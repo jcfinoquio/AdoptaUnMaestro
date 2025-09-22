@@ -9,3 +9,9 @@ El objetivo es materializar las ideas previas del proceso de Design Thinking a t
 - Código inicial de la aplicación y documentación técnica.
 
 ## 📂 Estructura del repositorio
+src/
+disenio/diagramas/
+disenio/mockups/
+disenio/navegacion/
+disenio/usabilidad/
+docs/
