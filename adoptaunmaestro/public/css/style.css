@@ -1,244 +1,126 @@
-/* Variables para colores */
-
-:root {
-
-  --color-primary-green: #2ecc71; /* Un verde de referencia */
-
-  --color-background-form: rgba(187, 221, 187, 0.8); /* Verde claro semi-transparente similar al diseño */
-
-  --color-text: #333;
-
-  --color-light-gray: #f4f4f4;
-
-}
-
-
-
-body {
-
-  font-family: Arial, sans-serif;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  min-height: 100vh;
-
+/* === RESET GENERAL === */
+* {
   margin: 0;
-
   padding: 0;
-
-  /* Esto simula un fondo simple para mantener el diseño limpio */
-
-  background-color: var(--color-light-gray); 
-
-  /* Si tienes una imagen de fondo con las ilustraciones, la añadirías aquí: */
-
-  /* background-image: url('ilustracion-fondo.jpg'); */
-
-  background-size: cover;
-
-  background-position: center;
-
-  background-repeat: no-repeat;
-
-}
-
-
-
-/* --- Estilos de la Barra de Navegación Superior --- */
-
-.header-nav {
-
-  display: flex;
-
-  justify-content: flex-start; /* Alinea elementos a la izquierda */
-
-  align-items: center;
-
-  width: 100%;
-
-  padding: 10px 20px;
-
   box-sizing: border-box;
-
-  position: absolute; /* Para que quede en la parte superior sin mover el formulario */
-
-  top: 0;
-
-  left: 0;
-
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* === ESTILOS DEL BODY === */
+body {
+  background: #f3f4f6;
+  color: #333;
+  height: 100vh;
+  overflow: hidden; /* evita el scroll cuando aparece el lightbox */
+}
 
+/* === HEADER === */
+.header-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0056b3;
+  color: white;
+  padding: 10px 40px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 
 .logo {
-
-  width: 60px; /* Ajusta el tamaño del logo */
-
-  height: 60px;
-
-  margin-right: 30px;
-
+  height: 50px;
 }
-
-
 
 .nav-links a {
-
+  color: white;
   text-decoration: none;
-
-  color: var(--color-text);
-
-  margin: 0 15px;
-
-  font-weight: bold;
-
-  font-size: 1.1em;
-
+  margin-left: 20px;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
-
-
 
 .nav-links a:hover {
-
-  text-decoration: underline;
-
+  color: #ffd43b;
 }
 
-
-
-/* --- Estilos del Contenedor Principal (Formulario) --- */
-
+/* === CONTENEDOR LOGIN LIGHTBOX === */
 .login-container {
-
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* fondo oscuro semitransparente */
   display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
   justify-content: center;
-
-  width: 100%;
-
-  flex-grow: 1; /* Permite que ocupe el espacio para centrar verticalmente */
-
-  padding-top: 120px; /* Espacio para la cabecera */
-
+  align-items: center;
+  z-index: 1000;
 }
 
-
-
-.login-box {
-
-  background-color: var(--color-background-form);
-
-  padding: 30px 50px;
-
-  width: 400px; /* Ancho del formulario */
-
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-
-  border-radius: 5px;
-
+/* === CUADRO DE LOGIN === */
+.login-lightbox {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 40px;
+  width: 350px;
   text-align: center;
-
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.5s ease;
 }
 
-
-
-h2 {
-
-  color: var(--color-text);
-
-  margin-bottom: 20px;
-
-  font-size: 1.5em;
-
-  font-weight: normal;
-
+.login-lightbox h2 {
+  color: #0056b3;
+  margin-bottom: 25px;
 }
 
-
-
-/* --- Estilos del Formulario --- */
-
-form {
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: flex-start; /* Alinea los labels a la izquierda */
-
-}
-
-
-
-label {
-
-  color: var(--color-text);
-
-  margin-top: 15px;
-
+/* === FORMULARIO === */
+.login-lightbox label {
+  display: block;
+  text-align: left;
   margin-bottom: 5px;
-
-  font-weight: bold;
-
+  font-weight: 600;
+  color: #333;
 }
 
-
-
-input[type="text"], 
-
-input[type="password"] {
-
+.login-lightbox input {
   width: 100%;
-
   padding: 10px;
-
-  margin-bottom: 20px;
-
+  margin-bottom: 15px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-
-  box-sizing: border-box; /* Incluye padding en el ancho */
-
-  border-radius: 3px;
-
-  background-color: rgba(255, 255, 255, 0.7); /* Ligeramente transparente */
-
+  outline: none;
+  transition: border-color 0.3s;
 }
 
+.login-lightbox input:focus {
+  border-color: #0056b3;
+}
 
-
-.btn-login {
-
-  background-color: rgba(173, 216, 230, 0.8); /* Azul claro semi-transparente */
-
-  color: var(--color-text);
-
+/* === BOTÓN ACCEDER === */
+.btn-acceder {
+  background-color: #0056b3;
+  color: white;
   border: none;
-
-  padding: 10px 20px;
-
-  margin-top: 10px;
-
+  border-radius: 5%;
   cursor: pointer;
-
-  font-size: 1.1em;
-
-  font-weight: bold;
-
-  border-radius: 5px;
-
-  align-self: center; /* Centra el botón en el formulario */
-
-  width: 120px;
-
+  padding: 0.5vw;
+  font-size: 1rem;
   transition: background-color 0.3s;
-
+  width: 100%;
 }
 
+.btn-login:hover {
+  background-color: #003d80;
+}
+
+/* === ENLACES DEBAJO DEL LOGIN === */
+.btn-register {
+  display: block;
+  text-align: center;
+  margin-top: 15px;
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.btn-register:hover {
+  text-decoration: underline;
+}
