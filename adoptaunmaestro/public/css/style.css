@@ -1,3 +1,10 @@
+:root {
+  --color-primary-green: #2ecc71;
+  --color-text: #333;
+  --color-gray-light: #f4f4f4;
+  --color-box-gray: #dcdcdc;
+}
+
 /* === RESET GENERAL === */
 * {
   margin: 0;
@@ -8,9 +15,11 @@
 
 /* === ESTILOS DEL BODY === */
 body {
-  background: #f3f4f6;
-  color: #333;
-  height: 100vh;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
   overflow: hidden; /* evita el scroll cuando aparece el lightbox */
 }
 
@@ -27,6 +36,13 @@ body {
 
 .logo {
   height: 50px;
+  width: auto;
+  margin-right: 30px;
+}
+
+.nav-links{
+  display: flex;
+  gap: 20px;
 }
 
 .nav-links a {
@@ -39,7 +55,40 @@ body {
 
 .nav-links a:hover {
   color: #ffd43b;
+  text-decoration: none;
 }
+
+/* === Barra lateral === */
+.sidebar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-links {
+  display: flex;
+  flex-direction: column;
+  background-color: #d3d3d3;
+  padding: 10px 0;
+  width: 130px;
+  text-align: center;
+}
+
+.side-links a {
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin: 8px 0;
+}
+
+.side-links a:hover {
+  text-decoration: underline;
+}
+
 
 /* === CONTENEDOR LOGIN LIGHTBOX === */
 .login-container {
@@ -123,4 +172,20 @@ body {
 
 .btn-register:hover {
   text-decoration: underline;
+}
+
+/* --- Contenedor principal (gris) --- */
+.main-content {
+  margin-left: 200px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.content-box {
+  width: 70%;
+  height: 400px;
+  background-color: var(--color-box-gray);
 }
