@@ -189,3 +189,78 @@ body {
   height: 400px;
   background-color: var(--color-box-gray);
 }
+
+/* ---------------------- */
+/* PÁGINA DE PERFIL */
+/* ---------------------- */
+
+.perfil-title {
+  font-size: 1.3em;
+  margin-right: 30px;
+  color: var(--color-text);
+  font-weight: bold;
+}
+
+/* Contenedor principal del perfil */
+.perfil-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  margin-top: 80px; /* deja espacio para el header */
+}
+
+/* COLUMNA IZQUIERDA */
+.perfil-sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Círculo para la foto de perfil */
+.perfil-foto {
+  width: 120px;
+  height: 120px;
+  background-color: #dcdcdc;
+  border-radius: 50%;
+}
+
+/* Rectángulo pequeño bajo la foto */
+.perfil-info {
+  width: 100px;
+  height: 200px;
+  background-color: #dcdcdc;
+}
+
+/* CONTENIDO CENTRAL */
+.perfil-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+/* Rectángulo superior (barra gris clara) */
+.perfil-header {
+  width: 100%;
+  height: 50px;
+  background-color: #dcdcdc;
+}
+
+/* Gran área gris del cuerpo principal */
+.perfil-body {
+  width: 100%;
+  height: 400px;
+  background-color: #dcdcdc;
+}
+
+/* COLUMNA DERECHA */
+.perfil-extra {
+  width: 100px;
+  height: 500px;
+  background-color: #dcdcdc;
+}
