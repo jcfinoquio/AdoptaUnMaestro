@@ -1,3 +1,6 @@
+/* === IMPORTACIÓN DE FUENTES === */
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+/* === VARIABLES DE COLOR === */
 :root {
   --color-primary-green: #2ecc71;
   --color-text: #333;
@@ -17,7 +20,9 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #fff;
+  background-image: url("../img/fondo-index.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   flex-direction: column;
   overflow: hidden; /* evita el scroll cuando aparece el lightbox */
@@ -59,6 +64,16 @@ body {
 }
 
 /* === Barra lateral === */
+aside{
+  position: fixed;
+  top: 80px; /* altura del header */
+  left: 0;
+  width: 12%;
+  height: calc(100% - 80px);
+  background-color: #f4f4f4;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  padding-top: 20px;
+}
 .sidebar {
   position: absolute;
   top: 100px;
@@ -67,26 +82,31 @@ body {
   flex-direction: column;
   align-items: center;
 }
+.btn-registrate:hover{
+  transform: scale(1.1);
+}
 
 .side-links {
   display: flex;
   flex-direction: column;
-  background-color: #d3d3d3;
   padding: 10px 0;
-  width: 130px;
+  width: 100%;
   text-align: center;
 }
 
 .side-links a {
+  border-radius: 5%;
+  border: 1px solid blue;
   text-decoration: none;
   color: #000;
   font-weight: bold;
-  font-size: 0.9em;
+  font-size: 1.5rem;
   margin: 8px 0;
 }
 
 .side-links a:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  border:2px solid blue;
 }
 
 
@@ -102,6 +122,7 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  display: none;;
 }
 
 /* === CUADRO DE LOGIN === */
@@ -187,29 +208,29 @@ body {
 .content-box {
   width: 70%;
   height: 400px;
-  background-color: var(--color-box-gray);
+  text-align: center;
+}
+.content-box p{
+  font-family: 'Indie Flower', fantasy, cursive;
+  font-size: 8rem;
+  font-weight: bold;
+  text-shadow: 0,0,0.8em white;
 }
 
 /* ---------------------- */
 /* PÁGINA DE PERFIL */
 /* ---------------------- */
 
-.perfil-title {
-  font-size: 1.3em;
-  margin-right: 30px;
-  color: var(--color-text);
-  font-weight: bold;
-}
-
 /* Contenedor principal del perfil */
 .perfil-container {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  width: 100%;
+  width: 80%;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 10%;
   margin-top: 80px; /* deja espacio para el header */
+  margin-left: 12%;
 }
 
 /* COLUMNA IZQUIERDA */
@@ -222,16 +243,19 @@ body {
 
 /* Círculo para la foto de perfil */
 .perfil-foto {
-  width: 120px;
-  height: 120px;
-  background-color: #dcdcdc;
+  width: 150px;
+  height: 150px;
+  background-image: url("../img/perfil.jpeg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position:inherit;
   border-radius: 50%;
 }
 
 /* Rectángulo pequeño bajo la foto */
 .perfil-info {
-  width: 100px;
-  height: 200px;
+  width: 250px;
+  height: 50px;
   background-color: #dcdcdc;
 }
 
@@ -248,6 +272,8 @@ body {
 .perfil-header {
   width: 100%;
   height: 50px;
+  padding: 10px;
+  border-radius: 5px;
   background-color: #dcdcdc;
 }
 
@@ -255,7 +281,11 @@ body {
 .perfil-body {
   width: 100%;
   height: 400px;
-  background-color: #dcdcdc;
+}
+.perfil-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* COLUMNA DERECHA */
@@ -263,4 +293,20 @@ body {
   width: 100px;
   height: 500px;
   background-color: #dcdcdc;
+}
+
+.likes{
+  background-color: tomato;
+}
+/*CONTADOR LIKES*/
+#contador-likes{
+  font-size: 1.5rem;
+  padding: 10px 20px;
+  background-image: url("../img/corazon.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  color: white;
+  border: 1px solid red;
+  border-radius: 5%;
+  cursor: pointer;
 }
