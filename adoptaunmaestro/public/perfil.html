@@ -32,11 +32,10 @@
 <main class="perfil-container">
 
     <!-- Columna izquierda -->
-    <aside class="perfil-sidebar">
+    <aside class="sidebar" id="sidebar-perfil-izquierda">
         <div class="perfil-foto"></div>
         <div class="perfil-info">
-            <p>Visualización del perfil: <span id="visitas-perfil">0</span></p>
-            <p>Visualización de la publicación: <span id="visitas-publi">0</span></p>
+            <p>Visitas al perfil: <span id="visitas-perfil">0</span></p>
         </div>
     </aside>
 
@@ -51,15 +50,23 @@
         </div>
         <div class="likes">
             <button id="contador-likes">
-                ❤️ <span id="numero-likes">0</span>
+                <!--❤️--> <span id="numero-likes">0</span>
             </button>
+            <p>Visitas publicación: <span id="visitas-publi">0</span></p>
         </div>
     </section>
 
     <!-- Columna derecha (opcional) -->
-    <aside class="perfil-extra">
-        <!-- Aquí podrías incluir anuncios, enlaces o contenido adicional -->
-    </aside>
+    <aside class="sidebar" id="sidebar-perfil-derecha">
+    <a href="#" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+    <nav class="side-links">
+        <a href="#">EVENTOS Y TALLERES</a>
+        <a href="#">RECURSOS EDUCATIVOS</a>
+        <a href="#">FOROS</a>
+        <a href="#">SOBRE NOSOTROS</a>
+        <a href="#">AYUDA Y SOPORTE</a>
+    </nav>
+</aside>
 
 </main>
 

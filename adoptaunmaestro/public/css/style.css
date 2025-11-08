@@ -3,85 +3,94 @@
 
 /* === VARIABLES DE COLOR === */
 :root {
-  --color-primary-green: #2ecc71; /* Verde principal */
-  --color-background-form: rgba(187, 221, 187, 0.8); /* Verde claro semi-transparente */
+  --color-primary-green: #2ecc71;
+  --color-background-form: rgba(187, 221, 187, 0.8);
   --color-text: #333;
   --color-light-gray: #f4f4f4;
 }
 
 /* === CONFIGURACIÓN GENERAL === */
-body {
-  font-family: Arial, sans-serif;
-  background-image: url("../img/fondo-index.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  background-color: var(--color-light-gray);
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--color-light-gray) url("../img/fondo-index.jpeg") center/cover no-repeat;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* === CABECERA === */
 .header-nav {
   display: flex;
-  justify-content: flex-start;
+  flex-wrap: wrap;
   align-items: center;
   width: 100%;
-  padding: 10px 20px;
-  box-sizing: border-box;
+  justify-content: space-between;
+  padding: 1vw 2vh;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(255,255,255,0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 1000;
 }
 
 .logo {
-  width: 60px;
-  height: 60px;
-  margin-right: 30px;
+  width: 10vw;
+  max-width: 60px;
+  max-height: 60px;
+  margin-right: 20px;
+}
+
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1vh;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 .nav-links a {
-  text-decoration: none;
-  color: var(--color-text);
-  margin: 0 15px;
+  font-size: 1.1rem;
   font-weight: bold;
-  font-size: 1.1em;
+  margin: 5px 10px;
+  transition: all 0.1s;
 }
 
 .nav-links a:hover {
-  text-decoration: underline;
+  font-size: 1.2rem;
 }
 
 /* === BARRA LATERAL === */
 .sidebar {
   position: fixed;
-  top: 80px;
+  top: 10vh;
   left: 0;
-  width: 12%;
-  height: calc(100% - 80px);
+  width: 12vw;
+  height: 90vh;
   background-color: #f4f4f4;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  padding-top: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 5vh;
+  transition: all 0.3s ease;
 }
 
 .btn-registrate {
   background-color: var(--color-primary-green);
-  color: white;
-  text-decoration: none;
+  color: #fff;
   padding: 10px 20px;
   border-radius: 8px;
   font-weight: bold;
-  transition: transform 0.3s ease;
   margin-bottom: 15px;
+  transition: transform 0.3s ease;
 }
 
 .btn-registrate:hover {
@@ -96,26 +105,24 @@ body {
 }
 
 .side-links a {
-  border-radius: 5%;
-  border: 1px solid blue;
-  text-decoration: none;
-  color: #000;
-  font-weight: bold;
   font-size: 1.2rem;
-  margin: 8px 0;
+  font-weight: bold;
+  border: 1px solid blue;
+  border-radius: 5px;
   padding: 5px;
+  margin: 5px 0;
+  transition: all 0.2s;
 }
 
 .side-links a:hover {
-  border: 2px solid blue;
+  border-width: 2px;
 }
 
 /* === LOGIN === */
 .login-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 100%;
   flex-grow: 1;
   padding-top: 120px;
@@ -123,46 +130,46 @@ body {
 
 .login-lightbox {
   background-color: var(--color-background-form);
-  padding: 30px 50px;
   width: 400px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 90%;
+  padding: 30px 50px;
   border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
 
 .login-lightbox h2 {
   color: var(--color-text);
   margin-bottom: 20px;
-  font-size: 1.5em;
+  font-size: 1.5rem;
 }
 
 .login-lightbox label {
-  color: var(--color-text);
-  margin-top: 15px;
-  font-weight: bold;
   display: block;
+  font-weight: bold;
+  margin-top: 15px;
+  color: var(--color-text);
 }
 
-.login-lightbox input[type="mail"],
+.login-lightbox input[type="email"],
 .login-lightbox input[type="password"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ccc;
   border-radius: 3px;
+  border: 1px solid #ccc;
   background-color: rgba(255, 255, 255, 0.7);
 }
 
 .btn-acceder {
   background-color: var(--color-primary-green);
-  color: white;
+  color: #fff;
   border: none;
   padding: 10px 20px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-size: 1.1em;
+  font-size: 1.1rem;
   font-weight: bold;
   border-radius: 5px;
+  cursor: pointer;
   transition: background-color 0.3s;
 }
 
@@ -174,71 +181,76 @@ body {
 .btn-reistro {
   display: block;
   margin-top: 10px;
-  text-decoration: none;
-  color: #333;
   font-weight: bold;
 }
 
 /* === CONTENIDO PRINCIPAL === */
 .content-box {
   width: 70%;
+  max-width: 1200px;
   text-align: center;
   padding: 20px;
-  margin-top: 150px;
+  margin: 150px auto 0;
 }
 
 .content-box p {
   font-family: 'Indie Flower', cursive;
   font-size: 4rem;
   font-weight: bold;
-  color: #333;
   text-shadow: 2px 2px 6px white;
+  color: #333;
 }
 
 /* === PERFIL === */
+
 .perfil-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-start;
-  width: 80%;
-  box-sizing: border-box;
-  padding: 10%;
-  margin-top: 80px;
-  margin-left: 12%;
+  width: 100%;
+  max-width: 1400px;
+  margin: 80px auto 0;
+  gap: 20px;
 }
 
-/* FOTO DE PERFIL */
+#sidebar-perfil-izquierda {
+  flex: 0 0 200px;  /* ancho fijo mínimo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
 .perfil-foto {
   width: 150px;
   height: 150px;
-  background-image: url("../img/perfil.jpeg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
   border-radius: 50%;
+  background: url("../img/perfil.jpeg") center/cover no-repeat;
 }
 
 .perfil-info {
-  width: 250px;
-  height: 50px;
+   width: 100%; /* ocupa todo el ancho del sidebar */
+  max-width: 200px; /* evita que se salga */
   background-color: #dcdcdc;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
-/* CONTENIDO CENTRAL */
 .perfil-contenido {
+  flex: 0 0 60vw;
+  min-width: 300px;
+  max-width: 60vw;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  flex-grow: 1;
-  margin: 0 20px;
 }
 
 .perfil-header {
   width: 100%;
-  height: 50px;
   padding: 10px;
-  border-radius: 5px;
   background-color: #dcdcdc;
+  border-radius: 5px;
 }
 
 .perfil-body {
@@ -252,26 +264,63 @@ body {
   object-fit: contain;
 }
 
-/* COLUMNA DERECHA */
-.perfil-extra {
-  width: 100px;
-  height: 500px;
+#sidebar-perfil-derecha {
+  top: 10vh;
+  left: 87.8vw;
   background-color: #dcdcdc;
 }
 
-/* CONTADOR DE LIKES */
+/* === CONTADOR DE LIKES === */
 .likes {
-  background-color: tomato;
+  background-color: transparent;
 }
 
 #contador-likes {
   font-size: 1.5rem;
   padding: 10px 20px;
-  background-image: url("../img/corazon.png");
-  background-size: contain;
-  background-repeat: no-repeat;
-  color: white;
+  background: url("../img/corazon.png") no-repeat center/contain;
+  color: #fff;
   border: 1px solid red;
   border-radius: 5%;
   cursor: pointer;
+}
+
+/* === MEDIA QUERIES === */
+
+/* Grandes pantallas */
+@media (min-width: 1920px) {
+  .login-lightbox { width: 500px; padding: 40px 60px; }
+  .content-box p { font-size: 5rem; }
+  .perfil-container { flex-direction: column; align-items: center; }
+  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { flex: 1 1 100%; max-width: 600px; margin: 10px 0; }
+  .perfil-contenido { width: 100%; }
+}
+
+/* Portátiles estándar */
+@media (max-width: 1440px) {
+  .sidebar { width: 100%; height: auto; flex-direction: row; justify-content: space-around; padding: 10px 0; position: relative; top: auto; }
+  .sidebar .btn-registrate, .sidebar .side-links a { margin: 0 5px; padding: 8px 12px; font-size: 1rem; }
+  .nav-links { justify-content: center; }
+  .login-lightbox { width: 350px; padding: 25px 40px; }
+  .content-box { width: 80%; }
+  .content-box p { font-size: 3rem; }
+  .perfil-container { flex-wrap: wrap; justify-content: center; }
+  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { flex: 1 1 100%; max-width: 600px; margin: 10px 0; }
+  .perfil-contenido { flex: 1 1 100%; min-width: auto; }
+  .perfil-extra { width: 80%; height: 200px; margin-top: 20px; }
+}
+
+/* Pantallas pequeñas */
+@media (max-width: 1280px) {
+  .sidebar { flex-direction: column; width: 100%; height: auto; padding: 10px 0; position: relative; top: auto; }
+  .sidebar .btn-registrate, .sidebar .side-links a { margin: 5px; padding: 8px 10px; font-size: 0.9rem; }
+  .login-lightbox { width: 90%; padding: 20px; }
+  .content-box { width: 95%; }
+  .content-box p { font-size: 2.2rem; }
+  .perfil-container { width: 95%; padding: 2%; flex-wrap: wrap; }
+  .perfil-foto { width: 120px; height: 120px; }
+  .perfil-info { width: 100%; }
+  .perfil-extra { width: 100%; height: auto; margin-top: 20px; }
+  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { width: 100%; max-width: 100%; margin: 10px 0; }
+  .perfil-contenido { width: 100%; }
 }
