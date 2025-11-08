@@ -127,7 +127,7 @@ a {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3); /* semitransparente */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +152,12 @@ a {
   max-width: 90%;
   width: 400px; /* ancho fijo deseado */
   z-index: 10000; /* siempre encima del overlay */
-  position: relative;
+  position: relative;  
+  box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.6);
+  border-radius: 10px; 
+}
+.login-lightbox:hover{
+  box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.6);
 }
 
 .login-lightbox h2 {
