@@ -33,7 +33,7 @@ a {
   align-items: center;
   width: 100%;
   justify-content: space-between;
-  padding: 1vw 2vh;
+  padding: 1vw 1vh;
   position: fixed;
   top: 0;
   left: 0;
@@ -51,7 +51,7 @@ a {
 .nav-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 1vh;
+  gap: 1vw;
   justify-content: flex-end;
   flex: 1;
 }
