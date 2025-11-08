@@ -18,7 +18,9 @@
 
 body {
   font-family: Arial, sans-serif;
-  background: var(--color-light-gray) url("../img/fondo-index.jpeg") center/cover no-repeat;
+  background: linear-gradient(to bottom, #007BFF, #F2F2F2);
+  height: 100vh;
+  margin: 0;
 }
 
 a {
