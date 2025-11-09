@@ -35,60 +35,66 @@ document.addEventListener("DOMContentLoaded", () => {
     // ToDo: Aquí logica para enviar los datos al servidor con fetch/AJAX
   });
 
-  /* ===========================
-     CONTADOR DE VISITAS
-  =========================== */
-  const visitasPerfilDisplay = document.getElementById("visitas-perfil");
-  const visitasPubliDisplay = document.getElementById("visitas-publi");
+/* ===========================
+     CONTADORES DE VISITAS
+=========================== */
 
-  const incrementarVisitas = () => {
-    let visitasPerfil = parseInt(localStorage.getItem("visitas-perfil")) || 0;
-    let visitasPubli = parseInt(localStorage.getItem("visitas-publi")) || 0;
+// Esta función incrementa las visitas de todos los elementos que sigan el patrón "visitas-*"
+const inicializarContadoresDeVisitas = () => {
+  const elementosVisitas = document.querySelectorAll("[id^='visitas-']");
 
-    visitasPerfil++;
-    visitasPubli++;
+  elementosVisitas.forEach((elemento) => {
+    const clave = elemento.id; // ej: "visitas-publi1" o "visitas-perfil"
+    let visitas = parseInt(localStorage.getItem(clave)) || 0;
 
-    localStorage.setItem("visitas-perfil", visitasPerfil);
-    localStorage.setItem("visitas-publi", visitasPubli);
+    // Incrementar y guardar
+    visitas++;
+    localStorage.setItem(clave, visitas);
 
-    visitasPerfilDisplay && (visitasPerfilDisplay.textContent = visitasPerfil);
-    visitasPubliDisplay && (visitasPubliDisplay.textContent = visitasPubli);
-  };
-  incrementarVisitas();
+    // Mostrar en pantalla
+    elemento.textContent = visitas;
+  });
+};
 
-  /* ===========================
-     CONTADOR DE LIKES CON UNA SOLA INTERACCIÓN POR USUARIO
-  =========================== */
-  const botonCorazon = document.getElementById("contador-likes");
-  const contadorDisplay = document.getElementById("numero-likes");
-  const STORAGE_KEY = "likes-count";
-  const USER_LIKED_KEY = "user-liked";
+inicializarContadoresDeVisitas();
 
-  const inicializarLikes = () => {
-    if (!botonCorazon || !contadorDisplay) return;
 
-    // Obtener total de likes
+/* ===========================
+     CONTADORES DE LIKES
+=========================== */
+
+const inicializarContadoresDeLikes = () => {
+  // Seleccionamos todos los botones de like (por id que empiece con "contador-likes")
+  const botonesLike = document.querySelectorAll("[id^='contador-likes']");
+
+  botonesLike.forEach((boton) => {
+    const idNumero = boton.id.replace("contador-likes", ""); // ej: "1", "2", "3"
+    const contadorDisplay = document.getElementById(`numero-likes${idNumero}`);
+    const STORAGE_KEY = `likes-count${idNumero}`;
+    const USER_LIKED_KEY = `user-liked${idNumero}`;
+
     let likes = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
-    contadorDisplay.textContent = likes;
+    contadorDisplay && (contadorDisplay.textContent = likes);
 
-    // Verificar si el usuario ya ha dado like en esta sesión
     const userLiked = sessionStorage.getItem(USER_LIKED_KEY) === "true";
     if (userLiked) {
-      botonCorazon.classList.add("clicado");
-      botonCorazon.disabled = true;
+      boton.classList.add("clicado");
+      boton.disabled = true;
     }
 
-    botonCorazon.addEventListener("click", () => {
+    boton.addEventListener("click", () => {
       if (!sessionStorage.getItem(USER_LIKED_KEY)) {
         likes++;
         contadorDisplay.textContent = likes;
         localStorage.setItem(STORAGE_KEY, likes);
-        botonCorazon.classList.add("clicado");
-        botonCorazon.disabled = true;
+        boton.classList.add("clicado");
+        boton.disabled = true;
         sessionStorage.setItem(USER_LIKED_KEY, "true");
       }
     });
-  };
-  inicializarLikes();
+  });
+};
+
+inicializarContadoresDeLikes();
 
 });

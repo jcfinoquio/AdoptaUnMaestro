@@ -1,70 +1,70 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adopta un Maestro - Login</title>
     <script src="./js/js.js"></script>
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/style.css" />
 </head>
 
 <body>
+    <!-- Encabezado -->
+    <header class="header-nav">
+        <div class="logo-container">
+            <img src="./img/logo.jpeg" alt="Logo del sitio Adopta un Maestro" class="logo" />
+        </div>
 
-<!-- Encabezado superior -->
-<header class="header-nav">
-    <div class="logo-container">
-        <img src="./img/logo.jpeg" alt="Logo del sitio Adopta un Maestro" class="logo">
-    </div>
+        <nav class="nav-links">
+            <a href="./index.html">INICIO</a>
+            <a href="./perfil.html">PERFIL</a>
+            <a href="#">EMPLEOS</a>
+            <a href="#">CENTROS/MAESTROS </a>
+            <a href="#">MENSAJES</a>
+            <a href="#">CONTACTOS</a>
+        </nav>
+    </header>
 
-    <nav class="nav-links">
-        <a href="./index.html">INICIO</a>
-        <a href="./perfil.html">PERFIL</a>
-        <a href="#">EMPLEOS</a>
-        <a href="#">CENTROS/MAESTROS </a>
-        <a href="#">MENSAJES</a>
-        <a href="#">CONTACTOS</a>
-    </nav>
-</header>
+    <!-- Barra lateral -->
+    <aside class="sidebar">
+        <a href="#" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+        <nav class="side-links">
+            <a href="#">EVENTOS Y TALLERES</a>
+            <a href="#">RECURSOS EDUCATIVOS</a>
+            <a href="#">FOROS</a>
+            <a href="#">SOBRE NOSOTROS</a>
+            <a href="#">AYUDA Y SOPORTE</a>
+        </nav>
+    </aside>
 
-<!-- Barra lateral -->
-<aside class="sidebar">
-    <a href="#" class="btn-registrate">REGÍSTRATE AQUÍ</a>
-    <nav class="side-links">
-        <a href="#">EVENTOS Y TALLERES</a>
-        <a href="#">RECURSOS EDUCATIVOS</a>
-        <a href="#">FOROS</a>
-        <a href="#">SOBRE NOSOTROS</a>
-        <a href="#">AYUDA Y SOPORTE</a>
-    </nav>
-</aside>
+    <!-- Contenedor login -->
+    <main class="login-container">
+        <div class="login-lightbox">
+            <h2>¡BIENVENIDO!</h2>
+            <form id="login-form" action="#" method="POST">
+                <label for="mail">Correo</label>
+                <input type="email" id="mail" name="mail" placeholder="Ingresa tu correo" required />
 
-<!-- Contenedor principal -->
-<main class="login-container">
-    <div class="login-lightbox">
-        <h2>¡BIENVENIDO!</h2>
-        <form id="login-form" action="#" method="POST">
-            <label for="mail">Correo</label>
-            <input type="email" id="mail" name="mail" placeholder="Ingresa tu correo" required>
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required />
+                <p id="mensaje" style="text-align: center; margin-top: 10px"></p>
 
-            <label for="password">Contraseña</label>
-            <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
-            <p id="mensaje" style="text-align:center; margin-top:10px;"></p>
+                <button type="submit" class="btn-acceder">Acceder</button>
+            </form>
 
-            <button type="submit" class="btn-acceder">Acceder</button>
-        </form>
+            <a href="#" class="btn-recordar">He olvidado mis credenciales</a>
+            <br />
+            <a href="#" class="btn-reistro">Crear usuario</a>
+        </div>
+    </main>
 
-        <a href="#" class="btn-recordar">He olvidado mis credenciales</a>
-        <br>
-        <a href="#" class="btn-reistro">Crear usuario</a>
-    </div>
-</main>
-
-<!-- Pie o contenido adicional -->
-<section class="main-content">
-    <div class="content-box">
-        <p>“Conectando Maestros y Colegios para un Futuro Educativo Mejor”</p>
-    </div>
-</section>
-
+    <!-- Contenido principal -->
+    <section class="main-content">
+        <div class="content-box">
+            <p>“Conectando Maestros y Colegios para un Futuro Educativo Mejor”</p>
+        </div>
+    </section>
 </body>
+
 </html>
