@@ -98,3 +98,95 @@ const inicializarContadoresDeLikes = () => {
 inicializarContadoresDeLikes();
 
 });
+
+/* ===========================
+FUNCIONALIDADES REGISTRO
+=========================== */
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const rolSelect = document.getElementById('rol');
+      const bloqueMaestro = document.getElementById('bloqueMaestro');
+      const bloqueCentro = document.getElementById('bloqueCentro');
+      const formacionesCont = document.getElementById('formacionesContenedor');
+      const btnAddForm = document.getElementById('btnAddForm');
+      const form = document.getElementById('registroForm');
+
+      function mostrarBloque(rol) {
+        if (rol === 'maestro') {
+          bloqueMaestro.classList.remove('hidden');
+          bloqueCentro.classList.add('hidden');
+        } else if (rol === 'centro') {
+          bloqueCentro.classList.remove('hidden');
+          bloqueMaestro.classList.add('hidden');
+        } else {
+          bloqueMaestro.classList.add('hidden');
+          bloqueCentro.classList.add('hidden');
+        }
+      }
+
+      rolSelect.addEventListener('change', (e) => mostrarBloque(e.target.value));
+
+      // Añadir formaciones dinámicamente
+      let formCount = 0;
+      function crearBloqueFormacion() {
+        formCount++;
+        const idx = formCount;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'formation-block';
+        wrapper.dataset.index = idx;
+        wrapper.innerHTML = `
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div style="flex:1 1 45%;">
+              <label>Título</label>
+              <input name="formacion[${idx}][titulo]" type="text" placeholder="Título (Ej: Máster en Educación)" />
+            </div>
+            <div style="flex:1 1 45%;">
+              <label>Centro formador</label>
+              <input name="formacion[${idx}][centroFormador]" type="text" placeholder="Centro formador" />
+            </div>
+            <div style="flex:1 1 30%;">
+              <label>Año fin</label>
+              <input name="formacion[${idx}][anioFin]" type="number" min="1900" max="2100" />
+            </div>
+            <div style="flex:1 1 30%;">
+              <label>Tipo</label>
+              <input name="formacion[${idx}][tipoFormacion]" type="text" placeholder="Tipo (FP, Grado...)" />
+            </div>
+          </div>
+          <div style="text-align:right;margin-top:8px;">
+            <button type="button" class="btn-cancel" data-remove="${idx}">Eliminar</button>
+          </div>
+        `;
+        formacionesCont.appendChild(wrapper);
+
+        wrapper.querySelector('[data-remove]').addEventListener('click', () => wrapper.remove());
+      }
+
+      btnAddForm.addEventListener('click', crearBloqueFormacion);
+
+      // Validación mínima
+      form.addEventListener('submit', (e) => {
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          form.reportValidity();
+          return;
+        }
+        const rol = rolSelect.value;
+        if (rol === '') {
+          e.preventDefault();
+          alert('Selecciona tu rol (Maestro o Centro).');
+          return;
+        }
+        if (rol === 'maestro') {
+          const nombre = document.getElementById('nombre').value.trim();
+          const apellidos = document.getElementById('apellidos').value.trim();
+          if (!nombre || !apellidos) {
+            e.preventDefault();
+            alert('Para registrarte como Maestro, indica nombre y apellidos.');
+            return;
+          }
+        }
+      });
+
+      mostrarBloque(rolSelect.value);
+    });
