@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Registro - Adopta un Maestro</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      const rolSelect = document.getElementById('rol');
+      const bloqueMaestro = document.getElementById('bloqueMaestro');
+      const bloqueCentro = document.getElementById('bloqueCentro');
+      const formacionesCont = document.getElementById('formacionesContenedor');
+      const btnAddForm = document.getElementById('btnAddForm');
+      const form = document.getElementById('registroForm');
+
+      function mostrarBloque(rol) {
+        if (rol === 'maestro') {
+          bloqueMaestro.classList.remove('hidden');
+          bloqueCentro.classList.add('hidden');
+        } else if (rol === 'centro') {
+          bloqueCentro.classList.remove('hidden');
+          bloqueMaestro.classList.add('hidden');
+        } else {
+          bloqueMaestro.classList.add('hidden');
+          bloqueCentro.classList.add('hidden');
+        }
+      }
+
+      rolSelect.addEventListener('change', (e) => mostrarBloque(e.target.value));
+
+      // Añadir formaciones dinámicamente
+      let formCount = 0;
+      function crearBloqueFormacion() {
+        formCount++;
+        const idx = formCount;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'formation-block';
+        wrapper.dataset.index = idx;
+        wrapper.innerHTML = `
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <div style="flex:1 1 45%;">
+              <label>Título</label>
+              <input name="formacion[${idx}][titulo]" type="text" placeholder="Título (Ej: Máster en Educación)" />
+            </div>
+            <div style="flex:1 1 45%;">
+              <label>Centro formador</label>
+              <input name="formacion[${idx}][centroFormador]" type="text" placeholder="Centro formador" />
+            </div>
+            <div style="flex:1 1 30%;">
+              <label>Año fin</label>
+              <input name="formacion[${idx}][anioFin]" type="number" min="1900" max="2100" />
+            </div>
+            <div style="flex:1 1 30%;">
+              <label>Tipo</label>
+              <input name="formacion[${idx}][tipoFormacion]" type="text" placeholder="Tipo (FP, Grado...)" />
+            </div>
+          </div>
+          <div style="text-align:right;margin-top:8px;">
+            <button type="button" class="btn-cancel" data-remove="${idx}">Eliminar</button>
+          </div>
+        `;
+        formacionesCont.appendChild(wrapper);
+
+        wrapper.querySelector('[data-remove]').addEventListener('click', () => wrapper.remove());
+      }
+
+      btnAddForm.addEventListener('click', crearBloqueFormacion);
+
+      // Validación mínima
+      form.addEventListener('submit', (e) => {
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          form.reportValidity();
+          return;
+        }
+        const rol = rolSelect.value;
+        if (rol === '') {
+          e.preventDefault();
+          alert('Selecciona tu rol (Maestro o Centro).');
+          return;
+        }
+        if (rol === 'maestro') {
+          const nombre = document.getElementById('nombre').value.trim();
+          const apellidos = document.getElementById('apellidos').value.trim();
+          if (!nombre || !apellidos) {
+            e.preventDefault();
+            alert('Para registrarte como Maestro, indica nombre y apellidos.');
+            return;
+          }
+        }
+      });
+
+      mostrarBloque(rolSelect.value);
+    });
+  </script>
+
+  <style>
+    .register-main {
+      width: 100%;
+      max-width: 1200px;
+      margin: 80px auto 40px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 0 2vw;
+    }
+
+    .register-box {
+      flex: 1 1 66%;
+      max-width: 800px;
+    }
+
+    .login-lightbox.form-box {
+      padding: 22px 28px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .form-row { display:flex; gap:10px; margin-bottom:12px; }
+    .form-group { flex:1; display:flex; flex-direction:column; }
+    .form-group label { font-weight:bold; margin-bottom:6px; color:var(--color-text); }
+    .form-group input, .form-group select, .form-group textarea { padding:8px; border-radius:4px; border:1px solid #bbb; background: rgba(255,255,255,0.85); font-family:inherit; }
+
+    .btn-row { display:flex; justify-content:space-between; gap:10px; margin-top:14px; }
+    .btn-cancel { background:transparent; border:1px solid #999; padding:8px 14px; border-radius:6px; cursor:pointer; font-weight:bold; }
+
+    .hidden { display:none; }
+    .formation-block { border:1px dashed rgba(0,0,0,0.12); padding:10px; margin-bottom:10px; border-radius:6px; background: rgba(255,255,255,0.6); }
+
+    @media (max-width: 900px) {
+      .form-row { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Cabecera -->
+  <header class="header-nav">
+    <div class="logo-container">
+      <img src="./img/logo.jpeg" alt="Logo del sitio Adopta un Maestro" class="logo">
+    </div>
+    <nav class="nav-links">
+      <a href="./index.html">INICIO</a>
+      <a href="./perfil.html">PERFIL</a>
+      <a href="#">EMPLEOS</a>
+      <a href="./listado-maestros.html">MAESTROS</a>
+      <a href="./listado-colegios.html">COLEGIOS</a>
+      <a href="#">MENSAJES</a>
+      <a href="#">CONTACTOS</a>
+    </nav>
+  </header>
+
+  <!-- Contenedor general -->
+  <main class="perfil-container register-main">
+    <!-- Sidebar izquierda -->
+    <aside class="sidebar" id="sidebar-perfil-izquierda">
+      <div class="perfil-foto" style="background-image: url('./img/perfil-placeholder.png');"></div>
+      <div class="perfil-info">
+        <p>¿Ya tienes cuenta?<br>
+          <a href="./index.html" class="btn-registrate" style="display:inline-block;padding:6px 10px;">Accede</a>
+        </p>
+      </div>
+    </aside>
+
+    <!-- Contenido central: formulario -->
+    <section class="perfil-contenido register-box">
+      <div class="login-lightbox form-box" role="form" aria-labelledby="tituloRegistro">
+        <h2 id="tituloRegistro">Crear cuenta - Adopta un Maestro</h2>
+
+        <form id="registroForm" novalidate>
+          <!-- Datos Usuario -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Correo electrónico *</label>
+              <input id="email" name="email" type="email" required placeholder="tu@email.com" />
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" name="telefono" type="text" placeholder="600 123 456" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="password">Contraseña * (min. 6)</label>
+              <input id="password" name="password" type="password" minlength="6" required />
+            </div>
+            <div class="form-group">
+              <label for="rol">Registro como *</label>
+              <select id="rol" name="rol" required>
+                <option value="">Selecciona...</option>
+                <option value="maestro">Maestro</option>
+                <option value="centro">Centro</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="avatar">Avatar</label>
+              <input id="avatar" name="avatar" type="file" accept="image/*" />
+            </div>
+          </div>
+
+          <!-- Bloque Maestro -->
+          <section id="bloqueMaestro" class="hidden">
+            <hr />
+            <h3>Datos del Maestro</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombre">Nombre *</label>
+                <input id="nombre" name="nombre" type="text" />
+              </div>
+              <div class="form-group">
+                <label for="apellidos">Apellidos *</label>
+                <input id="apellidos" name="apellidos" type="text" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="especialidad">Especialidad</label>
+                <input id="especialidad" name="especialidad" type="text" placeholder="Ej: Primaria, Inglés..." />
+              </div>
+              <div class="form-group">
+                <label for="aniosExperiencia">Años experiencia</label>
+                <input id="aniosExperiencia" name="aniosExperiencia" type="number" min="0" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group" style="flex:1 1 100%;">
+                <label for="biografia">Biografía</label>
+                <textarea id="biografia" name="biografia" rows="4" placeholder="Escribe una breve bio..."></textarea>
+              </div>
+            </div>
+
+            <div id="formacionesContenedor">
+              <label>Formación (opcional)</label>
+            </div>
+
+            <button type="button" id="btnAddForm" class="btn-add">+ Añadir formación</button>
+          </section>
+
+          <!-- Bloque Centro -->
+          <section id="bloqueCentro" class="hidden">
+            <hr />
+            <h3>Datos del Centro</h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="nombreCentro">Nombre del Centro *</label>
+                <input id="nombreCentro" name="nombreCentro" type="text" />
+              </div>
+              <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input id="direccion" name="direccion" type="text" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="sitioWeb">Sitio web</label>
+                <input id="sitioWeb" name="sitioWeb" type="url" placeholder="https://www.ejemplo.com" />
+              </div>
+            </div>
+          </section>
+
+          <div class="btn-row">
+            <button type="button" class="btn-cancel" onclick="location.href='index.html'">Cancelar</button>
+            <button class="btn-acceder" type="submit">Crear cuenta</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Sidebar derecha -->
+    <aside class="sidebar" id="sidebar-perfil-derecha">
+      <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+      <nav class="side-links">
+        <a href="#">EVENTOS Y TALLERES</a>
+        <a href="#">RECURSOS EDUCATIVOS</a>
+        <a href="#">FOROS</a>
+        <a href="#">SOBRE NOSOTROS</a>
+        <a href="#">AYUDA Y SOPORTE</a>
+      </nav>
+    </aside>
+
+  </main>
+</body>
+</html>
