@@ -1,111 +1,385 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adopta un Maestro</title>
-    <script src="./js/js.js"></script>
-    <link rel="stylesheet" href="./css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Perfil - Adopta un Maestro</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    /* Layout principal: columnas (izq - centro - dcha) */
+    .perfil-container {
+      display: grid;
+      grid-template-columns: 260px 1fr 240px; /* izquierda más ancha; derecha = 240 */
+      gap: 24px;
+      max-width: var(--container-max, 1400px);
+      margin: 100px auto;
+      padding: 0 1rem;
+      align-items: start;
+    }
+
+    /* === TARJETA PERFIL (izquierda) === */
+    .perfil-card {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+      max-width: 260px; /* evita que sea más estrecha */
+    }
+
+    .perfil-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%; /* circular */
+      background-image: url('./img/perfil.jpeg');
+      background-size: cover;
+      background-position: center;
+      box-shadow: var(--shadow-sm, 0 8px 20px rgba(12,24,40,0.06));
+      border: 4px solid rgba(255,255,255,0.8);
+    }
+
+    .perfil-meta {
+      background: var(--color-surface, #fff);
+      border-radius: 12px;
+      padding: 16px;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(12,24,40,0.03);
+    }
+
+    .perfil-meta h4 {
+      margin: 0 0 6px 0;
+      font-size: 1.05rem;
+      white-space: nowrap;          /* evita saltos raros */
+      overflow: hidden;
+      text-overflow: ellipsis;     /* recorta si hiciera falta */
+    }
+
+    .perfil-meta .meta-sub {
+      color: var(--color-muted, #6b6b6b);
+      font-size: 0.95rem;
+      margin: 6px 0;
+    }
+
+    .perfil-meta .meta-visitas {
+      margin-top: 8px;
+      font-weight: 600;
+    }
+
+    .perfil-meta .meta-actions {
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .perfil-meta .btn {
+      min-width: 110px;
+    }
+
+    /* === CONTENIDO CENTRAL === */
+    .perfil-contenido {
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .entrada {
+      background: var(--color-surface, #fff);
+      border-radius: 12px;
+      box-shadow: var(--shadow-sm, 0 8px 20px rgba(12,24,40,0.06));
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .entrada-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .entrada-header h3 { margin:0; font-size:1.05rem; color:var(--color-text, #123); }
+    .entrada-header p { margin:0; color:var(--color-muted, #6b6b6b); font-size:0.95rem; }
+
+    .entrada-body img {
+      width:100%;
+      height:auto;
+      border-radius:8px;
+      margin-bottom:12px;
+      object-fit:cover;
+    }
+
+    .entrada-footer {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-top:6px;
+      flex-wrap:wrap;
+    }
+
+    .likes {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .contador-likes {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid rgba(12,24,40,0.06);
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+      cursor:pointer;
+      font-weight:600;
+    }
+
+    .visitas {
+      color:var(--color-muted, #6b6b6b);
+      font-size:0.95rem;
+    }
+
+    /* === SIDEBAR DERECHA (botones verdes como resto de páginas) === */
+    .sidebar-right {
+      position: sticky;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .sidebar-right .card { width:100%; max-width:220px; text-align:center; border-radius:12px; padding:12px; box-shadow:0 8px 18px rgba(0,0,0,0.03); background:var(--color-surface,#fff); }
+
+    .sidebar-right .btn-registrate {
+      width: 100%;
+      max-width: 220px;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      color: #fff;
+      background: var(--color-primary, #009e70);
+      border: none;
+      transition: background 0.2s ease;
+    }
+    .sidebar-right .btn-registrate:hover { background: #007b57; }
+
+    .sidebar-right .side-links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .sidebar-right .side-links a {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: 600;
+      color: #fff;
+      background: var(--color-primary, #009e70);
+      border: none;
+      transition: background 0.2s ease, transform 0.1s ease;
+      text-decoration: none;
+    }
+
+    .sidebar-right .side-links a:hover {
+      background: #007b57;
+      transform: translateY(-2px);
+    }
+
+    /* === Responsive: ocultar sidebars en pantallas pequeñas === */
+    @media (max-width: 1100px) {
+      .perfil-container {
+        grid-template-columns: 1fr; 
+        margin: 120px 16px;
+      }
+      .perfil-card, .sidebar-right { display: none; } /* ocultar sidebars */
+      .perfil-contenido { width:100%; }
+    }
+
+    /* === Fondo unificado === */
+    body,
+    main,
+    .perfil-container {
+      background-color: #eaf5ee; /* verde claro uniforme */
+    }
+
+  </style>
 </head>
-
 <body>
-
-<!-- Encabezado superior -->
-<header class="header-nav">
+  <!-- Header -->
+  <header class="header-nav">
     <div class="logo-container">
-        <img src="./img/logo.jpeg" alt="Logo del sitio Adopta un Maestro" class="logo">
+      <img src="./img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
     </div>
+
     <nav class="nav-links">
-        <a href="./index.html">INICIO</a>
-        <a href="./perfil.html">PERFIL</a>
-        <a href="#">EMPLEOS</a>
-        <a href="./listado-maestros.html">MAESTROS</a>
-        <a href="./listado-colegios.html">COLEGIOS</a>
-        <a href="#">MENSAJES</a>
-        <a href="#">CONTACTOS</a>
+      <a href="./index.html">INICIO</a>
+      <a href="./perfil.html">PERFIL</a>
+      <a href="#">EMPLEOS</a>
+      <a href="./listado-maestros.html">MAESTROS</a>
+      <a href="./listado-colegios.html">COLEGIOS</a>
+      <a href="#">MENSAJES</a>
+      <a href="#">CONTACTOS</a>
     </nav>
-</header>
+  </header>
 
-<!-- Contenedor general -->
-<main class="perfil-container">
+  <!-- Main -->
+  <main class="perfil-container">
 
-    <!-- Columna izquierda -->
-    <aside class="sidebar" id="sidebar-perfil-izquierda">
-        <div class="perfil-foto"></div>
-        <div class="perfil-info">
-            <p>Visitas al perfil: <span id="visitas-perfil">0</span></p>
+    <!-- Left profile card -->
+    <aside class="perfil-card" aria-label="Información del usuario">
+      <div class="perfil-avatar" aria-hidden="true"></div>
+      <div class="perfil-meta">
+        <h4 title="María López">María López</h4>
+        <div class="meta-sub">Maestra de Primaria · 6 años</div>
+        <div class="meta-visitas">Visitas al perfil: <strong id="visitas-perfil">0</strong></div>
+
+        <div class="meta-actions">
+          <a class="btn btn-primary" href="./perfil.html">Editar perfil</a>
+          <a class="btn btn-outline" href="./listado-maestros.html">Ver mis anuncios</a>
         </div>
+      </div>
     </aside>
 
-    <!-- Contenido central -->
-    <section class="perfil-contenido">
-        <div class="perfil-header">
-            <h2>ENTRADA 1</h2>
+    <!-- Center content: posts -->
+    <section class="perfil-contenido" aria-live="polite">
+      <!-- Entrada 1 -->
+      <article class="entrada">
+        <div class="entrada-header">
+          <div>
+            <h3>ENTRADA 1</h3>
             <p>¿Valoramos actualmente a los maestros?</p>
+          </div>
+          <div class="text-muted">Publicado: 10 nov 2025</div>
         </div>
-        <div class="perfil-body">
-            <img src="./img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase">
+
+        <div class="entrada-body">
+          <img src="./img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase" />
+          <p class="text-muted" style="margin-top:8px;">Breve descripción de la entrada que resume el contenido y atrae al lector.</p>
         </div>
-        <div class="likes">
-            <button class="contador-likes" id="contador-likes1">
-                <span id="numero-likes1">0</span>
-            </button>
-            <p><br>Visitas publicación: <span id="visitas-publi1">0</span></p>
+
+        <div class="entrada-footer">
+          <div class="likes">
+            <button class="contador-likes" data-id="1" aria-pressed="false">❤️ <span id="numero-likes1">0</span></button>
+            <div class="visitas">Visitas publicación: <strong id="visitas-publi1">0</strong></div>
+          </div>
+
+          <div class="card-actions">
+            <a class="btn btn-outline" href="./perfil.html">Compartir</a>
+            <a class="btn btn-primary" href="./perfil.html">Ver más</a>
+          </div>
         </div>
-        <div class="perfil-header">
-            <h2>ENTRADA 2</h2>
+      </article>
+
+      <!-- Entrada 2 -->
+      <article class="entrada">
+        <div class="entrada-header">
+          <div>
+            <h3>ENTRADA 2</h3>
             <p>¿Valoramos actualmente a los maestros?</p>
+          </div>
+          <div class="text-muted">Publicado: 2 nov 2025</div>
         </div>
-        <div class="perfil-body">
-            <img src="./img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase">
+        <div class="entrada-body">
+          <img src="./img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase" />
+          <p class="text-muted" style="margin-top:8px;">Otra descripción breve que acompaña la imagen.</p>
         </div>
-        <div class="likes">
-            <button class="contador-likes" id="contador-likes2">
-                <span id="numero-likes2">0</span>
-            </button>
-            <p><br>Visitas publicación: <span id="visitas-publi2">0</span></p>
+        <div class="entrada-footer">
+          <div class="likes">
+            <button class="contador-likes" data-id="2" aria-pressed="false">❤️ <span id="numero-likes2">0</span></button>
+            <div class="visitas">Visitas publicación: <strong id="visitas-publi2">0</strong></div>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-outline" href="./perfil.html">Compartir</a>
+            <a class="btn btn-primary" href="./perfil.html">Ver más</a>
+          </div>
         </div>
-        <div class="perfil-header">
-            <h2>ENTRADA 3</h2>
+      </article>
+
+      <!-- Entrada 3 -->
+      <article class="entrada">
+        <div class="entrada-header">
+          <div>
+            <h3>ENTRADA 3</h3>
             <p>¿Valoramos actualmente a los maestros?</p>
+          </div>
+          <div class="text-muted">Publicado: 28 oct 2025</div>
         </div>
-        <div class="perfil-body">
-            <img src="./img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase">
+        <div class="entrada-body">
+          <img src="./img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase" />
         </div>
-        <div class="likes">
-            <button class="contador-likes" id="contador-likes3">
-                <span id="numero-likes3">0</span>
-            </button>
-            <p><br>Visitas publicación: <span id="visitas-publi3">0</span></p>
+        <div class="entrada-footer">
+          <div class="likes">
+            <button class="contador-likes" data-id="3" aria-pressed="false">❤️ <span id="numero-likes3">0</span></button>
+            <div class="visitas">Visitas publicación: <strong id="visitas-publi3">0</strong></div>
+          </div>
+          <div class="card-actions">
+            <a class="btn btn-outline" href="./perfil.html">Compartir</a>
+            <a class="btn btn-primary" href="./perfil.html">Ver más</a>
+          </div>
         </div>
-        <div class="perfil-header">
-            <h2>ENTRADA 4</h2>
-            <p>¿Valoramos actualmente a los maestros?</p>
-        </div>
-        <div class="perfil-body">
-            <img src="./img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase">
-        </div>
-        <div class="likes">
-            <button class="contador-likes" id="contador-likes4">
-                <span id="numero-likes4">0</span>
-            </button>
-            <p><br>Visitas publicación: <span id="visitas-publi4">0</span></p>
-        </div>
+      </article>
     </section>
 
-    <!-- Columna derecha (opcional) -->
-    <aside class="sidebar" id="sidebar-perfil-derecha">
-        <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
-        <nav class="side-links">
-            <a href="#">EVENTOS Y TALLERES</a>
-            <a href="#">RECURSOS EDUCATIVOS</a>
-            <a href="#">FOROS</a>
-            <a href="#">SOBRE NOSOTROS</a>
-            <a href="#">AYUDA Y SOPORTE</a>
-        </nav>
+    <!-- Right sidebar (botones verdes) -->
+    <aside class="sidebar-right" aria-label="Recursos y acciones">
+      <div class="card">
+        <h4>Acciones</h4>
+        <a class="btn-registrate" href="./registro.html">REGÍSTRATE AQUÍ</a>
+      </div>
+
+      <nav class="card" style="padding:12px; display:flex; flex-direction:column; gap:8px; align-items:center;">
+        <div class="side-links" style="width:100%; display:flex; flex-direction:column; gap:8px; align-items:center;">
+          <a href="./eventos.html">EVENTOS Y TALLERES</a>
+          <a href="#">RECURSOS EDUCATIVOS</a>
+          <a href="#">FOROS</a>
+        </div>
+      </nav>
     </aside>
 
-</main>
+  </main>
 
+  <script>
+    // Handlers para likes (guardado en sessionStorage)
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.contador-likes');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const key = 'likes_pub_' + id;
+      const current = Number(sessionStorage.getItem(key) || 0);
+      const newVal = current + 1;
+      sessionStorage.setItem(key, newVal);
+      const span = btn.querySelector('span');
+      if (span) span.textContent = newVal;
+      btn.setAttribute('aria-pressed', 'true');
+    });
+
+    // Inicializar visitas (ejemplo)
+    ['1','2','3'].forEach(id => {
+      const visitasEl = document.getElementById('visitas-publi' + id);
+      if (visitasEl && !sessionStorage.getItem('visitas_pub_' + id)) {
+        sessionStorage.setItem('visitas_pub_' + id, Math.floor(Math.random()*120));
+      }
+      if (visitasEl) visitasEl.textContent = sessionStorage.getItem('visitas_pub_' + id) || '0';
+    });
+    const vp = document.getElementById('visitas-perfil');
+    if (vp && !sessionStorage.getItem('visitas_perfil')) sessionStorage.setItem('visitas_perfil', Math.floor(Math.random()*400));
+    if (vp) vp.textContent = sessionStorage.getItem('visitas_perfil') || '0';
+  </script>
 </body>
 </html>

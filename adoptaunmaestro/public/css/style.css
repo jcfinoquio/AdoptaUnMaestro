@@ -1,367 +1,340 @@
+/* style.css — versión modernizada para Adopta un Maestro
+   Reemplaza por completo tu style.css actual.
+   Fuente: Inter (Google Fonts). */
+
 /* === IMPORTACIÓN DE FUENTES === */
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-/* === VARIABLES DE COLOR === */
-:root {
-  --color-primary-green: #2ecc71;
-  --color-background-form: rgba(187, 221, 187, 0.8);
-  --color-text: #333;
-  --color-light-gray: #f4f4f4;
+/* === VARIABLES DE DISEÑO === */
+:root{
+  /* colores */
+  --color-primary: #1FA58A;      /* verde principal */
+  --color-primary-700: #17a079;
+  --color-accent: #0D6EFD;       /* azul para enlaces/hover */
+  --color-bg: #f6f8fb;           /* fondo general (muy suave) */
+  --color-surface: #ffffff;      /* tarjetas y cajas */
+  --color-muted: #6b7280;        /* texto secundario */
+  --color-text: #0f172a;         /* texto principal */
+  --glass: rgba(255,255,255,0.55);
+
+  /* espaciados y tamaños */
+  --container-max: 1400px;
+  --gap: 16px;
+  --radius: 12px;
+  --shadow-sm: 0 6px 18px rgba(12, 24, 40, 0.06);
 }
 
-/* === CONFIGURACIÓN GENERAL === */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* === RESET BÁSICO === */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg, #edf6ee 0%, #d8ebdc 100%);
+  color:var(--color-text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.4;
+  min-height:100vh;
 }
 
-body {
-  font-family: 'Indie Flower', cursive;
-  height: auto;
-  min-height: 100%;
-  overflow-y: auto;
-  margin: 0;
-  /* Fondo con efecto Parallax */
-  background: linear-gradient(to bottom, #007BFF, #F2F2F2);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center top;
+/* enlaces */
+a{color:var(--color-accent); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* utilidades */
+.container{
+  width:calc(100% - 2rem);
+  max-width:var(--container-max);
+  margin:0 auto;
+  padding: 0 1rem;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* === CABECERA PRINCIPAL === */
+.header-nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:68px;
+  display:flex;
+  align-items:center;
+  gap:var(--gap);
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  backdrop-filter: blur(4px);
+  border-bottom:1px solid rgba(15,23,42,0.04);
+  padding: 0 1.2rem;
+  z-index:1200;
 }
 
-/* === LOGIN === */
-.login-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  opacity: 1;
-  visibility: visible;
+.logo{ width:54px; height:54px; object-fit:cover; border-radius:10px; }
+
+/* nav links */
+.nav-links{
+  display:flex;
+  gap:1rem;
+  margin-left:auto;
+  align-items:center;
+}
+.nav-links a{
+  font-weight:600;
+  color:var(--color-text);
+  padding:8px 12px;
+  border-radius:8px;
+  transition: all .18s ease;
+  font-size:0.95rem;
+}
+.nav-links a:hover{
+  background:rgba(13,110,253,0.06);
+  color:var(--color-accent);
 }
 
-.login-container.oculto {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+/* botón de registro en header (si se quiere destacar) */
+.btn-registrate-header{
+  background:var(--color-primary);
+  color:#fff;
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:700;
+  box-shadow:var(--shadow-sm);
 }
 
-.login-lightbox {
-  background-color: var(--color-background-form);
-  padding: 30px 50px;
-  border-radius: 8px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-  text-align: center;
-  max-width: 90%;
-  width: 400px; /* ancho fijo deseado */
-  z-index: 10000; /* siempre encima del overlay */
-  position: relative;  
-  box-shadow: 0 0 15px 2px rgba(255, 255, 255, 0.6);
-  border-radius: 10px; 
-}
-.login-lightbox:hover{
-  box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.6);
+/* === LAYOUT PRINCIPAL === */
+/* Ajuste general que usan las páginas (perfil, listados, registro...) */
+.perfil-container{
+  display:flex;
+  gap:var(--gap);
+  padding-top:92px;            /* separa del header fijo */
+  padding-left:1rem;
+  padding-right:1rem;
+  justify-content:center;
 }
 
-.login-lightbox h2 {
-  color: var(--color-text);
-  margin-bottom: 20px;
-  font-size: 1.5rem;
+/* sidebar (más discreta) */
+.sidebar{
+  width:14vw;                   /* no excesivo */
+  min-width:140px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.45));
+  border-radius: var(--radius);
+  padding:12px;
+  box-shadow: var(--shadow-sm);
+  height: calc(100vh - 120px);
+  position:sticky;
+  top:82px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
 }
 
-.login-lightbox label {
-  display: block;
-  font-weight: bold;
-  margin-top: 15px;
-  color: var(--color-text);
+/* contenido central */
+.perfil-contenido{
+  flex:1 1 70%;
+  max-width: calc(var(--container-max) - 320px);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  align-items:center;
 }
 
-.login-lightbox input[type="email"],
-.login-lightbox input[type="password"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 3px;
-  border: 1px solid #ccc;
-  background-color: rgba(255, 255, 255, 0.7);
+/* caja principal (antes login-lightbox) — glass card */
+.login-lightbox{
+  width:100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.80));
+  border-radius: var(--radius);
+  padding:20px;
+  box-shadow:var(--shadow-sm);
+  border:1px solid rgba(15,23,42,0.04);
 }
 
-.btn-acceder {
-  background-color: var(--color-primary-green);
-  color: #fff;
+/* titulares */
+h2{font-size:1.3rem; margin-bottom:8px}
+h3{font-size:1.05rem; margin-bottom:6px}
+
+/* texto grande (ej. intro en index) */
+.content-box p{
+  font-size:2.2rem;
+  font-weight:700;
+  color:var(--color-text);
+}
+
+/* === PERFIL: foto y caja info === */
+.perfil-foto{
+  width:130px;
+  height:130px;
+  border-radius:12px;
+  background:linear-gradient(135deg,#fff,#f4f6f8);
+  background-size:cover;
+  background-position:center;
+  box-shadow:var(--shadow-sm);
+}
+
+/* pequeños bloques de info */
+.perfil-info{
+  width:100%;
+  background:var(--color-surface);
+  border-radius:10px;
+  padding:10px;
+  text-align:center;
+  font-size:0.95rem;
+  box-shadow: 0 6px 18px rgba(12,24,40,0.03);
+}
+
+/* === GRID / TARJETAS === */
+.card-grid{
+  display:grid;
+  gap:18px;
+  width:100%;
+}
+
+/* responsive: control de columnas (puedes ajustar breakpoints) */
+@media (min-width: 1400px){
+  .card-grid{ grid-template-columns: repeat(5, 1fr); }
+}
+@media (min-width: 1200px) and (max-width:1399px){
+  .card-grid{ grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 900px) and (max-width:1199px){
+  .card-grid{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width:899px){
+  .card-grid{ grid-template-columns: repeat(1, 1fr); }
+}
+
+/* tarjeta (maestro / centro) */
+.card {
+  background: var(--color-surface);
+  border-radius: 12px;
+  padding: 14px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(12,24,40,0.03);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* avatar genérico */
+.avatar {
+  width:84px;
+  height:84px;
+  border-radius:50%;
+  background-size:cover;
+  background-position:center;
+  margin:0 auto;
+  box-shadow:0 6px 14px rgba(15,23,42,0.06);
+}
+
+/* meta info dentro tarjeta */
+.card-title{ font-weight:700; font-size:1rem; text-align:center }
+.card-sub{ font-size:0.9rem; color:var(--color-muted); text-align:center }
+
+/* botones de la tarjeta */
+.card-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:auto;
+}
+.btn {
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:600;
+  cursor:pointer;
   border: none;
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.16s ease;
+}
+.btn-primary{
+  background:var(--color-primary);
+  color:white;
+  box-shadow: 0 8px 18px rgba(31,165,138,0.12);
+}
+.btn-primary:hover{ transform: translateY(-2px); background:var(--color-primary-700) }
+.btn-outline{
+  background:transparent;
+  border:1px solid rgba(15,23,42,0.08);
+  color:var(--color-text);
+}
+.btn-outline:hover{ border-color:rgba(13,110,253,0.14) }
+
+/* contador like estilo */
+.contador-likes{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:8px;
+  background:linear-gradient(90deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4));
+  border:1px solid rgba(12,24,40,0.03);
 }
 
-.btn-acceder:hover {
-  background-color: #27ae60;
+/* === FORMULARIOS === */
+input[type="text"], input[type="email"], input[type="password"], select, textarea {
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid rgba(12,24,40,0.06);
+  background: #fbfdff;
+  font-family:inherit;
+  font-size:0.95rem;
+  outline: none;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 14px rgba(13,110,253,0.06);
 }
 
-.btn-recordar,
-.btn-reistro {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
+/* formularios en filas */
+.form-row{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+}
+.form-row .form-group{ flex:1 }
+@media (max-width:900px){ .form-row{ flex-direction:column } }
+
+/* botones globales */
+.btn-acceder{
+  background:var(--color-primary);
+  color:white;
+  padding:10px 16px;
+  border-radius:10px;
+  font-weight:700;
+  border:none;
+  cursor:pointer;
+}
+.btn-acceder:hover{ background:var(--color-primary-700) }
+
+/* PAGINACIÓN */
+.pagination{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:center;
+  margin-top:12px;
+}
+.pagination button{
+  min-width:110px;
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid rgba(12,24,40,0.06);
+  background:transparent;
+  cursor:pointer;
+}
+#pageInfo{ font-weight:700; white-space:nowrap }
+
+/* MEDIA QUERIES: ajustes generales */
+@media (max-width:1280px){
+  .sidebar{ display:none }             /* simplifica en pantallas pequeñas */
+  .perfil-contenido{ max-width:100% }
+  .header-nav{ padding: 0 0.8rem }
 }
 
-/* === CABECERA === */
-.header-nav {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  width: 100%;
-  justify-content: space-between;
-  padding: 1vw 1vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: linear-gradient(to top, #007BFF, #F2F2F2);
-  z-index: 1000;
-}
+/* pequeñas utilidades */
+.text-muted{ color:var(--color-muted); font-size:0.9rem }
+.center{ text-align:center }
+.mb-8{ margin-bottom:8px }
+.p-12{ padding:12px }
 
-.logo {
-  width: 10vw;
-  max-width: 60px;
-  max-height: 60px;
-  margin-right: 20px;
-}
+/* accesibilidad: focus visible */
+:focus{ outline: 3px solid rgba(13,110,253,0.12); outline-offset: 3px }
 
-.nav-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1vw;
-  justify-content: flex-end;
-  flex: 1;
-}
-
-.nav-links a {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 5px 10px;
-  transition: all 0.1s;
-}
-
-.nav-links a:hover {
-  font-size: 1.2rem;
-}
-
-/* === BARRA LATERAL === */
-.sidebar {
-  position: fixed;
-  top: 10vh;
-  left: 0;
-  width: 12vw;
-  height: 85vh;
-  background: linear-gradient(to top, #007BFF, #F2F2F2);
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1vh;
-  transition: all 0.3s ease;
-  border-radius: 5px;
-  margin-left: 1vh;
-}
-
-.btn-registrate {
-  background-color: var(--color-primary-green);
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  transition: transform 0.3s ease;
-}
-
-.btn-registrate:hover {
-  transform: scale(1.05);
-}
-
-.side-links {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  text-align: center;
-}
-
-.side-links a {
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: 1px solid blue;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px 0;
-  transition: all 0.2s;
-}
-
-.side-links a:hover {
-  border-width: 2px;
-}
-/* === CONTENIDO PRINCIPAL === */
-.main-content {
-  padding: 2vh 2vw;
-  padding-top: 12vh; /* espacio para la cabecera fija */
-}
-.content-box {
-  width: 70%;
-  max-width: 1200px;
-  text-align: center;
-  padding: 20px;
-  margin: 150px auto 0;
-}
-
-.content-box p {
-  font-family: 'Indie Flower', cursive;
-  font-size: 4rem;
-  font-weight: bold;
-  text-shadow: 2px 2px 6px white;
-  color: #333;
-}
-
-/* === PERFIL === */
-
-.perfil-container {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  max-width: 1400px;
-  margin: 80px auto 0;
-  gap: 20px;
-  min-height: 100vh;
-  overflow: visible;
-}
-
-#sidebar-perfil-izquierda {
-  flex: 0 0 200px;  /* ancho fijo mínimo */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
-}
-
-.perfil-foto {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background: url("../img/perfil.jpeg") center/cover no-repeat;
-}
-
-.perfil-info {
-   width: 100%; /* ocupa todo el ancho del sidebar */
-  max-width: 200px; /* evita que se salga */
-  background-color: #dcdcdc;
-  padding: 10px;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.perfil-contenido {
-  flex: 0 0 60vw;
-  min-height: 100vh;
-  overflow: visible;
-  min-width: 300px;
-  max-width: 60vw;
-  display: flex;
-  position: relative;
-  top:15vh;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.perfil-header {
-  width: 100%;
-  padding: 10px;
-  background-color: #dcdcdc;
-  border-radius: 5px;
-}
-
-.perfil-body {
-  width: 100%;
-  height: 400px;
-}
-
-.perfil-body img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-#sidebar-perfil-derecha {
-  top: 10vh;
-  left: 87.8vw;
-  background-color: #dcdcdc;
-}
-
-/* === CONTADOR DE LIKES === */
-.likes {
-  background-color: transparent;
-  display: flex;
-  justify-content: center;
-}
-
-.contador-likes {
-  font-size: 1.5rem;
-  padding: 10px 20px;
-  background: url("../img/corazon.png") no-repeat center/contain;
-  border-radius: 5%;
-  cursor: pointer;
-  border: none;
-}
-
-/* === MEDIA QUERIES === */
-
-/* Grandes pantallas */
-@media (min-width: 1920px) {
-  .login-lightbox { width: 500px; padding: 40px 60px; }
-  .content-box p { font-size: 5rem; }
-  .perfil-container { flex-direction: column; align-items: center; }
-  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { flex: 1 1 100%; max-width: 600px; margin: 10px 0; }
-  .perfil-contenido { width: 100%; }
-}
-
-/* Portátiles estándar */
-@media (max-width: 1440px) {
-  .sidebar { width: 100%; height: auto; flex-direction: row; justify-content: space-around; padding: 10px 0; position: relative; top: auto; }
-  .sidebar .btn-registrate, .sidebar .side-links a { margin: 0 5px; padding: 8px 12px; font-size: 1rem; }
-  .nav-links { justify-content: center; }
-  .login-lightbox { width: 350px; padding: 25px 40px; }
-  .content-box { width: 80%; }
-  .content-box p { font-size: 3rem; }
-  .perfil-container { flex-wrap: wrap; justify-content: center; }
-  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { flex: 1 1 100%; max-width: 600px; margin: 10px 0; }
-  .perfil-contenido { flex: 1 1 100%; min-width: auto; }
-  .perfil-extra { width: 80%; height: 200px; margin-top: 20px; }
-}
-
-/* Pantallas pequeñas */
-@media (max-width: 1280px) {
-  .sidebar { flex-direction: column; width: 100%; height: auto; padding: 10px 0; position: relative; top: auto; }
-  .sidebar .btn-registrate, .sidebar .side-links a { margin: 5px; padding: 8px 10px; font-size: 0.9rem; }
-  .login-lightbox { width: 90%; padding: 20px; }
-  .content-box { width: 95%; }
-  .content-box p { font-size: 2.2rem; }
-  .perfil-container { width: 95%; padding: 2%; flex-wrap: wrap; }
-  .perfil-foto { width: 120px; height: 120px; }
-  .perfil-info { width: 100%; }
-  .perfil-extra { width: 100%; height: auto; margin-top: 20px; }
-  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { width: 100%; max-width: 100%; margin: 10px 0; }
-  .perfil-contenido { width: 100%; }
-}
+/* fin */
