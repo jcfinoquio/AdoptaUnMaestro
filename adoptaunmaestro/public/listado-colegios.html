@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Listado de Colegios - Adopta un Maestro</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    /* Fondo unificado y layout */
+    body, main, .perfil-container, .list-main {
+      background-color: #eaf5ee;
+    }
+
+    .list-main {
+      width: 100%;
+      max-width: 1500px;
+      margin: 92px auto 40px;
+      display: flex;
+      gap: 10px;
+      padding: 0 2vw;
+      align-items: flex-start;
+      box-sizing: border-box;
+    }
+
+    #sidebar-perfil-izquierda,
+    #sidebar-perfil-derecha {
+      width: 12vw;
+      min-width: 140px;
+    }
+
+    .list-content {
+      flex: 1 1 78%;
+      max-width: 1300px;
+    }
+
+    .card-shell {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1300px;
+      padding: 28px;
+      box-sizing: border-box;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 0 8px 20px rgba(12,24,40,0.06);
+    }
+
+    h2 { margin-top:0; color: #094032; }
+
+    .controls {
+      display:flex;
+      gap:10px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .controls input[type="search"],
+    .controls select {
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #c6d9d0;
+      background: #fff;
+      font-family: inherit;
+      font-size:1rem;
+      min-width:180px;
+    }
+
+    .controls .btn-outline {
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #009e70;
+      background: transparent;
+      color: #009e70;
+      font-weight:700;
+      cursor:pointer;
+    }
+
+    /* GRID responsive (hasta 5 columnas) */
+    .card-grid {
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      justify-items: center;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .card-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 1200px) {
+      .card-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (min-width: 1400px) {
+      .card-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+
+    /* TARJETA COLEGIO */
+    .colegio-card {
+      background: #ffffff;
+      border-radius:12px;
+      box-shadow: 0 8px 18px rgba(12,24,40,0.06);
+      padding:16px;
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height: 260px;
+      box-sizing: border-box;
+    }
+
+    .colegio-logo {
+      width:84px;
+      height:84px;
+      border-radius:12px;
+      background-size:cover;
+      background-position:center;
+      margin:0 auto 12px auto;
+      border:4px solid rgba(234,245,238,0.9);
+      box-shadow: 0 6px 12px rgba(12,24,40,0.04);
+    }
+
+    .colegio-meta h4 {
+      margin:6px 0;
+      font-size:1.02rem;
+      color:#0b4233;
+      text-align:center;
+    }
+
+    .colegio-meta p {
+      margin:6px 0;
+      font-size:0.9rem;
+      color:#4b5950;
+      text-align:center;
+    }
+
+    .colegio-badges {
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .badge {
+      background: rgba(0,158,112,0.12);
+      color: #007b57;
+      border-radius: 999px;
+      padding:6px 10px;
+      font-weight:700;
+      font-size:0.8rem;
+    }
+
+    .colegio-actions {
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      align-items:center;
+    }
+
+    .btn-primary {
+      background: #009e70;
+      color: #fff;
+      border: none;
+      padding:10px 12px;
+      border-radius:8px;
+      font-weight:700;
+      cursor:pointer;
+      font-size:0.95rem;
+      width:85%;
+      text-align:center;
+    }
+
+    .btn-primary:hover { background: #007b57; }
+
+    .btn-outline {
+      background: transparent;
+      border:1px solid #777;
+      color:#222;
+      padding:8px 12px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:0.95rem;
+      width:85%;
+      text-align:center;
+    }
+
+    /* PAGINACIÓN */
+    .pagination {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .pagination button {
+      min-width: 90px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      cursor: pointer;
+      background: #ffffff;
+      border: 1px solid #c6d9d0;
+      font-weight:600;
+    }
+
+    #pageInfo {
+      white-space: nowrap;
+      font-weight: bold;
+      font-size: 1rem;
+      color:#094032;
+    }
+
+    @media (max-width: 900px) {
+      #sidebar-perfil-izquierda, #sidebar-perfil-derecha { display:none; }
+      .list-main { margin: 80px 12px; }
+      .colegio-card { min-height:auto; padding:12px; }
+      .controls { justify-content:stretch; gap:8px; }
+    }
+
+    /* Sidebar derecha: botones verdes y separación */
+    .sidebar .btn-registrate,
+    .sidebar .side-links a,
+    .sidebar-right .btn-registrate,
+    .sidebar-right .side-links a {
+      display: block;
+      width: 100%;
+      max-width: 220px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      color: #fff;
+      background: #009e70;
+      text-decoration: none;
+      border: none;
+      transition: background 0.2s ease, transform 0.1s ease;
+      margin-bottom: 10px;
+    }
+
+    .sidebar .btn-registrate:hover,
+    .sidebar .side-links a:hover,
+    .sidebar-right .btn-registrate:hover,
+    .sidebar-right .side-links a:hover {
+      background: #007b57;
+      transform: translateY(-2px);
+    }
+
+    /* ========== Modal styles ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(2,10,6,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 12000;
+      padding: 20px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 760px;
+      box-shadow: 0 12px 40px rgba(2,10,6,0.4);
+      padding: 20px;
+      box-sizing: border-box;
+      max-height: 90vh;
+      overflow: auto;
+      position: relative;
+    }
+
+    .modal-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+
+    .modal-header h3 { margin:0; color:#0b4233; font-size:1.2rem; }
+
+    .modal-close {
+      background: transparent;
+      border: none;
+      font-size:1.2rem;
+      cursor:pointer;
+      padding:6px 8px;
+      border-radius:8px;
+    }
+
+    .modal-body {
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+    }
+
+    .modal-logo {
+      width:140px;
+      height:140px;
+      border-radius:10px;
+      background-size:cover;
+      background-position:center;
+      flex: 0 0 140px;
+      box-shadow: 0 8px 18px rgba(12,24,40,0.06);
+    }
+
+    .modal-info {
+      flex: 1 1 calc(100% - 160px);
+    }
+
+    .modal-info p { margin:8px 0; color:#3b4a43; }
+
+    .modal-actions {
+      margin-top:12px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    /* make modal content more readable on small screens */
+    @media (max-width:600px) {
+      .modal-body { flex-direction:column; }
+      .modal-info { flex:1 1 100%; }
+      .modal-logo { width:100%; height:160px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header-nav">
+    <div class="logo-container">
+      <img src="./img/logo.jpeg" alt="Logo del sitio Adopta un Maestro" class="logo">
+    </div>
+    <nav class="nav-links">
+      <a href="./index.html">INICIO</a>
+      <a href="./perfil.html">PERFIL</a>
+      <a href="#">EMPLEOS</a>
+      <a href="./listado-maestros.html">MAESTROS</a>
+      <a href="./listado-colegios.html">COLEGIOS</a>
+      <a href="#">MENSAJES</a>
+      <a href="#">CONTACTOS</a>
+    </nav>
+  </header>
+
+  <main class="perfil-container list-main">
+    <aside class="sidebar" id="sidebar-perfil-izquierda">
+      <div class="perfil-foto" style="background-image:url('./img/perfil-placeholder.png'); width:100px; height:100px; border-radius:12px; background-size:cover;"></div>
+      <div class="perfil-info" style="padding:8px; text-align:center;">
+        <p style="margin:0; color:#094032; font-weight:600;">Busca colegios por provincia o tipo</p>
+      </div>
+    </aside>
+
+    <section class="perfil-contenido list-content">
+      <div class="card-shell" role="main" aria-labelledby="tituloListado">
+        <h2 id="tituloListado">Listado de Colegios (Andalucía)</h2>
+
+        <div class="controls" role="region" aria-label="Controles de búsqueda y filtro">
+          <input id="buscar" type="search" placeholder="Buscar por nombre, ciudad..." aria-label="Buscar colegios" />
+          <select id="filtroProvincia" aria-label="Filtrar por provincia">
+            <option value="">Todas las provincias</option>
+            <option value="Sevilla">Sevilla</option>
+            <option value="Málaga">Málaga</option>
+            <option value="Cádiz">Cádiz</option>
+            <option value="Granada">Granada</option>
+            <option value="Córdoba">Córdoba</option>
+            <option value="Jaén">Jaén</option>
+            <option value="Huelva">Huelva</option>
+            <option value="Almería">Almería</option>
+          </select>
+          <select id="filtroTipo" aria-label="Filtrar por tipo">
+            <option value="">Todos los tipos</option>
+            <option value="Concertado">Concertado</option>
+            <option value="Privado">Privado</option>
+            <option value="Público">Público</option>
+          </select>
+          <button id="btnLimpiar" class="btn-outline">Limpiar</button>
+        </div>
+
+        <div id="resultados" class="card-grid" aria-live="polite" aria-busy="false"></div>
+
+        <div class="pagination" id="pagination" role="navigation" aria-label="Paginación">
+          <button id="prevPage" class="btn-outline">« Anterior</button>
+          <span id="pageInfo">1 / 1</span>
+          <button id="nextPage" class="btn-outline">Siguiente »</button>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar" id="sidebar-perfil-derecha">
+      <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+      <nav class="side-links">
+        <a href="#">EVENTOS Y TALLERES</a>
+        <a href="#">RECURSOS EDUCATIVOS</a>
+        <a href="#">FOROS</a>
+        <a href="#">SOBRE NOSOTROS</a>
+        <a href="#">AYUDA Y SOPORTE</a>
+      </nav>
+    </aside>
+  </main>
+
+  <!-- Modal: ficha colegio -->
+  <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">Ficha colegio</h3>
+        <button class="modal-close" id="modalCloseBtn" aria-label="Cerrar ficha">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-logo" id="modalLogo" style="background-image:url('./img/colegio1.jpg')"></div>
+        <div class="modal-info">
+          <p id="modalProvinciaTipo" style="font-weight:700;"></p>
+          <p id="modalCiudad"></p>
+          <p id="modalDescripcion"></p>
+          <p id="modalTelefono" style="font-weight:700;"></p>
+          <div class="modal-actions">
+            <button id="modalContactBtn" class="btn-primary">Contactar centro</button>
+            <a id="modalGoPerfil" class="btn-outline" href="#">Ver página del centro</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Datos de ejemplo (igual que antes)
+    const colegios = [
+      { id:1, nombre:'Colegio San José', provincia:'Sevilla', tipo:'Concertado', ciudad:'Sevilla', telefono:'955 123 456', logo:'./img/colegio1.jpg', resumen:'Centro con enfoque STEM y apoyo a la inclusión.'},
+      { id:2, nombre:'Escuela La Marina', provincia:'Málaga', tipo:'Concertado', ciudad:'Málaga', telefono:'952 234 567', logo:'./img/colegio2.jpg', resumen:'Fuerte programa de idiomas y actividades náuticas.'},
+      { id:3, nombre:'Colegio Las Acacias', provincia:'Cádiz', tipo:'Privado', ciudad:'Cádiz', telefono:'956 345 678', logo:'./img/colegio3.jpg', resumen:'Proyecto artístico y cultural consolidado.'},
+      { id:4, nombre:'Centro Virgen del Alba', provincia:'Granada', tipo:'Concertado', ciudad:'Granada', telefono:'958 456 789', logo:'./img/colegio4.jpg', resumen:'Metodologías activas en primaria.'},
+      { id:5, nombre:'Colegio Horizonte', provincia:'Córdoba', tipo:'Público', ciudad:'Córdoba', telefono:'957 567 890', logo:'./img/colegio5.jpg', resumen:'Enfoque en mejora continua y convivencia.'},
+      { id:6, nombre:'Colegio Andalucía', provincia:'Jaén', tipo:'Concertado', ciudad:'Jaén', telefono:'953 678 901', logo:'./img/colegio6.jpg', resumen:'Programa de inclusión y proyectos rurales.'},
+      { id:7, nombre:'Escuela Nueva Ola', provincia:'Huelva', tipo:'Privado', ciudad:'Huelva', telefono:'959 789 012', logo:'./img/colegio7.jpg', resumen:'Talleres tecnológicos y deportivos.'},
+      { id:8, nombre:'Colegio Alborán', provincia:'Almería', tipo:'Concertado', ciudad:'Almería', telefono:'950 890 123', logo:'./img/colegio8.jpg', resumen:'Apuesta por la naturaleza y huertos escolares.'},
+      { id:9, nombre:'Colegio Río Verde', provincia:'Sevilla', tipo:'Público', ciudad:'Dos Hermanas', telefono:'955 901 234', logo:'./img/colegio9.jpg', resumen:'Proyectos STEAM desde infantil.'},
+      { id:10, nombre:'Colegio Mediterráneo', provincia:'Málaga', tipo:'Concertado', ciudad:'Fuengirola', telefono:'952 012 345', logo:'./img/colegio10.jpg', resumen:'Programas bilingües y actividades marinas.'},
+      { id:11, nombre:'Colegio San Martín', provincia:'Cádiz', tipo:'Concertado', ciudad:'Jerez', telefono:'956 123 987', logo:'./img/colegio11.jpg', resumen:'Trabajo en valores y deporte escolar.'},
+      { id:12, nombre:'Colegio Sierra', provincia:'Granada', tipo:'Privado', ciudad:'Motril', telefono:'958 234 876', logo:'./img/colegio12.jpg', resumen:'Atención a la diversidad y música.'},
+      { id:13, nombre:'Colegio Córdoba Centro', provincia:'Córdoba', tipo:'Concertado', ciudad:'Córdoba', telefono:'957 345 765', logo:'./img/colegio13.jpg', resumen:'Énfasis en tecnología educativa.'},
+      { id:14, nombre:'Colegio Norte', provincia:'Jaén', tipo:'Público', ciudad:'Linares', telefono:'953 456 654', logo:'./img/colegio14.jpg', resumen:'Programas deportivos y convivencia.'},
+      { id:15, nombre:'Colegio Costa', provincia:'Huelva', tipo:'Concertado', ciudad:'Lepe', telefono:'959 567 543', logo:'./img/colegio15.jpg', resumen:'Formación profesional y FP dual.'}
+    ];
+
+    const PER_PAGE = 15; // 5 columnas x 3 filas
+    let state = { q:'', provincia:'', tipo:'', page:1 };
+    const resultadosEl = document.getElementById('resultados');
+    const buscarEl = document.getElementById('buscar');
+    const filtroProvincia = document.getElementById('filtroProvincia');
+    const filtroTipo = document.getElementById('filtroTipo');
+    const btnLimpiar = document.getElementById('btnLimpiar');
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    const pageInfo = document.getElementById('pageInfo');
+
+    // Modal elements
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalLogo = document.getElementById('modalLogo');
+    const modalProvinciaTipo = document.getElementById('modalProvinciaTipo');
+    const modalCiudad = document.getElementById('modalCiudad');
+    const modalDescripcion = document.getElementById('modalDescripcion');
+    const modalTelefono = document.getElementById('modalTelefono');
+    const modalContactBtn = document.getElementById('modalContactBtn');
+    const modalGoPerfil = document.getElementById('modalGoPerfil');
+
+    let lastFocusedElement = null; // for focus restore
+
+    function filtrarDatos() {
+      const q = state.q.toLowerCase().trim();
+      return colegios.filter(c =>
+        ((c.nombre + ' ' + c.ciudad + ' ' + c.resumen + ' ' + c.provincia).toLowerCase().includes(q)) &&
+        (!state.provincia || c.provincia === state.provincia) &&
+        (!state.tipo || c.tipo === state.tipo)
+      );
+    }
+
+    function render() {
+      resultadosEl.setAttribute('aria-busy', 'true');
+      const datos = filtrarDatos();
+      const totalPages = Math.max(1, Math.ceil(datos.length / PER_PAGE));
+      state.page = Math.min(state.page, totalPages);
+      const start = (state.page - 1) * PER_PAGE;
+      const pageItems = datos.slice(start, start + PER_PAGE);
+
+      resultadosEl.innerHTML = pageItems.map(c => `
+        <article class="colegio-card" role="article" aria-labelledby="colegio-${c.id}">
+          <div class="colegio-logo" style="background-image:url('${c.logo}')" role="img" aria-label="${c.nombre} logo"></div>
+          <div class="colegio-meta">
+            <h4 id="colegio-${c.id}">${c.nombre}</h4>
+            <p><strong>${c.ciudad}</strong> · ${c.provincia}</p>
+            <p>${c.resumen}</p>
+            <div class="colegio-badges">
+              <span class="badge">${c.tipo}</span>
+            </div>
+          </div>
+
+          <div class="colegio-actions">
+            <button class="btn-outline btn-view" data-id="${c.id}" aria-label="Ver ficha de ${c.nombre}">Ver ficha</button>
+            <button class="btn-primary" data-contact="${c.id}">Contactar centro</button>
+          </div>
+        </article>
+      `).join('');
+
+      pageInfo.textContent = `${state.page} / ${totalPages}`;
+      prevBtn.disabled = state.page <= 1;
+      nextBtn.disabled = state.page >= totalPages;
+      resultadosEl.setAttribute('aria-busy', 'false');
+
+      // attach view handlers
+      document.querySelectorAll('.btn-view').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = Number(e.currentTarget.dataset.id);
+          openModalFor(id, e.currentTarget);
+        });
+      });
+    }
+
+    function openModalFor(id, opener) {
+      const c = colegios.find(x => x.id === id);
+      if (!c) return;
+      lastFocusedElement = opener || document.activeElement;
+      // populate modal
+      modalTitle.textContent = c.nombre;
+      modalLogo.style.backgroundImage = `url('${c.logo}')`;
+      modalProvinciaTipo.textContent = `${c.tipo} · ${c.provincia}`;
+      modalCiudad.textContent = `Ciudad: ${c.ciudad}`;
+      modalDescripcion.textContent = c.resumen;
+      modalTelefono.textContent = `Teléfono: ${c.telefono}`;
+      modalGoPerfil.href = `./detalle-colegio.html?id=${c.id}`;
+      // set contact button action (example)
+      modalContactBtn.onclick = () => alert(`Solicitud de contacto enviada a ${c.nombre}. Tel: ${c.telefono}`);
+      // show modal
+      modalOverlay.classList.add('open');
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      // focus first focusable element inside modal
+      trapFocus(modalOverlay);
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('open');
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      releaseFocusTrap();
+      // restore focus
+      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
+        lastFocusedElement.focus();
+      }
+    }
+
+    // close on overlay click (outside modal)
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    // close on Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('open')) {
+        closeModal();
+      }
+    });
+
+    // Simple focus trap
+    let focusableElements = [];
+    let firstFocusable = null;
+    let lastFocusable = null;
+    function trapFocus(container) {
+      focusableElements = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
+        .filter(el => el.offsetParent !== null);
+      if (focusableElements.length > 0) {
+        firstFocusable = focusableElements[0];
+        lastFocusable = focusableElements[focusableElements.length -1];
+        firstFocusable.focus();
+      }
+      container.addEventListener('keydown', handleTrap);
+    }
+    function releaseFocusTrap() {
+      modalOverlay.removeEventListener('keydown', handleTrap);
+      focusableElements = [];
+      firstFocusable = lastFocusable = null;
+    }
+    function handleTrap(e) {
+      if (e.key !== 'Tab') return;
+      if (focusableElements.length === 0) {
+        e.preventDefault();
+        return;
+      }
+      if (e.shiftKey) { // Shift + Tab
+        if (document.activeElement === firstFocusable) {
+          e.preventDefault();
+          lastFocusable.focus();
+        }
+      } else { // Tab
+        if (document.activeElement === lastFocusable) {
+          e.preventDefault();
+          firstFocusable.focus();
+        }
+      }
+    }
+
+    // Event listeners
+    buscarEl.addEventListener('input', e => { state.q = e.target.value; state.page = 1; render(); });
+    filtroProvincia.addEventListener('change', e => { state.provincia = e.target.value; state.page = 1; render(); });
+    filtroTipo.addEventListener('change', e => { state.tipo = e.target.value; state.page = 1; render(); });
+    btnLimpiar.addEventListener('click', () => { buscarEl.value=''; filtroProvincia.value=''; filtroTipo.value=''; state.q=''; state.provincia=''; state.tipo=''; state.page=1; render(); });
+    prevBtn.addEventListener('click', () => { if(state.page>1){ state.page--; render(); }});
+    nextBtn.addEventListener('click', () => { state.page++; render(); });
+
+    // Handler botón contactar en tarjetas
+    resultadosEl.addEventListener('click', e => {
+      const btn = e.target.closest('[data-contact]');
+      if(btn){
+        const id = Number(btn.dataset.contact);
+        const c = colegios.find(x => x.id === id);
+        alert(`Solicitud de contacto enviada a ${c.nombre}. Teléfono: ${c.telefono}`);
+      }
+    });
+
+    // Inicial render
+    render();
+  </script>
+</body>
+</html>
