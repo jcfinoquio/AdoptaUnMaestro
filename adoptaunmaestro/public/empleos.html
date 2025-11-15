@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empleos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: serif;
+        }
+
+        /* Contenedor general */
+        .page-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Título */
+        .title {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        /* Menú superior */
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            background: #e6e6e6;
+            padding: 15px 0;
+            border-radius: 6px;
+            margin-bottom: 40px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        /* Asides laterales */
+        .layout {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            gap: 20px;
+        }
+
+        aside {
+            background: #dedede;
+            min-height: 600px;
+            border-radius: 6px;
+        }
+
+        /* Bandeja de mensajes */
+        .messages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .message-box {
+            background: #e6e6e6;
+            padding: 25px;
+            border-radius: 6px;
+            max-height: 8.2em; /* Aproximadamente 4 líneas */
+            overflow: hidden;
+            position: relative;
+        }
+
+        .message-box.expanded {
+            max-height: none;
+        }
+
+        .read-more-btn {
+            margin-top: 10px;
+            background: #ccc;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        /* Responsividad */
+        @media (max-width: 1200px) {
+            .layout {
+                grid-template-columns: 150px 1fr 150px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            aside {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <nav class="menu">
+            <a href="#">Mi Perfil</a>
+            <a href="#">Empleos</a>
+            <a href="#">Centros/Maestros</a>
+            <a href="#">Mensajes</a>
+            <a href="#">Contactos</a>
+        </nav>
+
+        <div class="layout">
+            <aside id="left-aside"><!-- tu contenido aquí --></aside>
+
+            <div class="messages-container">
+                <div class="message-box">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta massa sed sapien placerat, vel luctus metus tristique. Etiam suscipit orci sed dolor fermentum feugiat.
+                    <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                </div>
+
+                <div class="message-box">
+                    Otro mensaje de prueba. Curabitur quis efficitur arcu. Maecenas vitae quam sem.
+                    <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                </div>
+
+                <div class="message-box">
+                    Mensaje número tres. Aliquam iaculis, ipsum ut elementum bibendum, arcu felis ornare massa, non luctus velit nisi eu libero.
+                    <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                </div>
+            </div>
+
+            <aside id="right-aside"><!-- tu contenido aquí --></aside>
+        </div>
+    </div>
+
+    <script>
+        function toggleExpand(btn) {
+            const box = btn.parentElement;
+            box.classList.toggle("expanded");
+            btn.textContent = box.classList.contains("expanded") ? "Leer menos" : "Leer más";
+        }
+    </script>
+</body>
+</html>

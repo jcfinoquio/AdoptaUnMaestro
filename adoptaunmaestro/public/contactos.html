@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contactos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: serif;
+        }
+
+        .page-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            background: #e6e6e6;
+            padding: 15px 0;
+            border-radius: 6px;
+            margin-bottom: 40px;
+        }
+
+        .menu a {
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            gap: 20px;
+        }
+
+        aside {
+            background: #dedede;
+            min-height: 600px;
+            border-radius: 6px;
+        }
+
+        /* Contactos */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px 20px;
+            justify-items: center;
+            margin-bottom: 50px;
+        }
+
+        .contact-card {
+            text-align: center;
+        }
+
+        .contact-card img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #ccc;
+        }
+
+        .name {
+            margin-top: 10px;
+            height: 18px;
+            background: #e6e6e6;
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Bloque inferior */
+        .bottom-block {
+            background: #e6e6e6;
+            height: 120px;
+            border-radius: 6px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 1200px) {
+            .layout {
+                grid-template-columns: 150px 1fr 150px;
+            }
+            .contacts-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+            aside {
+                display: none;
+            }
+            .contacts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <div class="title">CONTACTOS</div>
+
+        <nav class="menu">
+            <a href="#">Mi Perfil</a>
+            <a href="#">Empleos</a>
+            <a href="#">Centros/Maestros</a>
+            <a href="#">Mensajes</a>
+            <a href="#">Contactos</a>
+        </nav>
+
+        <div class="layout">
+            <aside><!-- contenido usuario --></aside>
+
+            <div>
+                <div class="contacts-grid">
+                    <!-- 10 contactos -->
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/11.jpg"><div class="name">Carlos Ruiz</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/14.jpg"><div class="name">Laura Pérez</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/36.jpg"><div class="name">Miguel Santos</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/28.jpg"><div class="name">Elena Gómez</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/52.jpg"><div class="name">Javier Ortiz</div></div>
+
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/33.jpg"><div class="name">Sara Molina</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/41.jpg"><div class="name">David Lara</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/47.jpg"><div class="name">Nuria Vidal</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/77.jpg"><div class="name">Rubén Torres</div></div>
+                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/5.jpg"><div class="name">Patricia León</div></div>
+                </div>
+
+                <div class="bottom-block"></div>
+            </div>
+
+            <aside><!-- contenido usuario --></aside>
+        </div>
+    </div>
+</body>
+</html>
