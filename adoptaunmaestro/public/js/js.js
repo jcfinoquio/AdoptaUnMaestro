@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
      FORMULARIO DE LOGIN
   =========================== */
   const loginForm = document.getElementById("login-form");
-  
+
   if (loginForm) {
     const mensaje = document.getElementById("mensaje");
     const inputEmail = document.getElementById("mail");
@@ -15,88 +15,88 @@ document.addEventListener("DOMContentLoaded", () => {
     const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
     // Funcionalidad del modal
-    document.getElementById('abrir-modal')?.addEventListener('click', function() {
-        modalOverlay.classList.add('active');
-        document.body.classList.add('modal-active');
+    document.getElementById('abrir-modal')?.addEventListener('click', function () {
+      modalOverlay.classList.add('active');
+      document.body.classList.add('modal-active');
     });
 
-    document.getElementById('cerrar-modal')?.addEventListener('click', function() {
-        cerrarModal();
+    document.getElementById('cerrar-modal')?.addEventListener('click', function () {
+      cerrarModal();
     });
 
     // Cerrar modal al hacer clic fuera del contenido
-    modalOverlay?.addEventListener('click', function(e) {
-        if (e.target === this) {
-            cerrarModal();
-        }
+    modalOverlay?.addEventListener('click', function (e) {
+      if (e.target === this) {
+        cerrarModal();
+      }
     });
 
     // Función para cerrar el modal
     function cerrarModal() {
-        modalOverlay.classList.remove('active');
-        document.body.classList.remove('modal-active');
-        // Limpiar mensajes y campos
-        mensaje.textContent = '';
-        loginForm.reset();
+      modalOverlay.classList.remove('active');
+      document.body.classList.remove('modal-active');
+      // Limpiar mensajes y campos
+      mensaje.textContent = '';
+      loginForm.reset();
     }
 
     // Manejo del formulario
     loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = inputEmail?.value.trim() || "";
-        const password = inputPassword?.value || "";
+      e.preventDefault();
+      const email = inputEmail?.value.trim() || "";
+      const password = inputPassword?.value || "";
 
-        // Validaciones
-        if (!email) {
-            mensaje.textContent = "Por favor, introduce tu correo electrónico.";
-            mensaje.style.color = "red";
-            return;
-        }
-        
-        if (!validarEmail(email)) {
-            mensaje.textContent = "El formato del correo electrónico no es válido.";
-            mensaje.style.color = "red";
-            return;
-        }
-        
-        if (!password) {
-            mensaje.textContent = "Por favor, introduce tu contraseña.";
-            mensaje.style.color = "red";
-            return;
-        }
+      // Validaciones
+      if (!email) {
+        mensaje.textContent = "Por favor, introduce tu correo electrónico.";
+        mensaje.style.color = "red";
+        return;
+      }
 
-        // Simulación de envío
-        mensaje.textContent = "Iniciando sesión...";
-        mensaje.style.color = "blue";
+      if (!validarEmail(email)) {
+        mensaje.textContent = "El formato del correo electrónico no es válido.";
+        mensaje.style.color = "red";
+        return;
+      }
 
-        setTimeout(() => {
-            // Simular respuesta del servidor
-            if (email === "usuario@ejemplo.com" && password === "123456") {
-                mensaje.textContent = "¡Login exitoso! ✅";
-                mensaje.style.color = "green";
-                
-                // Cerrar modal después de éxito
-                setTimeout(() => {
-                    cerrarModal();
-                    // Redirigir o actualizar la interfaz
-                    alert("Bienvenido!");
-                }, 1000);
-            } else {
-                mensaje.textContent = "Credenciales incorrectas. Inténtalo de nuevo.";
-                mensaje.style.color = "red";
-            }
-        }, 1500);
+      if (!password) {
+        mensaje.textContent = "Por favor, introduce tu contraseña.";
+        mensaje.style.color = "red";
+        return;
+      }
+
+      // Simulación de envío
+      mensaje.textContent = "Iniciando sesión...";
+      mensaje.style.color = "blue";
+
+      setTimeout(() => {
+        // Simular respuesta del servidor
+        if (email === "usuario@ejemplo.com" && password === "123456") {
+          mensaje.textContent = "¡Login exitoso! ✅";
+          mensaje.style.color = "green";
+
+          // Cerrar modal después de éxito
+          setTimeout(() => {
+            cerrarModal();
+            // Redirigir o actualizar la interfaz
+            alert("Bienvenido!");
+          }, 1000);
+        } else {
+          mensaje.textContent = "Credenciales incorrectas. Inténtalo de nuevo.";
+          mensaje.style.color = "red";
+        }
+      }, 1500);
     });
   }
 
   /* ===========================
     FUNCIONALIDAD EMPLEOS
   =========================== */
-  window.toggleExpand = function(btn) {
+  window.toggleExpand = function (btn) {
     const jobOffer = btn.closest('.job-offer');
     if (jobOffer) {
-        jobOffer.classList.toggle("expanded");
-        btn.textContent = jobOffer.classList.contains("expanded") ? "Leer menos" : "Leer más";
+      jobOffer.classList.toggle("expanded");
+      btn.textContent = jobOffer.classList.contains("expanded") ? "Leer menos" : "Leer más";
     }
   };
 
@@ -104,22 +104,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const readMoreButtons = document.querySelectorAll('.read-more-btn');
   if (readMoreButtons.length > 0) {
     readMoreButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            window.toggleExpand(this);
-        });
+      button.addEventListener('click', function () {
+        window.toggleExpand(this);
+      });
     });
-    
+
     // Botones de postulación
     document.querySelectorAll('.btn-primary').forEach(button => {
-        if (button.textContent === 'Postularme') {
-            button.addEventListener('click', function() {
-                alert('¡Postulación enviada correctamente!');
-                this.textContent = 'Postulado';
-                this.classList.remove('btn-primary');
-                this.classList.add('btn-success');
-                this.disabled = true;
-            });
-        }
+      if (button.textContent === 'Postularme') {
+        button.addEventListener('click', function () {
+          alert('¡Postulación enviada correctamente!');
+          this.textContent = 'Postulado';
+          this.classList.remove('btn-primary');
+          this.classList.add('btn-success');
+          this.disabled = true;
+        });
+      }
     });
   }
 
@@ -153,9 +153,9 @@ document.addEventListener("DOMContentLoaded", () => {
     botonesLike.forEach((boton) => {
       const idNumero = boton.id.replace("contador-likes", "");
       const contadorDisplay = document.getElementById(`numero-likes${idNumero}`);
-      
+
       if (!contadorDisplay) return;
-      
+
       const STORAGE_KEY = `likes-count${idNumero}`;
       const USER_LIKED_KEY = `user-liked${idNumero}`;
 
@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", () => {
     FUNCIONALIDADES REGISTRO
   =========================== */
   const registroForm = document.getElementById('registroForm');
-  
+
   if (registroForm) {
     const rolSelect = document.getElementById('rol');
     const bloqueMaestro = document.getElementById('bloqueMaestro');
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     let formCount = 0;
-    
+
     if (btnAddForm && formacionesCont) {
       btnAddForm.addEventListener('click', () => {
         formCount++;
@@ -255,109 +255,109 @@ document.addEventListener("DOMContentLoaded", () => {
     LISTADO COLEGIOS
   =========================== */
   const resultadosColegios = document.getElementById('resultados');
-  
+
   if (resultadosColegios) {
     // Datos de ejemplo con imágenes reales de bancos gratuitos
     const colegios = [
-      { 
-        id:1, 
-        nombre:'Colegio San José', 
-        provincia:'Sevilla', 
-        tipo:'Concertado', 
-        ciudad:'Sevilla', 
-        telefono:'955 123 456', 
-        logo:'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop', 
-        resumen:'Centro con enfoque STEM y apoyo a la inclusión.'
+      {
+        id: 1,
+        nombre: 'Colegio San José',
+        provincia: 'Sevilla',
+        tipo: 'Concertado',
+        ciudad: 'Sevilla',
+        telefono: '955 123 456',
+        logo: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
+        resumen: 'Centro con enfoque STEM y apoyo a la inclusión.'
       },
-      { 
-        id:2, 
-        nombre:'Escuela La Marina', 
-        provincia:'Málaga', 
-        tipo:'Concertado', 
-        ciudad:'Málaga', 
-        telefono:'952 234 567', 
-        logo:'https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=300&fit=crop', 
-        resumen:'Fuerte programa de idiomas y actividades náuticas.'
+      {
+        id: 2,
+        nombre: 'Escuela La Marina',
+        provincia: 'Málaga',
+        tipo: 'Concertado',
+        ciudad: 'Málaga',
+        telefono: '952 234 567',
+        logo: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=300&fit=crop',
+        resumen: 'Fuerte programa de idiomas y actividades náuticas.'
       },
-      { 
-        id:3, 
-        nombre:'Colegio Las Acacias', 
-        provincia:'Cádiz', 
-        tipo:'Privado', 
-        ciudad:'Cádiz', 
-        telefono:'956 345 678', 
-        logo:'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop', 
-        resumen:'Proyecto artístico y cultural consolidado.'
+      {
+        id: 3,
+        nombre: 'Colegio Las Acacias',
+        provincia: 'Cádiz',
+        tipo: 'Privado',
+        ciudad: 'Cádiz',
+        telefono: '956 345 678',
+        logo: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
+        resumen: 'Proyecto artístico y cultural consolidado.'
       },
-      { 
-        id:4, 
-        nombre:'Centro Virgen del Alba', 
-        provincia:'Granada', 
-        tipo:'Concertado', 
-        ciudad:'Granada', 
-        telefono:'958 456 789', 
-        logo:'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=300&fit=crop', 
-        resumen:'Metodologías activas en primaria.'
+      {
+        id: 4,
+        nombre: 'Centro Virgen del Alba',
+        provincia: 'Granada',
+        tipo: 'Concertado',
+        ciudad: 'Granada',
+        telefono: '958 456 789',
+        logo: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=300&fit=crop',
+        resumen: 'Metodologías activas en primaria.'
       },
-      { 
-        id:5, 
-        nombre:'Colegio Horizonte', 
-        provincia:'Córdoba', 
-        tipo:'Público', 
-        ciudad:'Córdoba', 
-        telefono:'957 567 890', 
-        logo:'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=400&h=300&fit=crop', 
-        resumen:'Enfoque en mejora continua y convivencia.'
+      {
+        id: 5,
+        nombre: 'Colegio Horizonte',
+        provincia: 'Córdoba',
+        tipo: 'Público',
+        ciudad: 'Córdoba',
+        telefono: '957 567 890',
+        logo: 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=400&h=300&fit=crop',
+        resumen: 'Enfoque en mejora continua y convivencia.'
       },
-      { 
-        id:6, 
-        nombre:'Colegio Andalucía', 
-        provincia:'Jaén', 
-        tipo:'Concertado', 
-        ciudad:'Jaén', 
-        telefono:'953 678 901', 
-        logo:'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop', 
-        resumen:'Programa de inclusión y proyectos rurales.'
+      {
+        id: 6,
+        nombre: 'Colegio Andalucía',
+        provincia: 'Jaén',
+        tipo: 'Concertado',
+        ciudad: 'Jaén',
+        telefono: '953 678 901',
+        logo: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
+        resumen: 'Programa de inclusión y proyectos rurales.'
       },
-      { 
-        id:7, 
-        nombre:'Escuela Nueva Ola', 
-        provincia:'Huelva', 
-        tipo:'Privado', 
-        ciudad:'Huelva', 
-        telefono:'959 789 012', 
-        logo:'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop', 
-        resumen:'Talleres tecnológicos y deportivos.'
+      {
+        id: 7,
+        nombre: 'Escuela Nueva Ola',
+        provincia: 'Huelva',
+        tipo: 'Privado',
+        ciudad: 'Huelva',
+        telefono: '959 789 012',
+        logo: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop',
+        resumen: 'Talleres tecnológicos y deportivos.'
       },
-      { 
-        id:8, 
-        nombre:'Colegio Alborán', 
-        provincia:'Almería', 
-        tipo:'Concertado', 
-        ciudad:'Almería', 
-        telefono:'950 890 123', 
-        logo:'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=300&fit=crop', 
-        resumen:'Apuesta por la naturaleza y huertos escolares.'
+      {
+        id: 8,
+        nombre: 'Colegio Alborán',
+        provincia: 'Almería',
+        tipo: 'Concertado',
+        ciudad: 'Almería',
+        telefono: '950 890 123',
+        logo: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=300&fit=crop',
+        resumen: 'Apuesta por la naturaleza y huertos escolares.'
       },
-      { 
-        id:9, 
-        nombre:'Colegio Río Verde', 
-        provincia:'Sevilla', 
-        tipo:'Público', 
-        ciudad:'Dos Hermanas', 
-        telefono:'955 901 234', 
-        logo:'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop', 
-        resumen:'Proyectos STEAM desde infantil.'
+      {
+        id: 9,
+        nombre: 'Colegio Río Verde',
+        provincia: 'Sevilla',
+        tipo: 'Público',
+        ciudad: 'Dos Hermanas',
+        telefono: '955 901 234',
+        logo: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
+        resumen: 'Proyectos STEAM desde infantil.'
       },
-      { 
-        id:10, 
-        nombre:'Colegio Mediterráneo', 
-        provincia:'Málaga', 
-        tipo:'Concertado', 
-        ciudad:'Fuengirola', 
-        telefono:'952 012 345', 
-        logo:'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop', 
-        resumen:'Programas bilingües y actividades marinas.'
+      {
+        id: 10,
+        nombre: 'Colegio Mediterráneo',
+        provincia: 'Málaga',
+        tipo: 'Concertado',
+        ciudad: 'Fuengirola',
+        telefono: '952 012 345',
+        logo: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop',
+        resumen: 'Programas bilingües y actividades marinas.'
       }
     ];
 
@@ -429,7 +429,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const c = colegios.find(x => x.id === id);
       if (!c) return;
       lastFocusedElement = opener || document.activeElement;
-      
+
       modalTitle.textContent = c.nombre;
       modalLogo.style.backgroundImage = `url('${c.logo}')`;
       modalProvinciaTipo.textContent = `${c.tipo} · ${c.provincia}`;
@@ -480,24 +480,24 @@ document.addEventListener("DOMContentLoaded", () => {
     if (buscarEl) {
       buscarEl.addEventListener('input', e => { state.q = e.target.value; state.page = 1; render(); });
     }
-    
+
     if (filtroProvincia) {
       filtroProvincia.addEventListener('change', e => { state.provincia = e.target.value; state.page = 1; render(); });
     }
-    
+
     if (filtroTipo) {
       filtroTipo.addEventListener('change', e => { state.tipo = e.target.value; state.page = 1; render(); });
     }
-    
+
     if (btnLimpiar) {
       btnLimpiar.addEventListener('click', () => {
-        if (buscarEl) buscarEl.value = ''; 
-        if (filtroProvincia) filtroProvincia.value = ''; 
+        if (buscarEl) buscarEl.value = '';
+        if (filtroProvincia) filtroProvincia.value = '';
         if (filtroTipo) filtroTipo.value = '';
-        state.q = ''; 
-        state.provincia = ''; 
-        state.tipo = ''; 
-        state.page = 1; 
+        state.q = '';
+        state.provincia = '';
+        state.tipo = '';
+        state.page = 1;
         render();
       });
     }
@@ -521,7 +521,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = Number(e.target.dataset.id);
         openModalFor(id, e.target);
       }
-      
+
       // Botones "Contactar centro" 
       const contactBtn = e.target.closest('[data-contact]');
       if (contactBtn) {
@@ -541,49 +541,49 @@ document.addEventListener("DOMContentLoaded", () => {
     LISTADO MAESTROS
   =========================== */
   const maestrosResultadosEl = document.getElementById('maestrosResultados');
-  
+
   if (maestrosResultadosEl) {
     // Datos de ejemplo con imágenes reales
     const maestros = [
-      { 
-        id:1, 
-        nombre:'María López', 
-        especialidad:'Primaria', 
-        anios:6, 
-        avatar:'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face', 
-        resumen:'Maestra con experiencia en metodologías activas y aprendizaje cooperativo.'
+      {
+        id: 1,
+        nombre: 'María López',
+        especialidad: 'Primaria',
+        anios: 6,
+        avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Maestra con experiencia en metodologías activas y aprendizaje cooperativo.'
       },
-      { 
-        id:2, 
-        nombre:'Carlos Ruiz', 
-        especialidad:'Inglés', 
-        anios:8, 
-        avatar:'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face', 
-        resumen:'Profesor B2 certificado, experiencia en infantil y primaria.'
+      {
+        id: 2,
+        nombre: 'Carlos Ruiz',
+        especialidad: 'Inglés',
+        anios: 8,
+        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor B2 certificado, experiencia en infantil y primaria.'
       },
-      { 
-        id:3, 
-        nombre:'Ana Pérez', 
-        especialidad:'Matemáticas', 
-        anios:4, 
-        avatar:'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face', 
-        resumen:'Apasionada por el razonamiento lógico y creativo en matemáticas.'
+      {
+        id: 3,
+        nombre: 'Ana Pérez',
+        especialidad: 'Matemáticas',
+        anios: 4,
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Apasionada por el razonamiento lógico y creativo en matemáticas.'
       },
-      { 
-        id:4, 
-        nombre:'Javier Gómez', 
-        especialidad:'Educación Física', 
-        anios:12, 
-        avatar:'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face', 
-        resumen:'Entrenador y profesor con enfoque inclusivo y saludable.'
+      {
+        id: 4,
+        nombre: 'Javier Gómez',
+        especialidad: 'Educación Física',
+        anios: 12,
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Entrenador y profesor con enfoque inclusivo y saludable.'
       },
-      { 
-        id:5, 
-        nombre:'Lucía Martín', 
-        especialidad:'Inglés', 
-        anios:3, 
-        avatar:'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=200&h=200&fit=crop&crop=face', 
-        resumen:'Formación en TEFL y experiencia internacional en UK.'
+      {
+        id: 5,
+        nombre: 'Lucía Martín',
+        especialidad: 'Inglés',
+        anios: 3,
+        avatar: 'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Formación en TEFL y experiencia internacional en UK.'
       }
     ];
 
@@ -600,93 +600,93 @@ document.addEventListener("DOMContentLoaded", () => {
     const maestrosResultsCount = document.getElementById('maestrosResultsCount');
 
     function setupEventListeners() {
-        if (maestrosBuscarEl) {
-            maestrosBuscarEl.addEventListener('input', e => { 
-                maestrosState.q = e.target.value; 
-                maestrosState.page = 1; 
-                renderMaestros(); 
-            });
-        }
-        
-        if (filtroEspecialidadEl) {
-            filtroEspecialidadEl.addEventListener('change', e => { 
-                maestrosState.especialidad = e.target.value; 
-                maestrosState.page = 1; 
-                renderMaestros(); 
-            });
-        }
-        
-        if (btnMaestrosLimpiar) {
-            btnMaestrosLimpiar.addEventListener('click', () => { 
-                if (maestrosBuscarEl) maestrosBuscarEl.value = ''; 
-                if (filtroEspecialidadEl) filtroEspecialidadEl.value = ''; 
-                maestrosState.q = ''; 
-                maestrosState.especialidad = ''; 
-                maestrosState.page = 1; 
-                renderMaestros(); 
-            });
-        }
-
-        if (maestrosPrevBtn) {
-            maestrosPrevBtn.addEventListener('click', () => { 
-                if (maestrosState.page > 1) { 
-                    maestrosState.page--; 
-                    renderMaestros(); 
-                } 
-            });
-        }
-
-        if (maestrosNextBtn) {
-            maestrosNextBtn.addEventListener('click', () => { 
-                maestrosState.page++; 
-                renderMaestros(); 
-            });
-        }
-
-        // Event delegation para botones de contacto
-        maestrosResultadosEl.addEventListener('click', e => {
-            const btn = e.target.closest('[data-contact]');
-            if (btn) {
-                const id = Number(btn.dataset.contact);
-                const m = maestros.find(x => x.id === id);
-                if (m) {
-                    alert(`Solicitud de contacto enviada a ${m.nombre}.`);
-                }
-            }
+      if (maestrosBuscarEl) {
+        maestrosBuscarEl.addEventListener('input', e => {
+          maestrosState.q = e.target.value;
+          maestrosState.page = 1;
+          renderMaestros();
         });
+      }
+
+      if (filtroEspecialidadEl) {
+        filtroEspecialidadEl.addEventListener('change', e => {
+          maestrosState.especialidad = e.target.value;
+          maestrosState.page = 1;
+          renderMaestros();
+        });
+      }
+
+      if (btnMaestrosLimpiar) {
+        btnMaestrosLimpiar.addEventListener('click', () => {
+          if (maestrosBuscarEl) maestrosBuscarEl.value = '';
+          if (filtroEspecialidadEl) filtroEspecialidadEl.value = '';
+          maestrosState.q = '';
+          maestrosState.especialidad = '';
+          maestrosState.page = 1;
+          renderMaestros();
+        });
+      }
+
+      if (maestrosPrevBtn) {
+        maestrosPrevBtn.addEventListener('click', () => {
+          if (maestrosState.page > 1) {
+            maestrosState.page--;
+            renderMaestros();
+          }
+        });
+      }
+
+      if (maestrosNextBtn) {
+        maestrosNextBtn.addEventListener('click', () => {
+          maestrosState.page++;
+          renderMaestros();
+        });
+      }
+
+      // Event delegation para botones de contacto
+      maestrosResultadosEl.addEventListener('click', e => {
+        const btn = e.target.closest('[data-contact]');
+        if (btn) {
+          const id = Number(btn.dataset.contact);
+          const m = maestros.find(x => x.id === id);
+          if (m) {
+            alert(`Solicitud de contacto enviada a ${m.nombre}.`);
+          }
+        }
+      });
     }
 
     function filtrarMaestros() {
-        const q = maestrosState.q.toLowerCase().trim();
-        return maestros.filter(m =>
-            ((m.nombre + ' ' + m.especialidad + ' ' + m.resumen).toLowerCase().includes(q)) &&
-            (!maestrosState.especialidad || m.especialidad === maestrosState.especialidad)
-        );
+      const q = maestrosState.q.toLowerCase().trim();
+      return maestros.filter(m =>
+        ((m.nombre + ' ' + m.especialidad + ' ' + m.resumen).toLowerCase().includes(q)) &&
+        (!maestrosState.especialidad || m.especialidad === maestrosState.especialidad)
+      );
     }
 
     function renderMaestros() {
-        maestrosResultadosEl.setAttribute('aria-busy', 'true');
-        const datos = filtrarMaestros();
-        const totalPages = Math.max(1, Math.ceil(datos.length / MAESTROS_PER_PAGE));
-        maestrosState.page = Math.min(maestrosState.page, totalPages);
-        const start = (maestrosState.page - 1) * MAESTROS_PER_PAGE;
-        const pageItems = datos.slice(start, start + MAESTROS_PER_PAGE);
+      maestrosResultadosEl.setAttribute('aria-busy', 'true');
+      const datos = filtrarMaestros();
+      const totalPages = Math.max(1, Math.ceil(datos.length / MAESTROS_PER_PAGE));
+      maestrosState.page = Math.min(maestrosState.page, totalPages);
+      const start = (maestrosState.page - 1) * MAESTROS_PER_PAGE;
+      const pageItems = datos.slice(start, start + MAESTROS_PER_PAGE);
 
-        // Actualizar contador de resultados
-        if (maestrosResultsCount) {
-            maestrosResultsCount.textContent = datos.length;
-        }
+      // Actualizar contador de resultados
+      if (maestrosResultsCount) {
+        maestrosResultsCount.textContent = datos.length;
+      }
 
-        if (pageItems.length === 0) {
-            maestrosResultadosEl.innerHTML = `
+      if (pageItems.length === 0) {
+        maestrosResultadosEl.innerHTML = `
                 <div class="maestros-empty-state" style="grid-column: 1 / -1;">
                     <h3>No se encontraron maestros</h3>
                     <p>Intenta ajustar tus filtros de búsqueda</p>
                     <button class="btn-maestros-outline" onclick="document.getElementById('btnMaestrosLimpiar')?.click()">Limpiar filtros</button>
                 </div>
             `;
-        } else {
-            maestrosResultadosEl.innerHTML = pageItems.map(m => `
+      } else {
+        maestrosResultadosEl.innerHTML = pageItems.map(m => `
                 <article class="maestro-card" role="article" aria-labelledby="maestro-${m.id}">
                     <div class="maestro-avatar" style="background-image:url('${m.avatar}')" role="img" aria-label="${m.nombre}"></div>
                     <div class="maestro-meta">
@@ -704,18 +704,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </article>
             `).join('');
-        }
+      }
 
-        if (maestrosPageInfo) {
-            maestrosPageInfo.textContent = `${maestrosState.page} / ${totalPages}`;
-        }
-        if (maestrosPrevBtn) {
-            maestrosPrevBtn.disabled = maestrosState.page <= 1;
-        }
-        if (maestrosNextBtn) {
-            maestrosNextBtn.disabled = maestrosState.page >= totalPages;
-        }
-        maestrosResultadosEl.setAttribute('aria-busy', 'false');
+      if (maestrosPageInfo) {
+        maestrosPageInfo.textContent = `${maestrosState.page} / ${totalPages}`;
+      }
+      if (maestrosPrevBtn) {
+        maestrosPrevBtn.disabled = maestrosState.page <= 1;
+      }
+      if (maestrosNextBtn) {
+        maestrosNextBtn.disabled = maestrosState.page >= totalPages;
+      }
+      maestrosResultadosEl.setAttribute('aria-busy', 'false');
     }
 
     // Inicializar
