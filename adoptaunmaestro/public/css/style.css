@@ -1508,7 +1508,7 @@ label {
   background: #e6e6e6;
   padding: 25px;
   border-radius: 6px;
-  max-height: 8.2em;
+  max-height: 30vh;
   overflow: hidden;
   position: relative;
   transition: all 0.3s ease;
@@ -1518,8 +1518,12 @@ label {
   max-height: none;
 }
 
-.message-box .read-more-btn {
-  margin-top: 10px;
+.read-more-btn{
+  max-width: 100px;
+  max-height: 40px;
+  position: absolute;
+  top: 1vh;
+  right: 0;
   background: #ccc;
   border: none;
   padding: 8px 12px;
@@ -1528,7 +1532,7 @@ label {
   transition: background-color 0.2s ease;
 }
 
-.message-box .read-more-btn:hover {
+.read-more-btn:hover {
   background: #bbb;
 }
 

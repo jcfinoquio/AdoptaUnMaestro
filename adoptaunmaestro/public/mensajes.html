@@ -1,140 +1,76 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mensajes</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: serif;
-        }
-
-        /* Contenedor general */
-        .page-wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Título */
-        .title {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        /* Menú superior */
-        .menu {
-            display: flex;
-            justify-content: space-around;
-            background: #e6e6e6;
-            padding: 15px 0;
-            border-radius: 6px;
-            margin-bottom: 40px;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-        }
-
-        /* Asides laterales */
-        .layout {
-            display: grid;
-            grid-template-columns: 200px 1fr 200px;
-            gap: 20px;
-        }
-
-        aside {
-            background: #dedede;
-            min-height: 600px;
-            border-radius: 6px;
-        }
-
-        /* Bandeja de mensajes */
-        .messages-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .message-box {
-            background: #e6e6e6;
-            padding: 25px;
-            border-radius: 6px;
-            max-height: 8.2em;
-            /* Aproximadamente 4 líneas */
-            overflow: hidden;
-            position: relative;
-        }
-
-        .message-box.expanded {
-            max-height: none;
-        }
-
-        .read-more-btn {
-            margin-top: 10px;
-            background: #ccc;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* Responsividad */
-        @media (max-width: 1200px) {
-            .layout {
-                grid-template-columns: 150px 1fr 150px;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .layout {
-                grid-template-columns: 1fr;
-            }
-
-            aside {
-                display: none;
-            }
-        }
-    </style>
+    <style src="js/js.js"></style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
     <div class="page-wrapper">
-        <nav class="menu">
-            <a href="#">Mi Perfil</a>
-            <a href="#">Empleos</a>
-            <a href="#">Centros/Maestros</a>
-            <a href="#">Mensajes</a>
-            <a href="#">Contactos</a>
-        </nav>
+         <header class="header-nav">
+            <div class="logo-container">
+                <img src="img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
+            </div>
+            <nav class="menu" role="navigation" aria-label="Main navigation">
+                <a href="index.html">Inicio</a>
+                <a href="listado-colegios.html">Empleos</a>
+                <a href="listado-maestros.html">Centros/Maestros</a>
+                <a href="mensajes.html">Mensajes</a>
+                <a href="contactos.html">Contactos</a>
+            </nav>
+        </header>
 
         <div class="layout">
-            <aside id="left-aside"><!-- tu contenido aquí --></aside>
+            <aside class="sidebar-maestros" id="sidebar-maestros-izquierda">
+                <div class="perfil-avatar" aria-hidden="true"></div>
+                <div class="perfil-meta">
+                    <h4 title="María López">María López</h4>
+                    <div class="meta-sub">Maestra de Primaria · 6 años</div>
+                    <div class="meta-visitas">Visitas al perfil: <strong id="visitas-perfil">0</strong></div>
+                    <div class="meta-actions">
+                        <a class="btn btn-primary" href="perfil.html">Editar perfil</a>
+                        <a class="btn btn-outline" href="listado-maestros.html">Ver mis anuncios</a>
+                    </div>
+                </div>
+            </aside>
+
 
             <div class="messages-container">
                 <div class="message-box">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta massa sed sapien placerat, vel
-                    luctus metus tristique. Etiam suscipit orci sed dolor fermentum feugiat.
+                    <div class="message-header">María López (Directora CEIP Los Almendros)</div>
+                    <div class="message-meta">📅 Hoy, 09:12</div>
+                    Gracias por enviar tu perfil. Estamos buscando un maestro de apoyo para primaria y tu experiencia nos encaja muy bien. ¿Podrías indicarnos tu disponibilidad para una entrevista esta semana?
                     <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
                 </div>
 
                 <div class="message-box">
-                    Otro mensaje de prueba. Curabitur quis efficitur arcu. Maecenas vitae quam sem.
+                    <div class="message-header">Javier Ruiz (Maestro de Música)</div>
+                    <div class="message-meta">📅 Ayer, 18:47</div>
+                    ¡Hola! Vi que te interesa colaborar en actividades extraescolares. Yo coordino un taller de creatividad musical y quizá podrías participar como apoyo. Si te interesa, te mando más info.
                     <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
                 </div>
 
                 <div class="message-box">
-                    Mensaje número tres. Aliquam iaculis, ipsum ut elementum bibendum, arcu felis ornare massa, non
-                    luctus velit nisi eu libero.
+                    <div class="message-header">IES Monteverde (Departamento de Orientación)</div>
+                    <div class="message-meta">📅 12/03/2025, 15:22</div>
+                    Estamos organizando un programa de refuerzo para alumnos con dificultades de aprendizaje. Tu perfil nos ha parecido interesante y querríamos saber si tienes experiencia previa en adaptaciones curriculares o trabajo en grupos reducidos.
                     <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
                 </div>
             </div>
 
-            <aside id="right-aside"><!-- tu contenido aquí --></aside>
+              <!-- SIDEBAR DERECHA -->
+            <aside class="sidebar">
+                <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+                <nav class="side-links">
+                    <a href="#">EVENTOS Y TALLERES</a>
+                    <a href="#">RECURSOS EDUCATIVOS</a>
+                    <a href="#">FOROS</a>
+                    <a href="#">SOBRE NOSOTROS</a>
+                    <a href="#">AYUDA Y SOPORTE</a>
+                </nav>
+            </aside>
         </div>
     </div>
 
@@ -146,5 +82,4 @@
         }
     </script>
 </body>
-
 </html>
