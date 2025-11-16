@@ -1518,13 +1518,12 @@ label {
   max-height: none;
 }
 
-.read-more-btn{
-  max-width: 100px;
-  max-height: 40px;
+.read-more-butn{
   position: absolute;
   top: 1vh;
-  right: 0;
-  background: #ccc;
+  right: 1vw;
+  background: var(--color-primary);
+  color: white;
   border: none;
   padding: 8px 12px;
   border-radius: 4px;
@@ -1532,10 +1531,9 @@ label {
   transition: background-color 0.2s ease;
 }
 
-.read-more-btn:hover {
-  background: #bbb;
+.message-header{
+  font-weight: 700;
 }
-
 /* ====================================================
    MEDIA QUERIES RESPONSIVE
    ==================================================== */
