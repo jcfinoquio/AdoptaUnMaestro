@@ -1534,9 +1534,12 @@ label {
 .message-header{
   font-weight: 700;
 }
+
 /* ====================================================
-   MEDIA QUERIES RESPONSIVE
+   MEDIA QUERIES RESPONSIVE - UNIFICADAS
    ==================================================== */
+
+/* Breakpoint: 1280px - Laptops y pantallas medianas */
 @media (max-width: 1280px) {
   .sidebar {
     display: none;
@@ -1548,6 +1551,7 @@ label {
   }
 }
 
+/* Breakpoint: 992px - Tablets landscape */
 @media (max-width: 992px) {
   .layout {
     grid-template-columns: 1fr;
@@ -1558,6 +1562,7 @@ label {
   }
 }
 
+/* Breakpoint: 900px - Tablets y dispositivos medianos */
 @media (max-width: 900px) {
   #sidebar-maestros-izquierda, 
   #sidebar-perfil-izquierda, 
@@ -1601,8 +1606,8 @@ label {
     min-width: 140px; 
   }
   
-  .coles-contenido,
-  .maestros-contenido { 
+  .list-content,
+  .maestros-content { 
     max-width: 100%; 
   }
 
@@ -1616,6 +1621,7 @@ label {
   }
 }
 
+/* Breakpoint: 768px - Tablets portrait y móviles grandes */
 @media (max-width: 768px) {
   .page-index .content-box p {
     font-size: 2.5rem;
@@ -1649,6 +1655,7 @@ label {
   }
 }
 
+/* Breakpoint: 600px - Móviles */
 @media (max-width: 600px) {
   .form-row {
     flex-direction: column;
