@@ -24,11 +24,16 @@
   </header>
 
   <main class="coles-container list-main">
-    <aside class="sidebar" id="sidebar-perfil-izquierda">
-      <!-- ERROR CORREGIDO: Sintaxis incorrecta en el style -->
-      <div class="perfil-foto" style="background-image:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face'); width:100px; height:100px; border-radius:12px; background-size:cover;"></div>
-      <div class="perfil-info" style="padding:8px; text-align:center;">
-        <p style="margin:0; color:#094032; font-weight:600;">Busca colegios por provincia o tipo</p>
+    <aside class="sidebar-maestros" id="sidebar-maestros-izquierda">
+      <div class="perfil-avatar" aria-hidden="true"></div>
+      <div class="perfil-meta">
+        <h4 title="María López">María López</h4>
+        <div class="meta-sub">Maestra de Primaria · 6 años</div>
+        <div class="meta-visitas">Visitas al perfil: <strong id="visitas-perfil">0</strong></div>
+        <div class="meta-actions">
+          <a class="btn btn-primary" href="perfil.html">Editar perfil</a>
+          <a class="btn btn-outline" href="listado-maestros.html">Ver mis anuncios</a>
+        </div>
       </div>
     </aside>
 
@@ -88,7 +93,9 @@
         <button class="modal-close" id="modalCloseBtn" aria-label="Cerrar ficha">&times;</button>
       </div>
       <div class="modal-body">
-        <div class="modal-logo" id="modalLogo" style="background-image:url('https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop')"></div>
+        <div class="modal-logo" id="modalLogo"
+          style="background-image:url('https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop')">
+        </div>
         <div class="modal-info">
           <p id="modalProvinciaTipo" style="font-weight:700;"></p>
           <p id="modalCiudad"></p>
@@ -103,4 +110,5 @@
     </div>
   </div>
 </body>
+
 </html>

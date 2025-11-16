@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,8 +8,9 @@
   <link rel="stylesheet" href="css/style.css" />
   <script src="js/js.js" defer></script>
 </head>
+
 <body class="page-maestros">
-<header class="header-nav">
+  <header class="header-nav">
     <div class="logo-container">
       <img src="img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
     </div>
@@ -20,19 +22,18 @@
       <a href="contactos.html">Contactos</a>
     </nav>
   </header>
-<main class="maestros-container maestros-main">
+  <main class="maestros-container maestros-main">
     <aside class="sidebar-maestros" id="sidebar-maestros-izquierda">
       <div class="perfil-avatar" aria-hidden="true"></div>
       <div class="perfil-meta">
-                    <h4 title="María López">María López</h4>
-                    <div class="meta-sub">Maestra de Primaria · 6 años</div>
-                    <div class="meta-visitas">Visitas al perfil: <strong id="visitas-perfil">0</strong></div>
-
-                    <div class="meta-actions">
-                        <a class="btn btn-primary" href="perfil.html">Editar perfil</a>
-                        <a class="btn btn-outline" href="listado-maestros.html">Ver mis anuncios</a>
-                    </div>
-                </div>
+        <h4 title="María López">María López</h4>
+        <div class="meta-sub">Maestra de Primaria · 6 años</div>
+        <div class="meta-visitas">Visitas al perfil: <strong id="visitas-perfil">0</strong></div>
+        <div class="meta-actions">
+          <a class="btn btn-primary" href="perfil.html">Editar perfil</a>
+          <a class="btn btn-outline" href="listado-maestros.html">Ver mis anuncios</a>
+        </div>
+      </div>
     </aside>
 
     <section class="maestros-contenido maestros-content">
@@ -41,7 +42,8 @@
 
         <div class="maestros-controls">
           <div class="maestros-search-filters">
-            <input id="maestrosBuscar" type="search" placeholder="Buscar por nombre o especialidad..." aria-label="Buscar maestros" />
+            <input id="maestrosBuscar" type="search" placeholder="Buscar por nombre o especialidad..."
+              aria-label="Buscar maestros" />
             <select id="filtroEspecialidad" aria-label="Filtrar por especialidad">
               <option value="">Todas las especialidades</option>
               <option value="Primaria">Primaria</option>
@@ -69,9 +71,9 @@
       </div>
     </section>
 
-    <aside class="sidebar-maestros" id="sidebar-maestros-derecha">
-      <a href="registro.html" class="btn-maestros-registrate">REGÍSTRATE AQUÍ</a>
-      <nav class="maestros-side-links">
+    <aside class="sidebar">
+      <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+      <nav class="side-links">
         <a href="#">EVENTOS Y TALLERES</a>
         <a href="#">RECURSOS EDUCATIVOS</a>
         <a href="#">FOROS</a>
@@ -81,4 +83,5 @@
     </aside>
   </main>
 </body>
+
 </html>
