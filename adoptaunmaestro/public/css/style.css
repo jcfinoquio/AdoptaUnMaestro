@@ -802,13 +802,37 @@ LISTADO COLEGIOS
 LISTADO COLEGIOS
 =======================================================================*/
 
-/* Fondo unificado y layout */
-.list-main {
+/* Variables CSS */
+:root {
+  --container-max: 1500px;
+  --gap: 20px;
+}
+
+/* Header fijo - asegurar que esté por encima */
+.header-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: white;
+  height: 92px; /* Asegurar altura consistente */
+}
+
+/* Body con padding para el header fijo */
+body.page-listado-colegios {
+  padding-top: 92px;
+  margin: 0;
+  background-color: #eaf5ee;
+}
+
+/* Contenedor principal CORREGIDO */
+.coles-container.list-main {
   width: 100%;
-  max-width: 1500px;
-  margin: 92px auto 40px;
+  max-width: var(--container-max);
+  margin: 0 auto 40px;
   display: flex;
-  gap: 20px;
+  gap: var(--gap);
   padding: 0 2vw;
   align-items: flex-start;
   box-sizing: border-box;
@@ -819,13 +843,22 @@ LISTADO COLEGIOS
   max-width: 1300px;
 }
 
-.perfil-contenido {
+.coles-contenido {
   flex: 1 1 70%;
   max-width: calc(100% - 320px);
   display: flex;
   flex-direction: column;
   gap: 18px;
   align-items: center;
+}
+
+/* GRID responsive (hasta 5 columnas) */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
 }
 
 .card-shell {
@@ -918,15 +951,6 @@ LISTADO COLEGIOS
 
 .results-info strong {
   color: #094032;
-}
-
-/* GRID responsive (hasta 5 columnas) */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  justify-items: center;
-  align-items: start;
 }
 
 @media (min-width: 900px) {
@@ -1126,13 +1150,15 @@ LISTADO COLEGIOS
   padding: 0 16px;
 }
 
-/* Sidebar izquierda */
-.sidebar-left {
+/* Sidebars - CORREGIDO para coincidir con HTML */
+.sidebar {
   background: white;
   border-radius: 14px;
   padding: 20px;
   box-shadow: 0 8px 20px rgba(12,24,40,0.06);
   border: 1px solid rgba(0,158,112,0.1);
+  width: 12vw;
+  min-width: 180px;
 }
 
 .perfil-foto {
@@ -1146,7 +1172,7 @@ LISTADO COLEGIOS
   box-shadow: 0 6px 12px rgba(12,24,40,0.06);
 }
 
-.sidebar-left p {
+.sidebar p {
   margin: 0;
   color: #094032;
   font-weight: 600;
@@ -1155,19 +1181,8 @@ LISTADO COLEGIOS
   line-height: 1.4;
 }
 
-/* Sidebar derecha */
-.sidebar-right {
-  background: white;
-  border-radius: 14px;
-  padding: 20px;
-  box-shadow: 0 8px 20px rgba(12,24,40,0.06);
-  border: 1px solid rgba(0,158,112,0.1);
-}
-
 .sidebar .btn-registrate,
-.sidebar .side-links a,
-.sidebar-right .btn-registrate,
-.sidebar-right .side-links a {
+.sidebar .side-links a {
   display: block;
   width: 100%;
   padding: 14px 16px;
@@ -1184,36 +1199,56 @@ LISTADO COLEGIOS
 }
 
 .sidebar .btn-registrate:hover,
-.sidebar .side-links a:hover,
-.sidebar-right .btn-registrate:hover,
-.sidebar-right .side-links a:hover {
+.sidebar .side-links a:hover {
   background: #007b57;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,158,112,0.3);
 }
 
-.sidebar .side-links a,
-.sidebar-right .side-links a {
+.sidebar .side-links a {
   background: rgba(234,245,238,0.8);
   color: #094032;
   border: 1px solid rgba(0,158,112,0.2);
 }
 
-.sidebar .side-links a:hover,
-.sidebar-right .side-links a:hover {
+.sidebar .side-links a:hover {
   background: rgba(0,158,112,0.1);
   color: #007b57;
 }
 
 @media (max-width: 900px) {
-  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { display: none; }
-  .list-main { margin: 80px 12px; }
-  .colegio-card { min-height: auto; padding: 16px; }
-  .controls { justify-content: stretch; gap: 10px; }
-  .search-filters { width: 100%; }
+  #sidebar-perfil-izquierda, 
+  #sidebar-perfil-derecha { 
+    display: none; 
+  }
+  
+  .coles-container.list-main { 
+    margin: 0 12px 40px; 
+  }
+  
+  .colegio-card { 
+    min-height: auto; 
+    padding: 16px; 
+  }
+  
+  .controls { 
+    justify-content: stretch; 
+    gap: 10px; 
+  }
+  
+  .search-filters { 
+    width: 100%; 
+  }
+  
   .controls input[type="search"],
-  .controls select { flex: 1; min-width: 140px; }
-  .perfil-contenido { max-width: 100%; }
+  .controls select { 
+    flex: 1; 
+    min-width: 140px; 
+  }
+  
+  .coles-contenido { 
+    max-width: 100%; 
+  }
 }
 
 /* ========== Modal styles ========== */
@@ -1318,11 +1353,6 @@ LISTADO COLEGIOS
 }
 
 /* Estados de carga y vacío */
-.loading {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
 .empty-state {
   text-align: center;
   padding: 40px 20px;
@@ -1335,12 +1365,13 @@ LISTADO COLEGIOS
   margin-bottom: 12px;
 }
 
-/* make modal content more readable on small screens */
 @media (max-width: 600px) {
   .modal-body { flex-direction: column; }
   .modal-info { flex: 1 1 100%; }
   .modal-logo { width: 100%; height: 180px; }
 }
+
+
 
 
 
