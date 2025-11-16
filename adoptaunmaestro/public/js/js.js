@@ -88,26 +88,33 @@ form?.addEventListener("submit", (e) => {
     }, 1500);
 });
 /* ===========================
-    FUNCIONALIDAD EMPLEOS leer más
+    FUNCIONALIDAD EMPLEOS
 =========================== */
- function toggleExpand(btn) {
-            const jobOffer = btn.closest('.job-offer');
-            jobOffer.classList.toggle("expanded");
-            btn.textContent = jobOffer.classList.contains("expanded") ? "Leer menos" : "Leer más";
-        }
-        
-        // Simular funcionalidad de los botones de postulación
-        document.querySelectorAll('.btn-primary').forEach(button => {
-            if (button.textContent === 'Postularme') {
-                button.addEventListener('click', function() {
-                    alert('¡Postulación enviada correctamente!');
-                    this.textContent = 'Postulado';
-                    this.classList.remove('btn-primary');
-                    this.classList.add('btn-success');
-                    this.disabled = true;
-                });
-            }
+window.toggleExpand = function(btn) {
+    const jobOffer = btn.closest('.job-offer');
+    if (jobOffer) {
+        jobOffer.classList.toggle("expanded");
+        btn.textContent = jobOffer.classList.contains("expanded") ? "Leer menos" : "Leer más";
+    }
+};
+
+    document.querySelectorAll('.read-more-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            window.toggleExpand(this);
         });
+    });
+    
+    // Botones de postulación
+    document.querySelectorAll('.btn-primary').forEach(button => {
+        if (button.textContent === 'Postularme') {
+            button.addEventListener('click', function() {
+                alert('¡Postulación enviada correctamente!');
+                this.textContent = 'Postulado';
+                this.classList.remove('btn-primary');
+                this.classList.add('btn-success');
+                this.disabled = true;
+            });
+        }});
 
 /* ===========================
     CONTADORES DE VISITAS
