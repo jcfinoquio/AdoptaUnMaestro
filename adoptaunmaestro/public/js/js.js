@@ -87,6 +87,27 @@ form?.addEventListener("submit", (e) => {
         }
     }, 1500);
 });
+/* ===========================
+    FUNCIONALIDAD EMPLEOS leer más
+=========================== */
+ function toggleExpand(btn) {
+            const jobOffer = btn.closest('.job-offer');
+            jobOffer.classList.toggle("expanded");
+            btn.textContent = jobOffer.classList.contains("expanded") ? "Leer menos" : "Leer más";
+        }
+        
+        // Simular funcionalidad de los botones de postulación
+        document.querySelectorAll('.btn-primary').forEach(button => {
+            if (button.textContent === 'Postularme') {
+                button.addEventListener('click', function() {
+                    alert('¡Postulación enviada correctamente!');
+                    this.textContent = 'Postulado';
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-success');
+                    this.disabled = true;
+                });
+            }
+        });
 
 /* ===========================
     CONTADORES DE VISITAS

@@ -1,143 +1,246 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Empleos</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: serif;
-        }
-
-        /* Contenedor general */
-        .page-wrapper {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        /* Título */
-        .title {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
-
-        /* Menú superior */
-        .menu {
-            display: flex;
-            justify-content: space-around;
-            background: #e6e6e6;
-            padding: 15px 0;
-            border-radius: 6px;
-            margin-bottom: 40px;
-        }
-
-        .menu a {
-            text-decoration: none;
-            color: #000;
-            font-weight: bold;
-        }
-
-        /* Asides laterales */
-        .layout {
-            display: grid;
-            grid-template-columns: 200px 1fr 200px;
-            gap: 20px;
-        }
-
-        aside {
-            background: #dedede;
-            min-height: 600px;
-            border-radius: 6px;
-        }
-
-        /* Bandeja de mensajes */
-        .messages-container {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .message-box {
-            background: #e6e6e6;
-            padding: 25px;
-            border-radius: 6px;
-            max-height: 8.2em; /* Aproximadamente 4 líneas */
-            overflow: hidden;
-            position: relative;
-        }
-
-        .message-box.expanded {
-            max-height: none;
-        }
-
-        .read-more-btn {
-            margin-top: 10px;
-            background: #ccc;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        /* Responsividad */
-        @media (max-width: 1200px) {
-            .layout {
-                grid-template-columns: 150px 1fr 150px;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .layout {
-                grid-template-columns: 1fr;
-            }
-            aside {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="js/js.js"></script>
 </head>
-<body>
+
+<body class="page-empleos">
     <div class="page-wrapper">
-        <nav class="menu">
-            <a href="#">Mi Perfil</a>
-            <a href="#">Empleos</a>
-            <a href="#">Centros/Maestros</a>
-            <a href="#">Mensajes</a>
-            <a href="#">Contactos</a>
-        </nav>
+        <header class="header-nav">
+            <div class="logo-container">
+                <img src="img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
+            </div>
+            <nav class="menu" role="navigation" aria-label="Main navigation">
+                <a href="index.html">Inicio</a>
+                <a href="listado-colegios.html">Empleos</a>
+                <a href="listado-maestros.html">Centros/Maestros</a>
+                <a href="mensajes.html">Mensajes</a>
+                <a href="contactos.html">Contactos</a>
+            </nav>
+        </header>
 
         <div class="layout">
-            <aside id="left-aside"><!-- tu contenido aquí --></aside>
+            <!-- Left profile card -->
+            <aside class="perfil-card" aria-label="Información del usuario">
+                <div class="perfil-avatar" aria-hidden="true"></div>
+                <div class="perfil-meta">
+                    <h4 title="María López">María López</h4>
+                    <div class="meta-sub">Maestra de Primaria · 6 años</div>
+                    <div class="meta-visitas">Visitas al perfil: <strong id="visitas-perfil">0</strong></div>
 
+                    <div class="meta-actions">
+                        <a class="btn btn-primary" href="perfil.html">Editar perfil</a>
+                        <a class="btn btn-outline" href="listado-maestros.html">Ver mis anuncios</a>
+                    </div>
+                </div>
+            </aside>
+            <!-- Ofertas de empleo -->
             <div class="messages-container">
-                <div class="message-box">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta massa sed sapien placerat, vel luctus metus tristique. Etiam suscipit orci sed dolor fermentum feugiat.
-                    <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                <div class="job-offer">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Profesor de Matemáticas - Secundaria</h3>
+                            <div class="job-school">Colegio San José</div>
+                            <div class="job-location">Madrid, España</div>
+                        </div>
+                        <div class="job-date">Publicado hace 2 días</div>
+                    </div>
+
+                    <div class="job-tags">
+                        <span class="tag tag-primary">Jornada Completa</span>
+                        <span class="tag">Contrato Temporal</span>
+                        <span class="tag">1-3 años experiencia</span>
+                    </div>
+
+                    <div class="job-description">
+                        <p>Buscamos profesor de matemáticas para educación secundaria con experiencia en metodologías
+                            activas. El candidato ideal debe tener capacidad para trabajar en equipo y experiencia en
+                            preparación de alumnos para olimpiadas matemáticas.</p>
+                        <p><strong>Requisitos:</strong></p>
+                        <ul>
+                            <li>Licenciatura en Matemáticas o grado equivalente</li>
+                            <li>Máster en Formación del Profesorado</li>
+                            <li>Experiencia mínima de 2 años en docencia</li>
+                            <li>Conocimientos de nuevas tecnologías aplicadas a la educación</li>
+                        </ul>
+                        <p><strong>Ofrecemos:</strong></p>
+                        <ul>
+                            <li>Salario competitivo según convenio</li>
+                            <li>Posibilidad de continuidad</li>
+                            <li>Formación continua</li>
+                            <li>Ambiente de trabajo colaborativo</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-meta">
+                        <span>Salario: 28.000€ - 32.000€</span>
+                        <span>Vacantes: 1</span>
+                    </div>
+
+                    <div class="job-actions">
+                        <button class="btn btn-primary">Postularme</button>
+                        <button class="btn btn-outline">Guardar</button>
+                        <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                    </div>
                 </div>
 
-                <div class="message-box">
-                    Otro mensaje de prueba. Curabitur quis efficitur arcu. Maecenas vitae quam sem.
-                    <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                <div class="job-offer">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Maestro de Educación Infantil</h3>
+                            <div class="job-school">Escuela Infantil Los Peques</div>
+                            <div class="job-location">Barcelona, España</div>
+                        </div>
+                        <div class="job-date">Publicado hace 5 días</div>
+                    </div>
+
+                    <div class="job-tags">
+                        <span class="tag tag-primary">Jornada Parcial</span>
+                        <span class="tag">Contrato Indefinido</span>
+                        <span class="tag">0-1 años experiencia</span>
+                    </div>
+
+                    <div class="job-description">
+                        <p>Se busca maestro/a de educación infantil para cubrir plaza en escuela infantil con
+                            metodología activa y respetuosa. Valoraremos experiencia con metodologías Montessori o
+                            Reggio Emilia.</p>
+                        <p><strong>Requisitos:</strong></p>
+                        <ul>
+                            <li>Grado en Educación Infantil</li>
+                            <li>Experiencia en aulas de 0-3 años</li>
+                            <li>Conocimientos de primeros auxilios</li>
+                            <li>Capacidad de trabajo en equipo</li>
+                        </ul>
+                        <p><strong>Ofrecemos:</strong></p>
+                        <ul>
+                            <li>Jornada de 25 horas semanales</li>
+                            <li>Contrato indefinido</li>
+                            <li>Posibilidad de crecimiento profesional</li>
+                            <li>Ambiente familiar y acogedor</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-meta">
+                        <span>Salario: 18.000€ - 20.000€</span>
+                        <span>Vacantes: 2</span>
+                    </div>
+
+                    <div class="job-actions">
+                        <button class="btn btn-primary">Postularme</button>
+                        <button class="btn btn-outline">Guardar</button>
+                        <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                    </div>
                 </div>
 
-                <div class="message-box">
-                    Mensaje número tres. Aliquam iaculis, ipsum ut elementum bibendum, arcu felis ornare massa, non luctus velit nisi eu libero.
-                    <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                <div class="job-offer">
+                    <div class="job-header">
+                        <div>
+                            <h3 class="job-title">Profesor de Inglés - Nativos</h3>
+                            <div class="job-school">Academia de Idiomas Moderna</div>
+                            <div class="job-location">Valencia, España</div>
+                        </div>
+                        <div class="job-date">Publicado hace 1 semana</div>
+                    </div>
+
+                    <div class="job-tags">
+                        <span class="tag tag-primary">Jornada Completa</span>
+                        <span class="tag">Contrato Temporal</span>
+                        <span class="tag">+3 años experiencia</span>
+                    </div>
+
+                    <div class="job-description">
+                        <p>Buscamos profesor de inglés nativo o bilingüe para impartir clases a grupos reducidos.
+                            Niveles desde A1 hasta C2. Se valorará experiencia preparando para exámenes oficiales
+                            (Cambridge, IELTS, TOEFL).</p>
+                        <p><strong>Requisitos:</strong></p>
+                        <ul>
+                            <li>Nativo o nivel C2 certificado</li>
+                            <li>Certificado TEFL, CELTA o equivalente</li>
+                            <li>Experiencia mínima de 3 años en enseñanza</li>
+                            <li>Disponibilidad para horarios de tarde</li>
+                        </ul>
+                        <p><strong>Ofrecemos:</strong></p>
+                        <ul>
+                            <li>Salario atractivo según experiencia</li>
+                            <li>Grupos reducidos (máx. 8 alumnos)</li>
+                            <li>Material didáctico proporcionado</li>
+                            <li>Posibilidad de contrato indefinido</li>
+                        </ul>
+                    </div>
+
+                    <div class="job-meta">
+                        <span>Salario: 24.000€ - 28.000€</span>
+                        <span>Vacantes: 1</span>
+                    </div>
+
+                    <div class="job-actions">
+                        <button class="btn btn-primary">Postularme</button>
+                        <button class="btn btn-outline">Guardar</button>
+                        <button class="read-more-btn" onclick="toggleExpand(this)">Leer más</button>
+                    </div>
                 </div>
             </div>
 
-            <aside id="right-aside"><!-- tu contenido aquí --></aside>
+            <aside id="right-aside">
+                <div class="filter-group">
+                    <label for="tipo-contrato">Tipo de contrato</label>
+                    <select id="tipo-contrato">
+                        <option value="">Todos</option>
+                        <option value="indefinido">Indefinido</option>
+                        <option value="temporal">Temporal</option>
+                        <option value="sustitucion">Sustitución</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="jornada">Jornada</label>
+                    <select id="jornada">
+                        <option value="">Todas</option>
+                        <option value="completa">Completa</option>
+                        <option value="parcial">Parcial</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="experiencia">Experiencia requerida</label>
+                    <select id="experiencia">
+                        <option value="">Todas</option>
+                        <option value="0-1">0-1 años</option>
+                        <option value="1-3">1-3 años</option>
+                        <option value="3+">+3 años</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="ubicacion">Ubicación</label>
+                    <input type="text" id="ubicacion" placeholder="Ciudad o provincia">
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%; margin-top: 10px;">Aplicar Filtros</button>
+
+                <div class="stats-container">
+                    <h4>Estadísticas</h4>
+                    <div class="stat-item">
+                        <span>Ofertas activas:</span>
+                        <span>24</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Postulaciones enviadas:</span>
+                        <span>3</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Entrevistas programadas:</span>
+                        <span>1</span>
+                    </div>
+                </div>
+            </aside>
         </div>
     </div>
-
-    <script>
-        function toggleExpand(btn) {
-            const box = btn.parentElement;
-            box.classList.toggle("expanded");
-            btn.textContent = box.classList.contains("expanded") ? "Leer menos" : "Leer más";
-        }
-    </script>
 </body>
+
 </html>

@@ -27,6 +27,7 @@
   --radius-sm: 8px;
   --radius: 12px;
   --radius-lg: 18px;
+  --border-radius: 8px;
 
   /* Sombras */
   --shadow-xs: 0 2px 6px rgba(12, 24, 40, 0.04);
@@ -442,58 +443,59 @@ aside {
   min-height: 600px;
   border-radius: 6px;
 }
+
 /* Tarjeta de perfil izquierda */
 .perfil-card {
-    background: rgba(255, 255, 255, 0.75);
-    border-radius: 15px;
-    padding: 25px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-    position: sticky;
-    top: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 20px;
 }
 
 .perfil-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #3498db, #2980b9);
-    margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2.5rem;
-    font-weight: bold;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
 }
 
 .perfil-meta h4 {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-    color: #2c3e50;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  color: #2c3e50;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .meta-sub {
-    color: #7f8c8d;
-    text-align: center;
-    margin-bottom: 15px;
-    font-size: 0.95rem;
+  color: #7f8c8d;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
 }
 
 .meta-visitas {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #7f8c8d;
-    font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #7f8c8d;
+  font-size: 0.9rem;
 }
 
 .meta-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 /* Contactos Grid*/
@@ -593,9 +595,173 @@ aside {
   }
 }
 
+/*======================================================================
+    EMPLEOS
+=======================================================================*/
 
+/* Bandeja de ofertas de empleo */
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 
+.job-offer {
+  background: white;
+  padding: 25px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  max-height: 180px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
 
+.job-offer.expanded {
+  max-height: 1000px;
+}
+
+.job-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+}
+
+.job-title {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.job-school {
+  color: var(--color-primary);
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.job-location {
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.job-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.tag {
+  background-color: var(--bg-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: var(--color-secondary);
+}
+
+.tag-primary {
+  background-color: rgba(74, 108, 247, 0.1);
+  color: var(--color-primary);
+}
+
+.job-description {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.job-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.read-more-btn {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.read-more-btn:hover {
+  background-color: #3a5ce5;
+}
+
+.job-meta {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+}
+
+.job-date {
+  font-style: italic;
+}
+
+#right-aside {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  height: 80%;
+  overflow: hidden;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.filter-group {
+  margin-bottom: 20px;
+}
+
+.filter-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.filter-group select,
+.filter-group input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.stats-container {
+  background-color: var(--bg-light);
+  padding: 15px;
+  border-radius: var(--border-radius);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 992px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .perfil-card,
+  #right-aside {
+    display: none;
+  }
+}
 
 
 
