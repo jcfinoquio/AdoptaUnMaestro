@@ -148,7 +148,7 @@ button {
   color: var(--color-accent);
 }
 /*=====================
-INDEX
+    INDEX
 ========================*/
 /* --------------------------------------------------------------------------
   SISTEMA DE MODAL LOGIN
@@ -350,8 +350,10 @@ body.page-index .login-modal.active~.main-container {
   margin: 0;
   font-family: var(--font-sans);
 }
-
-.page-index .sidebar {
+/* --------------------------------------------------------------------------
+ SIDEBAR INDEX
+ ------------------------------------------------------------------------ */
+.sidebar {
   display: flex;
   flex-direction: column;
   align-items: center;
