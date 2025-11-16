@@ -147,7 +147,9 @@ button {
   background: rgba(13, 110, 253, 0.06);
   color: var(--color-accent);
 }
-
+/*=====================
+INDEX
+========================*/
 /* --------------------------------------------------------------------------
   SISTEMA DE MODAL LOGIN
 -------------------------------------------------------------------------- */
@@ -167,6 +169,14 @@ button {
 
 .modal-overlay.active {
   display: flex;
+}
+
+.modal-overlay.active .login-lightbox {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-overlay.active {
+  animation: fadeIn 0.3s ease-out;
 }
 
 .login-lightbox {
@@ -203,7 +213,6 @@ button {
   background: rgba(0, 0, 0, 0.1);
   color: var(--fg);
 }
-
 
 h2 {
   margin-bottom: 8px;
@@ -264,6 +273,10 @@ input:focus {
   text-align: center;
 }
 
+.mb-8 {
+  margin-bottom: 8px
+}
+
 .btn-outline {
   display: inline-block;
   color: var(--color-primary);
@@ -312,19 +325,30 @@ body.page-index .login-modal.active~.main-container {
 }
 
 
-/*=======
-INDEX
-=================*/
+/* --------------------------------------------------------------------------
+ MAIN CONTENT INDEX
+ ------------------------------------------------------------------------ */
 .page-index {
   background: linear-gradient(180deg, #e9f4ea 0%, #cfe6d4 100%);
 }
-
-
-.page-index .perfil-container {
-  padding-top: 90px;
-  justify-content: center;
+.main-container {
+  display: flex;
   align-items: center;
+  justify-content: center;
   min-height: 100vh;
+  padding: 80px 20px 20px;
+}
+.main-content {
+  text-align: center;
+  max-width: 80%;
+}
+.content-box p {
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--fg);
+  line-height: 1.5;
+  margin: 0;
+  font-family: var(--font-sans);
 }
 
 .page-index .sidebar {
@@ -352,29 +376,6 @@ INDEX
   width: 100%;
 }
 
-
-.page-index .main-content {
-  text-align: center;
-  max-width: 600px;
-  width: 100%;
-}
-
-.page-index .content-box p {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--fg);
-  line-height: 1.3;
-  margin: 0;
-}
-
-/* Contenedores principales */
-.main-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  padding: 80px 20px 20px;
-}
 
 /* === LAYOUT PRINCIPAL === */
 /* Ajuste general que usan las páginas (perfil, listados, registro...) */
@@ -425,13 +426,6 @@ h2 {
 h3 {
   font-size: 1.05rem;
   margin-bottom: 6px
-}
-
-/* texto grande (ej. intro en index) */
-.content-box p {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: var(--color-text);
 }
 
 /* === PERFIL: foto y caja info === */
@@ -663,13 +657,6 @@ textarea:focus {
   font-size: 0.9rem
 }
 
-.center {
-  text-align: center
-}
-
-.mb-8 {
-  margin-bottom: 8px
-}
 
 .p-12 {
   padding: 12px

@@ -7,7 +7,10 @@ const form = document.getElementById("login-form");
 const mensaje = document.getElementById("mensaje");
 const inputEmail = document.getElementById("mail");
 const inputPassword = document.getElementById("password");
-const modalOverlay = document.getElementById("modal-login");
+const modalOverlay = document.getElementById("login-overlay");
+const btnCerrarModal = document.getElementById("cerrar-modal");
+
+// Función para validar formato de email
 
 const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
@@ -31,7 +34,7 @@ modalOverlay?.addEventListener('click', function(e) {
 // Función para cerrar el modal
 function cerrarModal() {
     modalOverlay.classList.remove('active');
-    document.body.classList.remove('modal-active');
+    document.body.classList.remove('modal-overlay');
     // Limpiar mensajes y campos
     mensaje.textContent = '';
     form.reset();
