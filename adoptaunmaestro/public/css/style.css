@@ -781,23 +781,6 @@ aside {
                 display: none;
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*======================================================================
-LISTADO COLEGIOS
-=======================================================================*/
 /*======================================================================
 LISTADO COLEGIOS
 =======================================================================*/
@@ -1371,6 +1354,435 @@ body.page-listado-colegios {
   .modal-logo { width: 100%; height: 180px; }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===============================
+Listado maestros
+==============================*/
+  /* Fondo unificado */
+    body, main, .maestros-container, .maestros-main {
+      background-color: #eaf5ee;
+    }
+
+    .maestros-main {
+      width: 100%;
+      max-width: 1500px;
+      margin: 92px auto 40px;
+      display: flex;
+      gap: 10px;
+      padding: 0 2vw;
+      align-items: flex-start;
+      box-sizing: border-box;
+    }
+
+    #sidebar-maestros-izquierda,
+    #sidebar-maestros-derecha {
+      width: 12vw;
+      min-width: 140px;
+    }
+
+    .maestros-content {
+      flex: 1 1 78%;
+      max-width: 1300px;
+    }
+
+    .maestros-lightbox.form-box {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1300px;
+      padding: 28px;
+      box-sizing: border-box;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.95);
+      box-shadow: 0 10px 30px rgba(12,24,40,0.08);
+      border: 1px solid rgba(0,158,112,0.1);
+    }
+
+    .maestros-lightbox h2 { 
+      margin-top:0; 
+      color: #094032; 
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid rgba(0,158,112,0.2);
+    }
+
+    .maestros-controls {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(234,245,238,0.7);
+      padding: 18px;
+      border-radius: 12px;
+      border: 1px solid rgba(0,158,112,0.15);
+    }
+
+    .maestros-search-filters {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .maestros-controls input[type="search"],
+    .maestros-controls select {
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid #c6d9d0;
+      background: #fff;
+      font-family: inherit;
+      font-size: 1rem;
+      min-width: 200px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .maestros-controls input[type="search"]:focus,
+    .maestros-controls select:focus {
+      outline: none;
+      border-color: #009e70;
+      box-shadow: 0 0 0 3px rgba(0,158,112,0.15);
+    }
+
+    .maestros-controls .btn-maestros-outline {
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid #009e70;
+      background: transparent;
+      color: #009e70;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .maestros-controls .btn-maestros-outline:hover {
+      background: rgba(0,158,112,0.08);
+      transform: translateY(-1px);
+    }
+
+    .maestros-results-info {
+      margin-bottom: 16px;
+      color: #4b5950;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .maestros-results-info strong {
+      color: #094032;
+    }
+
+    /* === GRID: responsive hasta 5 columnas === */
+    .maestros-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      justify-items: center;
+      align-items: start;
+    }
+
+    @media (min-width: 900px) {
+      .maestros-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (min-width: 1200px) {
+      .maestros-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (min-width: 1400px) {
+      .maestros-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+
+    /* === TARJETA MAESTRO === */
+    .maestro-card {
+      background: #ffffff;
+      border-radius: 14px;
+      box-shadow: 0 8px 20px rgba(12,24,40,0.08);
+      padding: 18px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(0,158,112,0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .maestro-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 28px rgba(12,24,40,0.12);
+      border-color: rgba(0,158,112,0.2);
+    }
+
+    .maestro-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #009e70, #00c993);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .maestro-card:hover::before {
+      opacity: 1;
+    }
+
+    .maestro-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-size: cover;
+      background-position: center;
+      margin: 0 auto 14px auto;
+      border: 4px solid rgba(234,245,238,0.9);
+      box-shadow: 0 6px 12px rgba(12,24,40,0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .maestro-card:hover .maestro-avatar {
+      transform: scale(1.05);
+    }
+
+    .maestro-meta h4 {
+      margin: 8px 0;
+      font-size: 1.1rem;
+      color: #0b4233;
+      text-align: center;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .maestro-meta p {
+      margin: 6px 0;
+      font-size: 0.92rem;
+      color: #4b5950;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .maestro-badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .maestro-badge {
+      background: rgba(0,158,112,0.12);
+      color: #007b57;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border: 1px solid rgba(0,158,112,0.2);
+    }
+
+    .maestro-actions {
+      margin-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-maestros-primary {
+      background: #009e70;
+      color: #fff;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.95rem;
+      width: 100%;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .btn-maestros-primary:hover { 
+      background: #007b57; 
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,158,112,0.3);
+    }
+
+    .btn-maestros-outline {
+      background: transparent;
+      border: 1px solid #c6d9d0;
+      color: #4b5950;
+      padding: 10px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      width: 100%;
+      text-align: center;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-maestros-outline:hover {
+      border-color: #009e70;
+      color: #009e70;
+      background: rgba(0,158,112,0.05);
+      transform: translateY(-1px);
+    }
+
+    /* === PAGINACIÓN === */
+    .maestros-pagination {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+      padding-top: 20px;
+      border-top: 1px solid rgba(198,217,208,0.5);
+    }
+
+    .maestros-pagination button {
+      min-width: 100px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      cursor: pointer;
+      background: #ffffff;
+      border: 1px solid #c6d9d0;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .maestros-pagination button:hover:not(:disabled) {
+      border-color: #009e70;
+      color: #009e70;
+      transform: translateY(-1px);
+    }
+
+    .maestros-pagination button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #maestrosPageInfo {
+      white-space: nowrap;
+      font-weight: bold;
+      font-size: 1rem;
+      color: #094032;
+      padding: 0 16px;
+    }
+
+    /* === Sidebars === */
+    .sidebar-maestros {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 8px 20px rgba(12,24,40,0.06);
+      border: 1px solid rgba(0,158,112,0.1);
+    }
+
+    .maestro-perfil-foto {
+      width: 100px;
+      height: 100px;
+      border-radius: 12px;
+      background-size: cover;
+      background-position: center;
+      margin: 0 auto 16px;
+      border: 4px solid rgba(234,245,238,0.9);
+      box-shadow: 0 6px 12px rgba(12,24,40,0.06);
+    }
+
+    .sidebar-maestros p {
+      margin: 0;
+      color: #094032;
+      font-weight: 600;
+      text-align: center;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .sidebar-maestros .btn-maestros-registrate,
+    .sidebar-maestros .maestros-side-links a {
+      display: block;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 700;
+      color: #fff;
+      background: #009e70;
+      text-decoration: none;
+      border: none;
+      transition: all 0.2s ease;
+      margin-bottom: 12px;
+      font-size: 0.95rem;
+    }
+
+    .sidebar-maestros .btn-maestros-registrate:hover,
+    .sidebar-maestros .maestros-side-links a:hover {
+      background: #007b57;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,158,112,0.3);
+    }
+
+    .sidebar-maestros .maestros-side-links a {
+      background: rgba(234,245,238,0.8);
+      color: #094032;
+      border: 1px solid rgba(0,158,112,0.2);
+    }
+
+    .sidebar-maestros .maestros-side-links a:hover {
+      background: rgba(0,158,112,0.1);
+      color: #007b57;
+    }
+
+    @media (max-width: 900px) {
+      #sidebar-maestros-izquierda, #sidebar-maestros-derecha { display: none; }
+      .maestros-main { margin: 80px 12px; }
+      .maestro-card { min-height: auto; padding: 16px; }
+      .maestros-controls { justify-content: stretch; gap: 10px; }
+      .maestros-search-filters { width: 100%; }
+      .maestros-controls input[type="search"],
+      .maestros-controls select { flex: 1; min-width: 140px; }
+    }
+
+    /* Estados vacíos */
+    .maestros-empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #4b5950;
+      grid-column: 1 / -1;
+    }
+
+    .maestros-empty-state h3 {
+      color: #094032;
+      margin-bottom: 12px;
+    }
 
 
 

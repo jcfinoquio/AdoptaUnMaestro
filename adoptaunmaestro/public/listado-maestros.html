@@ -3,295 +3,69 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Listado de Maestros - Adopta un Maestro</title>
-  <link rel="stylesheet" href="./css/style.css" />
-  <style>
-    /* Fondo unificado */
-    body, main, .perfil-container, .list-main {
-      background-color: #eaf5ee;
-    }
-
-    .list-main {
-      width: 100%;
-      max-width: 1500px;
-      margin: 92px auto 40px;
-      display: flex;
-      gap: 10px;
-      padding: 0 2vw;
-      align-items: flex-start;
-      box-sizing: border-box;
-    }
-
-    #sidebar-perfil-izquierda,
-    #sidebar-perfil-derecha {
-      width: 12vw;
-      min-width: 140px;
-    }
-
-    .list-content {
-      flex: 1 1 78%;
-      max-width: 1300px;
-    }
-
-    .login-lightbox.form-box {
-      margin: 0 auto;
-      width: 100%;
-      max-width: 1300px;
-      padding: 28px;
-      box-sizing: border-box;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.9);
-      box-shadow: 0 8px 20px rgba(12,24,40,0.06);
-    }
-
-    h2 { margin-top:0; color: #094032; }
-
-    .controls {
-      display:flex;
-      gap:10px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:center;
-    }
-
-    .controls input[type="search"],
-    .controls select {
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid #c6d9d0;
-      background: #fff;
-      font-family: inherit;
-      font-size:1rem;
-      min-width:200px;
-    }
-
-    .controls .btn-outline {
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid #009e70;
-      background: transparent;
-      color: #009e70;
-      font-weight:700;
-      cursor:pointer;
-    }
-
-    /* === GRID: responsive hasta 5 columnas === */
-    .card-grid {
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      justify-items: center;
-      align-items: start;
-    }
-
-    @media (min-width: 900px) {
-      .card-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-
-    @media (min-width: 1200px) {
-      .card-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-
-    @media (min-width: 1400px) {
-      .card-grid { grid-template-columns: repeat(5, 1fr); }
-    }
-
-    /* === TARJETA === */
-    .maestro-card {
-      background: #ffffff;
-      border-radius:12px;
-      box-shadow: 0 8px 18px rgba(12,24,40,0.06);
-      padding:16px;
-      width:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      min-height: 260px;
-      box-sizing: border-box;
-    }
-
-    .maestro-avatar {
-      width:96px;
-      height:96px;
-      border-radius:50%;
-      background-size:cover;
-      background-position:center;
-      margin:0 auto 12px auto;
-      border:4px solid rgba(234,245,238,0.9);
-      box-shadow: 0 6px 12px rgba(12,24,40,0.04);
-    }
-
-    .maestro-meta h4 {
-      margin:6px 0;
-      font-size:1.05rem;
-      color:#0b4233;
-      text-align:center;
-    }
-
-    .maestro-meta p {
-      margin:6px 0;
-      font-size:0.92rem;
-      color:#4b5950;
-      text-align:center;
-    }
-
-    .maestro-actions {
-      margin-top:12px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      align-items:center;
-    }
-
-    .btn-small {
-      background: #009e70;
-      color: #fff;
-      border: none;
-      padding:8px 12px;
-      border-radius:8px;
-      font-weight:700;
-      cursor:pointer;
-      font-size:0.95rem;
-      width:85%;
-      text-align:center;
-    }
-
-    .btn-small:hover { background: #007b57; }
-
-    .btn-outline {
-      background: transparent;
-      border:1px solid #777;
-      color:#222;
-      padding:8px 12px;
-      border-radius:8px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:0.95rem;
-      width:85%;
-      text-align:center;
-    }
-
-    /* === PAGINACIÓN === */
-    .pagination {
-      display: flex;
-      gap: 12px;
-      margin-top: 18px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: nowrap;
-    }
-
-    .pagination button {
-      min-width: 90px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      white-space: nowrap;
-      cursor: pointer;
-      background: #ffffff;
-      border: 1px solid #c6d9d0;
-      font-weight:600;
-    }
-
-    #pageInfo {
-      white-space: nowrap;
-      font-weight: bold;
-      font-size: 1rem;
-      color:#094032;
-    }
-
-    @media (max-width: 900px) {
-      #sidebar-perfil-izquierda, #sidebar-perfil-derecha { display:none; }
-      .list-main { margin: 80px 12px; }
-      .maestro-card { min-height:auto; padding:12px; }
-      .controls { justify-content:stretch; gap:8px; }
-    }
-
-    /* === Sidebar derecha: botones verdes coherentes y con más espacio === */
-    .sidebar .btn-registrate,
-    .sidebar .side-links a,
-    .sidebar-right .btn-registrate,
-    .sidebar-right .side-links a {
-      display: block;
-      width: 100%;
-      max-width: 220px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: 700;
-      color: #fff;
-      background: #009e70;
-      text-decoration: none;
-      border: none;
-      transition: background 0.2s ease, transform 0.1s ease;
-      margin-bottom: 10px; /* Espacio entre botones */
-    }
-
-    .sidebar .btn-registrate:hover,
-    .sidebar .side-links a:hover,
-    .sidebar-right .btn-registrate:hover,
-    .sidebar-right .side-links a:hover {
-      background: #007b57;
-      transform: translateY(-2px);
-    }
-
-  </style>
+  <title>Listado de Maestros</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style src="js/js.js" defer></style>
 </head>
 
-<body>
-  <header class="header-nav">
+<body class="page-listado-maestros">
+<header class="header-nav">
     <div class="logo-container">
-      <img src="./img/logo.jpeg" alt="Logo del sitio Adopta un Maestro" class="logo">
+      <img src="img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
     </div>
-    <nav class="nav-links">
-      <a href="./index.html">INICIO</a>
-      <a href="./perfil.html">PERFIL</a>
-      <a href="#">EMPLEOS</a>
-      <a href="./listado-maestros.html">MAESTROS</a>
-      <a href="./listado-colegios.html">COLEGIOS</a>
-      <a href="#">MENSAJES</a>
-      <a href="#">CONTACTOS</a>
+    <nav class="menu" role="navigation" aria-label="Main navigation">
+      <a href="index.html">Inicio</a>
+      <a href="listado-colegios.html">Empleos</a>
+      <a href="listado-maestros.html">Centros/Maestros</a>
+      <a href="mensajes.html">Mensajes</a>
+      <a href="contactos.html">Contactos</a>
     </nav>
   </header>
-
-  <main class="perfil-container list-main">
-    <aside class="sidebar" id="sidebar-perfil-izquierda">
-      <div class="perfil-foto" style="background-image:url('./img/perfil-placeholder.png'); width:100px; height:100px; border-radius:12px; background-size:cover;"></div>
-      <div class="perfil-info" style="padding:8px; text-align:center;">
-        <p style="margin:0; color:#094032; font-weight:600;">Filtra y encuentra al maestro ideal</p>
+<main class="maestros-container maestros-main">
+    <aside class="sidebar-maestros" id="sidebar-maestros-izquierda">
+      <div class="maestro-perfil-foto" style="background-image:url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face');"></div>
+      <div class="maestro-perfil-info" style="padding:8px; text-align:center;">
+        <p style="margin:0; color:#094032; font-weight:600;">Filtra y encuentra al maestro ideal para tu centro</p>
       </div>
     </aside>
 
-    <section class="perfil-contenido list-content">
-      <div class="login-lightbox form-box">
-        <h2>Listado de Maestros</h2>
+    <section class="maestros-contenido maestros-content">
+      <div class="maestros-lightbox form-box">
+        <h2>Encuentra Maestros Cualificados</h2>
 
-        <div class="controls">
-          <input id="buscar" type="search" placeholder="Buscar por nombre o especialidad..." />
-          <select id="filtroEspecialidad">
-            <option value="">Todas las especialidades</option>
-            <option value="Primaria">Primaria</option>
-            <option value="Inglés">Inglés</option>
-            <option value="Matemáticas">Matemáticas</option>
-            <option value="Educación Física">Educación Física</option>
-          </select>
-          <button id="btnLimpiar" class="btn-outline">Limpiar</button>
+        <div class="maestros-controls">
+          <div class="maestros-search-filters">
+            <input id="maestrosBuscar" type="search" placeholder="Buscar por nombre o especialidad..." aria-label="Buscar maestros" />
+            <select id="filtroEspecialidad" aria-label="Filtrar por especialidad">
+              <option value="">Todas las especialidades</option>
+              <option value="Primaria">Primaria</option>
+              <option value="Inglés">Inglés</option>
+              <option value="Matemáticas">Matemáticas</option>
+              <option value="Educación Física">Educación Física</option>
+              <option value="Ciencias">Ciencias</option>
+              <option value="Música">Música</option>
+            </select>
+          </div>
+          <button id="btnMaestrosLimpiar" class="btn-maestros-outline">Limpiar filtros</button>
         </div>
 
-        <div id="resultados" class="card-grid" aria-live="polite"></div>
+        <div class="maestros-results-info" id="maestrosResultsInfo" aria-live="polite">
+          <span id="maestrosResultsCount">15</span> maestros encontrados
+        </div>
 
-        <div class="pagination" id="pagination">
-          <button id="prevPage" class="btn-outline">« Anterior</button>
-          <span id="pageInfo">1 / 1</span>
-          <button id="nextPage" class="btn-outline">Siguiente »</button>
+        <div id="maestrosResultados" class="maestros-grid" aria-live="polite" aria-busy="false"></div>
+
+        <div class="maestros-pagination" id="maestrosPagination">
+          <button id="maestrosPrevPage" class="btn-maestros-outline">« Anterior</button>
+          <span id="maestrosPageInfo">1 / 1</span>
+          <button id="maestrosNextPage" class="btn-maestros-outline">Siguiente »</button>
         </div>
       </div>
     </section>
 
-    <aside class="sidebar" id="sidebar-perfil-derecha">
-      <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
-      <nav class="side-links">
+    <aside class="sidebar-maestros" id="sidebar-maestros-derecha">
+      <a href="registro.html" class="btn-maestros-registrate">REGÍSTRATE AQUÍ</a>
+      <nav class="maestros-side-links">
         <a href="#">EVENTOS Y TALLERES</a>
         <a href="#">RECURSOS EDUCATIVOS</a>
         <a href="#">FOROS</a>
@@ -300,87 +74,5 @@
       </nav>
     </aside>
   </main>
-
-  <script>
-    const maestros = [
-      { id:1, nombre:'María López', especialidad:'Primaria', anios:6, avatar:'./img/maestra1.jpg', resumen:'Maestra con experiencia en metodologías activas.' },
-      { id:2, nombre:'Carlos Ruiz', especialidad:'Inglés', anios:8, avatar:'./img/maestro2.jpg', resumen:'Profesor B2, experiencia en infantil y primaria.' },
-      { id:3, nombre:'Ana Pérez', especialidad:'Matemáticas', anios:4, avatar:'./img/maestra3.jpg', resumen:'Apasionada por el razonamiento lógico y creativo.' },
-      { id:4, nombre:'Javier Gómez', especialidad:'Educación Física', anios:12, avatar:'./img/maestro4.jpg', resumen:'Entrenador y profesor con enfoque inclusivo.' },
-      { id:5, nombre:'Lucía Martín', especialidad:'Inglés', anios:3, avatar:'./img/maestra5.jpg', resumen:'Formación en TEFL y experiencia internacional.' },
-      { id:6, nombre:'Pablo Sánchez', especialidad:'Primaria', anios:10, avatar:'./img/maestro6.jpg', resumen:'Coordinador de proyectos educativos.' },
-      { id:7, nombre:'Elena Torres', especialidad:'Primaria', anios:5, avatar:'./img/maestra7.jpg', resumen:'Especialista en aprendizaje cooperativo.' },
-      { id:8, nombre:'Diego Morales', especialidad:'Matemáticas', anios:7, avatar:'./img/maestro8.jpg', resumen:'Enfoque en razonamiento numérico.' },
-      { id:9, nombre:'Sofía Ruiz', especialidad:'Inglés', anios:2, avatar:'./img/maestra9.jpg', resumen:'Experiencia en inmersión lingüística.' },
-      { id:10, nombre:'Miguel Ángel', especialidad:'Primaria', anios:9, avatar:'./img/maestro10.jpg', resumen:'Coordinador de proyectos STEAM.' },
-      { id:11, nombre:'Isabel Gómez', especialidad:'Primaria', anios:11, avatar:'./img/maestra11.jpg', resumen:'Docente con enfoque inclusivo y emprendimiento.' },
-      { id:12, nombre:'Raúl Fernández', especialidad:'Matemáticas', anios:6, avatar:'./img/maestro12.jpg', resumen:'Especialista en álgebra y pensamiento crítico.' },
-      { id:13, nombre:'Alicia Moreno', especialidad:'Inglés', anios:4, avatar:'./img/maestra13.jpg', resumen:'Inglés con metodología comunicativa.' },
-      { id:14, nombre:'Sergio Pastor', especialidad:'Educación Física', anios:8, avatar:'./img/maestro14.jpg', resumen:'Trabajo inclusivo y hábitos saludables.' },
-      { id:15, nombre:'Laura Ríos', especialidad:'Primaria', anios:7, avatar:'./img/maestra15.jpg', resumen:'Atención a la diversidad y proyectos culturales.' }
-    ];
-
-    const PER_PAGE = 15;
-    let state = { q:'', especialidad:'', page:1 };
-    const resultadosEl = document.getElementById('resultados');
-    const buscarEl = document.getElementById('buscar');
-    const filtroEl = document.getElementById('filtroEspecialidad');
-    const btnLimpiar = document.getElementById('btnLimpiar');
-    const prevBtn = document.getElementById('prevPage');
-    const nextBtn = document.getElementById('nextPage');
-    const pageInfo = document.getElementById('pageInfo');
-
-    function filtrarDatos() {
-      const q = state.q.toLowerCase().trim();
-      return maestros.filter(m =>
-        (m.nombre + ' ' + m.especialidad + ' ' + (m.resumen || '')).toLowerCase().includes(q) &&
-        (!state.especialidad || m.especialidad === state.especialidad)
-      );
-    }
-
-    function render() {
-      const datos = filtrarDatos();
-      const totalPages = Math.max(1, Math.ceil(datos.length / PER_PAGE));
-      state.page = Math.min(state.page, totalPages);
-      const start = (state.page - 1) * PER_PAGE;
-      const pageItems = datos.slice(start, start + PER_PAGE);
-
-      resultadosEl.innerHTML = pageItems.map(m => `
-        <article class="maestro-card" role="article" aria-labelledby="maestro-${m.id}">
-          <div class="maestro-avatar" style="background-image:url('${m.avatar}')" role="img" aria-label="${m.nombre}"></div>
-          <div class="maestro-meta">
-            <h4 id="maestro-${m.id}">${m.nombre}</h4>
-            <p><strong>${m.especialidad}</strong> · ${m.anios} años</p>
-            <p>${m.resumen}</p>
-          </div>
-          <div class="maestro-actions">
-            <a class="btn-outline" href="./perfil.html?maestro=${m.id}">Ver perfil</a>
-            <button class="btn-small" data-contact="${m.id}">Contactar</button>
-          </div>
-        </article>
-      `).join('');
-
-      pageInfo.textContent = `${state.page} / ${totalPages}`;
-      prevBtn.disabled = state.page <= 1;
-      nextBtn.disabled = state.page >= totalPages;
-    }
-
-    buscarEl.addEventListener('input', e => { state.q = e.target.value; state.page = 1; render(); });
-    filtroEl.addEventListener('change', e => { state.especialidad = e.target.value; state.page = 1; render(); });
-    btnLimpiar.addEventListener('click', () => { buscarEl.value=''; filtroEl.value=''; state.q=''; state.especialidad=''; state.page=1; render(); });
-    prevBtn.addEventListener('click', () => { if(state.page>1){ state.page--; render(); }});
-    nextBtn.addEventListener('click', () => { state.page++; render(); });
-
-    resultadosEl.addEventListener('click', e => {
-      const btn = e.target.closest('[data-contact]');
-      if(btn){
-        const id = btn.dataset.contact;
-        const m = maestros.find(x => x.id == id);
-        alert(`Enviar solicitud de contacto a ${m.nombre}.`);
-      }
-    });
-
-    render();
-  </script>
 </body>
 </html>

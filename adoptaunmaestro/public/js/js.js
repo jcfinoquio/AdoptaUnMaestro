@@ -684,3 +684,87 @@ FUNCIONALIDADES REGISTRO
       // Inicial render
       render();
     });
+
+    //LISTADO MAESTROS
+    
+    document.addEventListener('DOMContentLoaded', () => {
+    // Datos de ejemplo con imágenes reales de bancos gratuitos
+    const maestros = [
+      { id:1, nombre:'María López', especialidad:'Primaria', anios:6, avatar:'./img/maestra1.jpg', resumen:'Maestra con experiencia en metodologías activas.' },
+      { id:2, nombre:'Carlos Ruiz', especialidad:'Inglés', anios:8, avatar:'./img/maestro2.jpg', resumen:'Profesor B2, experiencia en infantil y primaria.' },
+      { id:3, nombre:'Ana Pérez', especialidad:'Matemáticas', anios:4, avatar:'./img/maestra3.jpg', resumen:'Apasionada por el razonamiento lógico y creativo.' },
+      { id:4, nombre:'Javier Gómez', especialidad:'Educación Física', anios:12, avatar:'./img/maestro4.jpg', resumen:'Entrenador y profesor con enfoque inclusivo.' },
+      { id:5, nombre:'Lucía Martín', especialidad:'Inglés', anios:3, avatar:'./img/maestra5.jpg', resumen:'Formación en TEFL y experiencia internacional.' },
+      { id:6, nombre:'Pablo Sánchez', especialidad:'Primaria', anios:10, avatar:'./img/maestro6.jpg', resumen:'Coordinador de proyectos educativos.' },
+      { id:7, nombre:'Elena Torres', especialidad:'Primaria', anios:5, avatar:'./img/maestra7.jpg', resumen:'Especialista en aprendizaje cooperativo.' },
+      { id:8, nombre:'Diego Morales', especialidad:'Matemáticas', anios:7, avatar:'./img/maestro8.jpg', resumen:'Enfoque en razonamiento numérico.' },
+      { id:9, nombre:'Sofía Ruiz', especialidad:'Inglés', anios:2, avatar:'./img/maestra9.jpg', resumen:'Experiencia en inmersión lingüística.' },
+      { id:10, nombre:'Miguel Ángel', especialidad:'Primaria', anios:9, avatar:'./img/maestro10.jpg', resumen:'Coordinador de proyectos STEAM.' },
+      { id:11, nombre:'Isabel Gómez', especialidad:'Primaria', anios:11, avatar:'./img/maestra11.jpg', resumen:'Docente con enfoque inclusivo y emprendimiento.' },
+      { id:12, nombre:'Raúl Fernández', especialidad:'Matemáticas', anios:6, avatar:'./img/maestro12.jpg', resumen:'Especialista en álgebra y pensamiento crítico.' },
+      { id:13, nombre:'Alicia Moreno', especialidad:'Inglés', anios:4, avatar:'./img/maestra13.jpg', resumen:'Inglés con metodología comunicativa.' },
+      { id:14, nombre:'Sergio Pastor', especialidad:'Educación Física', anios:8, avatar:'./img/maestro14.jpg', resumen:'Trabajo inclusivo y hábitos saludables.' },
+      { id:15, nombre:'Laura Ríos', especialidad:'Primaria', anios:7, avatar:'./img/maestra15.jpg', resumen:'Atención a la diversidad y proyectos culturales.' }
+    ];
+
+    const PER_PAGE = 15;
+    let state = { q:'', especialidad:'', page:1 };
+    const resultadosEl = document.getElementById('resultados');
+    const buscarEl = document.getElementById('buscar');
+    const filtroEl = document.getElementById('filtroEspecialidad');
+    const btnLimpiar = document.getElementById('btnLimpiar');
+    const prevBtn = document.getElementById('prevPage');
+    const nextBtn = document.getElementById('nextPage');
+    const pageInfo = document.getElementById('pageInfo');
+
+    function filtrarDatos() {
+      const q = state.q.toLowerCase().trim();
+      return maestros.filter(m =>
+        (m.nombre + ' ' + m.especialidad + ' ' + (m.resumen || '')).toLowerCase().includes(q) &&
+        (!state.especialidad || m.especialidad === state.especialidad)
+      );
+    }
+
+    function render() {
+      const datos = filtrarDatos();
+      const totalPages = Math.max(1, Math.ceil(datos.length / PER_PAGE));
+      state.page = Math.min(state.page, totalPages);
+      const start = (state.page - 1) * PER_PAGE;
+      const pageItems = datos.slice(start, start + PER_PAGE);
+
+      resultadosEl.innerHTML = pageItems.map(m => `
+        <article class="maestro-card" role="article" aria-labelledby="maestro-${m.id}">
+          <div class="maestro-avatar" style="background-image:url('${m.avatar}')" role="img" aria-label="${m.nombre}"></div>
+          <div class="maestro-meta">
+            <h4 id="maestro-${m.id}">${m.nombre}</h4>
+            <p><strong>${m.especialidad}</strong> · ${m.anios} años</p>
+            <p>${m.resumen}</p>
+          </div>
+          <div class="maestro-actions">
+            <a class="btn-outline" href="./perfil.html?maestro=${m.id}">Ver perfil</a>
+            <button class="btn-small" data-contact="${m.id}">Contactar</button>
+          </div>
+        </article>
+      `).join('');
+
+      pageInfo.textContent = `${state.page} / ${totalPages}`;
+      prevBtn.disabled = state.page <= 1;
+      nextBtn.disabled = state.page >= totalPages;
+    }
+
+    buscarEl.addEventListener('input', e => { state.q = e.target.value; state.page = 1; render(); });
+    filtroEl.addEventListener('change', e => { state.especialidad = e.target.value; state.page = 1; render(); });
+    btnLimpiar.addEventListener('click', () => { buscarEl.value=''; filtroEl.value=''; state.q=''; state.especialidad=''; state.page=1; render(); });
+    prevBtn.addEventListener('click', () => { if(state.page>1){ state.page--; render(); }});
+    nextBtn.addEventListener('click', () => { state.page++; render(); });
+
+    resultadosEl.addEventListener('click', e => {
+      const btn = e.target.closest('[data-contact]');
+      if(btn){
+        const id = btn.dataset.contact;
+        const m = maestros.find(x => x.id == id);
+        alert(`Enviar solicitud de contacto a ${m.nombre}.`);
+      }
+    });
+
+    render();});
