@@ -798,7 +798,14 @@ aside {
 /*======================================================================
 LISTADO COLEGIOS
 =======================================================================*/
-
+.perfil-contenido {
+  flex: 1 1 70%;
+  max-width: calc(var(--container-max) - 320px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-items: center;
+}
 /* Fondo unificado y layout */
     .list-main {
       width: 100%;
@@ -1080,7 +1087,6 @@ LISTADO COLEGIOS
       flex-wrap:wrap;
     }
 
-    /* make modal content more readable on small screens */
     @media (max-width:600px) {
       .modal-body { flex-direction:column; }
       .modal-info { flex:1 1 100%; }
