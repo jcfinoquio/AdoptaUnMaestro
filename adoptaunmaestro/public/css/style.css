@@ -148,6 +148,7 @@ button {
   background: rgba(13, 110, 253, 0.06);
   color: var(--color-accent);
 }
+
 /*=====================
     INDEX
 ========================*/
@@ -266,6 +267,7 @@ textarea:focus {
 .form-row .form-group {
   flex: 1
 }
+
 label {
   display: block;
   margin-bottom: 8px;
@@ -299,7 +301,7 @@ label {
 
 .btn-outline {
   display: inline-block;
-  color: var(--color-primary);
+  color: white;
   text-decoration: none;
   padding: 8px 12px;
   border-radius: 6px;
@@ -351,16 +353,19 @@ body.page-index .login-modal.active~.main-container {
 .page-index {
   background: linear-gradient(180deg, #e9f4ea 0%, #cfe6d4 100%);
 }
+
 .main-container {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
+
 .main-content {
   text-align: center;
   width: 70%;
 }
+
 .content-box p {
   font-size: 4.5rem;
   font-weight: 700;
@@ -369,6 +374,7 @@ body.page-index .login-modal.active~.main-container {
   margin: 0;
   font-family: var(--font-serif);
 }
+
 /* --------------------------------------------------------------------------
  SIDEBAR INDEX
  ------------------------------------------------------------------------ */
@@ -378,12 +384,16 @@ body.page-index .login-modal.active~.main-container {
   align-items: center;
   gap: 12px;
   padding: 12px;
-  position: fixed;
+  position: sticky;
+  height: calc(100vh - 120px);
+  width: 14vw;
+  min-width: 140px;
   right: 20px;
-  top: 100px;
+  top: 90px;
   background: rgba(255, 255, 255, 0.75);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  /*  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.45));*/
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
 
 .page-index #mensaje {
@@ -397,6 +407,219 @@ body.page-index .login-modal.active~.main-container {
   width: 100%;
 }
 
+/* --------------------------------------------------------------------------
+  CONTACTOS
+ ------------------------------------------------------------------------ */
+.page-contactos {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+}
+
+.page-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  gap: 20px;
+  max-width: 1400px;
+  margin: auto;
+  padding: 20px;
+  align-items: start;
+  padding-top: 10vh;
+}
+
+aside {
+  background: rgba(255, 255, 255, 0.75);
+  min-height: 600px;
+  border-radius: 6px;
+}
+/* Tarjeta de perfil izquierda */
+.perfil-card {
+    background: rgba(255, 255, 255, 0.75);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 20px;
+}
+
+.perfil-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.perfil-meta h4 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #2c3e50;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.meta-sub {
+    color: #7f8c8d;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+}
+
+.meta-visitas {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.meta-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Contactos Grid*/
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 40px 20px;
+
+  background: lightcyan;
+  justify-items: center;
+  margin-bottom: 50px;
+
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.contact-card {
+  background: white;
+  border-radius: 20px;
+  padding: 25px 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
+
+.contact-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(52, 152, 219, 0.05), transparent);
+  transform: rotate(45deg);
+  z-index: 0;
+}
+
+.contact-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+  border: 3px solid #f1f1f1;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.contact-card:hover img {
+  border-color: #3498db;
+  transform: scale(1.05);
+}
+
+.name {
+  font-weight: 600;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsivo */
+@media (max-width: 1200px) {
+  .layout {
+    grid-template-columns: 150px 1fr 150px;
+  }
+
+  .contacts-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  aside {
+    display: none;
+  }
+
+  .contacts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* === LAYOUT PRINCIPAL === */
 /* Ajuste general que usan las páginas (perfil, listados, registro...) */
@@ -408,24 +631,6 @@ body.page-index .login-modal.active~.main-container {
   padding-left: 1rem;
   padding-right: 1rem;
   justify-content: center;
-}
-
-/* sidebar (más discreta) */
-.sidebar {
-  width: 14vw;
-  /* no excesivo */
-  min-width: 140px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.45));
-  border-radius: var(--radius);
-  padding: 12px;
-  box-shadow: var(--shadow-sm);
-  height: calc(100vh - 120px);
-  position: sticky;
-  top: 82px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
 }
 
 /* contenido central */
@@ -673,22 +878,6 @@ h3 {
 
 body {
   background: linear-gradient(180deg, #e9f4ea 0%, #cfe6d4 100%);
-}
-
-/* --- Sidebar verde --- */
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 12px;
-  position: fixed;
-  right: 20px;
-  top: 100px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(4px);
-  border-radius: 12px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
 }
 
 .sidebar .btn-registrate {
