@@ -798,300 +798,549 @@ aside {
 /*======================================================================
 LISTADO COLEGIOS
 =======================================================================*/
+/*======================================================================
+LISTADO COLEGIOS
+=======================================================================*/
+
+/* Fondo unificado y layout */
+.list-main {
+  width: 100%;
+  max-width: 1500px;
+  margin: 92px auto 40px;
+  display: flex;
+  gap: 20px;
+  padding: 0 2vw;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.list-content {
+  flex: 1 1 78%;
+  max-width: 1300px;
+}
+
 .perfil-contenido {
   flex: 1 1 70%;
-  max-width: calc(var(--container-max) - 320px);
+  max-width: calc(100% - 320px);
   display: flex;
   flex-direction: column;
   gap: 18px;
   align-items: center;
 }
-/* Fondo unificado y layout */
-    .list-main {
-      width: 100%;
-      max-width: 1500px;
-      margin: 92px auto 40px;
-      display: flex;
-      gap: 10px;
-      padding: 0 2vw;
-      align-items: flex-start;
-      box-sizing: border-box;
-    }
 
-    .list-content {
-      flex: 1 1 78%;
-      max-width: 1300px;
-    }
+.card-shell {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1300px;
+  padding: 28px;
+  box-sizing: border-box;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 10px 30px rgba(12,24,40,0.08);
+  border: 1px solid rgba(0,158,112,0.1);
+}
 
-    .card-shell {
-      margin: 0 auto;
-      width: 100%;
-      max-width: 1300px;
-      padding: 28px;
-      box-sizing: border-box;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.92);
-      box-shadow: 0 8px 20px rgba(12,24,40,0.06);
-    }
+.card-shell h2 {
+  margin-top: 0;
+  color: #094032;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(0,158,112,0.2);
+}
 
-    .controls {
-      display:flex;
-      gap:10px;
-      margin-bottom:18px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:center;
-    }
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(234,245,238,0.7);
+  padding: 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,158,112,0.15);
+}
 
-    .controls input[type="search"],
-    .controls select {
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid #c6d9d0;
-      background: #fff;
-      font-family: inherit;
-      font-size:1rem;
-      min-width:180px;
-    }
+.search-filters {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  flex: 1;
+}
 
-    .controls .btn-outline {
-      padding:10px 12px;
-      border-radius:8px;
-      border:1px solid #009e70;
-      background: transparent;
-      color: #009e70;
-      font-weight:700;
-      cursor:pointer;
-    }
+.controls input[type="search"],
+.controls select {
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #c6d9d0;
+  background: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  min-width: 180px;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
 
-    /* GRID responsive (hasta 5 columnas) */
-    .card-grid {
-      display:grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
-      justify-items: center;
-      align-items: start;
-    }
+.controls input[type="search"]:focus,
+.controls select:focus {
+  outline: none;
+  border-color: #009e70;
+  box-shadow: 0 0 0 3px rgba(0,158,112,0.15);
+}
 
-    @media (min-width: 900px) {
-      .card-grid { grid-template-columns: repeat(3, 1fr); }
-    }
+.controls .btn-outline {
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: 1px solid #009e70;
+  background: transparent;
+  color: #009e70;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
 
-    @media (min-width: 1200px) {
-      .card-grid { grid-template-columns: repeat(4, 1fr); }
-    }
+.controls .btn-outline:hover {
+  background: rgba(0,158,112,0.08);
+  transform: translateY(-1px);
+}
 
-    @media (min-width: 1400px) {
-      .card-grid { grid-template-columns: repeat(5, 1fr); }
-    }
+.results-info {
+  margin-bottom: 16px;
+  color: #4b5950;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-    /* TARJETA COLEGIO */
-    .colegio-card {
-      background: #ffffff;
-      border-radius:12px;
-      box-shadow: 0 8px 18px rgba(12,24,40,0.06);
-      padding:16px;
-      width:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      min-height: 260px;
-      box-sizing: border-box;
-    }
+.results-info strong {
+  color: #094032;
+}
 
-    .colegio-logo {
-      width:84px;
-      height:84px;
-      border-radius:12px;
-      background-size:cover;
-      background-position:center;
-      margin:0 auto 12px auto;
-      border:4px solid rgba(234,245,238,0.9);
-      box-shadow: 0 6px 12px rgba(12,24,40,0.04);
-    }
+/* GRID responsive (hasta 5 columnas) */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
+}
 
-    .colegio-meta h4 {
-      margin:6px 0;
-      font-size:1.02rem;
-      color:#0b4233;
-      text-align:center;
-    }
+@media (min-width: 900px) {
+  .card-grid { grid-template-columns: repeat(3, 1fr); }
+}
 
-    .colegio-meta p {
-      margin:6px 0;
-      font-size:0.9rem;
-      color:#4b5950;
-      text-align:center;
-    }
+@media (min-width: 1200px) {
+  .card-grid { grid-template-columns: repeat(4, 1fr); }
+}
 
-    .colegio-badges {
-      display:flex;
-      gap:8px;
-      justify-content:center;
-      flex-wrap:wrap;
-      margin-top:8px;
-    }
+@media (min-width: 1400px) {
+  .card-grid { grid-template-columns: repeat(5, 1fr); }
+}
 
-    .badge {
-      background: rgba(0,158,112,0.12);
-      color: #007b57;
-      border-radius: 999px;
-      padding:6px 10px;
-      font-weight:700;
-      font-size:0.8rem;
-    }
+/* TARJETA COLEGIO */
+.colegio-card {
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(12,24,40,0.08);
+  padding: 18px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0,158,112,0.05);
+  position: relative;
+  overflow: hidden;
+}
 
-    .colegio-actions {
-      margin-top:12px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      align-items:center;
-    }
+.colegio-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(12,24,40,0.12);
+  border-color: rgba(0,158,112,0.2);
+}
 
-    /* PAGINACIÓN */
-    .pagination {
-      display: flex;
-      gap: 12px;
-      margin-top: 18px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: nowrap;
-    }
+.colegio-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #009e70, #00c993);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
 
-    .pagination button {
-      min-width: 90px;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      white-space: nowrap;
-      cursor: pointer;
-      background: #ffffff;
-      border: 1px solid #c6d9d0;
-      font-weight:600;
-    }
+.colegio-card:hover::before {
+  opacity: 1;
+}
 
-    #pageInfo {
-      white-space: nowrap;
-      font-weight: bold;
-      font-size: 1rem;
-      color:#094032;
-    }
+.colegio-logo {
+  width: 90px;
+  height: 90px;
+  border-radius: 14px;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 14px auto;
+  border: 4px solid rgba(234,245,238,0.9);
+  box-shadow: 0 6px 12px rgba(12,24,40,0.06);
+  transition: transform 0.3s ease;
+}
 
-    @media (max-width: 900px) {
-      #sidebar-perfil-izquierda, #sidebar-perfil-derecha { display:none; }
-      .list-main { margin: 80px 12px; }
-      .colegio-card { min-height:auto; padding:12px; }
-      .controls { justify-content:stretch; gap:8px; }
-    }
+.colegio-card:hover .colegio-logo {
+  transform: scale(1.05);
+}
 
-    /* Sidebar derecha: botones verdes y separación */
-    .sidebar .btn-registrate,
-    .sidebar .side-links a,
-    .sidebar-right .btn-registrate,
-    .sidebar-right .side-links a {
-      display: block;
-      width: 100%;
-      max-width: 220px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: 700;
-      color: #fff;
-      background: #009e70;
-      text-decoration: none;
-      border: none;
-      transition: background 0.2s ease, transform 0.1s ease;
-      margin-bottom: 10px;
-    }
+.colegio-meta h4 {
+  margin: 8px 0;
+  font-size: 1.1rem;
+  color: #0b4233;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.3;
+}
 
-    .sidebar .btn-registrate:hover,
-    .sidebar .side-links a:hover,
-    .sidebar-right .btn-registrate:hover,
-    .sidebar-right .side-links a:hover {
-      background: #007b57;
-      transform: translateY(-2px);
-    }
+.colegio-meta p {
+  margin: 6px 0;
+  font-size: 0.92rem;
+  color: #4b5950;
+  text-align: center;
+  line-height: 1.4;
+}
 
-    /* ========== Modal styles ========== */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(2,10,6,0.45);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 12000;
-      padding: 20px;
-    }
-    .modal-overlay.open { display: flex; }
+.colegio-badges {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
 
-    .modal {
-      background: #fff;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 760px;
-      box-shadow: 0 12px 40px rgba(2,10,6,0.4);
-      padding: 20px;
-      box-sizing: border-box;
-      max-height: 90vh;
-      overflow: auto;
-      position: relative;
-    }
+.badge {
+  background: rgba(0,158,112,0.12);
+  color: #007b57;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  border: 1px solid rgba(0,158,112,0.2);
+}
 
-    .modal-header {
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      margin-bottom:12px;
-    }
+.colegio-actions {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
 
-    .modal-header h3 { margin:0; color:#0b4233; font-size:1.2rem; }
+.btn-primary {
+  background: #009e70;
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s ease;
+}
 
-    .modal-close {
-      background: transparent;
-      border: none;
-      font-size:1.2rem;
-      cursor:pointer;
-      padding:6px 8px;
-      border-radius:8px;
-    }
+.btn-primary:hover { 
+  background: #007b57; 
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,158,112,0.3);
+}
 
-    .modal-body {
-      display:flex;
-      gap:18px;
-      flex-wrap:wrap;
-    }
+.btn-outline {
+  background: transparent;
+  border: 1px solid #c6d9d0;
+  color: #4b5950;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  width: 100%;
+  text-align: center;
+  transition: all 0.2s ease;
+}
 
-    .modal-logo {
-      width:140px;
-      height:140px;
-      border-radius:10px;
-      background-size:cover;
-      background-position:center;
-      flex: 0 0 140px;
-      box-shadow: 0 8px 18px rgba(12,24,40,0.06);
-    }
+.btn-outline:hover {
+  border-color: #009e70;
+  color: #009e70;
+  background: rgba(0,158,112,0.05);
+  transform: translateY(-1px);
+}
 
-    .modal-info {
-      flex: 1 1 calc(100% - 160px);
-    }
+/* PAGINACIÓN */
+.pagination {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding-top: 20px;
+  border-top: 1px solid rgba(198,217,208,0.5);
+}
 
-    .modal-info p { margin:8px 0; color:#3b4a43; }
+.pagination button {
+  min-width: 100px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #c6d9d0;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
 
-    .modal-actions {
-      margin-top:12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+.pagination button:hover:not(:disabled) {
+  border-color: #009e70;
+  color: #009e70;
+  transform: translateY(-1px);
+}
 
-    @media (max-width:600px) {
-      .modal-body { flex-direction:column; }
-      .modal-info { flex:1 1 100%; }
-      .modal-logo { width:100%; height:160px; }
-    }
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+#pageInfo {
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 1rem;
+  color: #094032;
+  padding: 0 16px;
+}
+
+/* Sidebar izquierda */
+.sidebar-left {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(12,24,40,0.06);
+  border: 1px solid rgba(0,158,112,0.1);
+}
+
+.perfil-foto {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto 16px;
+  border: 4px solid rgba(234,245,238,0.9);
+  box-shadow: 0 6px 12px rgba(12,24,40,0.06);
+}
+
+.sidebar-left p {
+  margin: 0;
+  color: #094032;
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Sidebar derecha */
+.sidebar-right {
+  background: white;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 8px 20px rgba(12,24,40,0.06);
+  border: 1px solid rgba(0,158,112,0.1);
+}
+
+.sidebar .btn-registrate,
+.sidebar .side-links a,
+.sidebar-right .btn-registrate,
+.sidebar-right .side-links a {
+  display: block;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 700;
+  color: #fff;
+  background: #009e70;
+  text-decoration: none;
+  border: none;
+  transition: all 0.2s ease;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.sidebar .btn-registrate:hover,
+.sidebar .side-links a:hover,
+.sidebar-right .btn-registrate:hover,
+.sidebar-right .side-links a:hover {
+  background: #007b57;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,158,112,0.3);
+}
+
+.sidebar .side-links a,
+.sidebar-right .side-links a {
+  background: rgba(234,245,238,0.8);
+  color: #094032;
+  border: 1px solid rgba(0,158,112,0.2);
+}
+
+.sidebar .side-links a:hover,
+.sidebar-right .side-links a:hover {
+  background: rgba(0,158,112,0.1);
+  color: #007b57;
+}
+
+@media (max-width: 900px) {
+  #sidebar-perfil-izquierda, #sidebar-perfil-derecha { display: none; }
+  .list-main { margin: 80px 12px; }
+  .colegio-card { min-height: auto; padding: 16px; }
+  .controls { justify-content: stretch; gap: 10px; }
+  .search-filters { width: 100%; }
+  .controls input[type="search"],
+  .controls select { flex: 1; min-width: 140px; }
+  .perfil-contenido { max-width: 100%; }
+}
+
+/* ========== Modal styles ========== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(2,10,6,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 12000;
+  padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 760px;
+  box-shadow: 0 20px 60px rgba(2,10,6,0.4);
+  padding: 24px;
+  box-sizing: border-box;
+  max-height: 90vh;
+  overflow: auto;
+  position: relative;
+  border: 1px solid rgba(0,158,112,0.1);
+  animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+  from { opacity: 0; transform: scale(0.95) translateY(-10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(198,217,208,0.5);
+}
+
+.modal-header h3 { 
+  margin: 0; 
+  color: #0b4233; 
+  font-size: 1.4rem; 
+  font-weight: 700; 
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #4b5950;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0,0,0,0.05);
+  color: #094032;
+}
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.modal-logo {
+  width: 160px;
+  height: 160px;
+  border-radius: 12px;
+  background-size: cover;
+  background-position: center;
+  flex: 0 0 160px;
+  box-shadow: 0 8px 18px rgba(12,24,40,0.08);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.modal-info {
+  flex: 1 1 calc(100% - 180px);
+}
+
+.modal-info p { 
+  margin: 10px 0; 
+  color: #3b4a43; 
+  line-height: 1.5; 
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Estados de carga y vacío */
+.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #4b5950;
+  grid-column: 1 / -1;
+}
+
+.empty-state h3 {
+  color: #094032;
+  margin-bottom: 12px;
+}
+
+/* make modal content more readable on small screens */
+@media (max-width: 600px) {
+  .modal-body { flex-direction: column; }
+  .modal-info { flex: 1 1 100%; }
+  .modal-logo { width: 100%; height: 180px; }
+}
 
 
 
