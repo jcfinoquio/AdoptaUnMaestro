@@ -271,3 +271,58 @@ FUNCIONALIDADES REGISTRO
 
       mostrarBloque(rolSelect.value);
     });
+
+/*Registro*/
+     document.addEventListener('DOMContentLoaded', () => {
+      const rolSelect = document.getElementById('rol');
+      const bloqueMaestro = document.getElementById('bloqueMaestro');
+      const bloqueCentro = document.getElementById('bloqueCentro');
+      const formacionesCont = document.getElementById('formacionesContenedor');
+      const btnAddForm = document.getElementById('btnAddForm');
+      const form = document.getElementById('registroForm');
+
+      function mostrarBloque(rol) {
+        bloqueMaestro.classList.toggle('hidden', rol !== 'maestro');
+        bloqueCentro.classList.toggle('hidden', rol !== 'centro');
+      }
+
+      rolSelect.addEventListener('change', (e) => mostrarBloque(e.target.value));
+
+      let formCount = 0;
+      btnAddForm?.addEventListener('click', () => {
+        formCount++;
+        const idx = formCount;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'formation-block';
+        wrapper.innerHTML = `
+          <div class="form-row">
+            <div class="form-group">
+              <label>Título</label>
+              <input name="formacion[${idx}][titulo]" type="text" placeholder="Título (Ej: Máster en Educación)" />
+            </div>
+            <div class="form-group">
+              <label>Centro formador</label>
+              <input name="formacion[${idx}][centroFormador]" type="text" placeholder="Centro formador" />
+            </div>
+            <div class="form-group">
+              <label>Año fin</label>
+              <input name="formacion[${idx}][anioFin]" type="number" min="1900" max="2100" />
+            </div>
+            <div class="form-group">
+              <label>Tipo</label>
+              <input name="formacion[${idx}][tipoFormacion]" type="text" placeholder="Tipo (FP, Grado...)" />
+            </div>
+          </div>
+          <div style="text-align:right;margin-top:8px;">
+            <button type="button" class="btn btn-outline" onclick="this.closest('.formation-block').remove()">Eliminar</button>
+          </div>`;
+        formacionesCont.appendChild(wrapper);
+      });
+
+      form.addEventListener('submit', (e) => {
+        if (!form.checkValidity()) {
+          e.preventDefault();
+          form.reportValidity();
+        }
+      });
+    });
