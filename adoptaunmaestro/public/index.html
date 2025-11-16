@@ -1,140 +1,71 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Adopta un Maestro - Iniciar sesión</title>
-  <script src="./js/js.js"></script>
-  <link rel="stylesheet" href="./css/style.css" />
-  <style>
-    /* === Fondo con verde cálido === */
-    body {
-      background: linear-gradient(180deg, #e9f4ea 0%, #cfe6d4 100%);
-    }
-
-    /* --- Sidebar verde --- */
-    .sidebar {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-      padding: 12px;
-      position: fixed;
-      right: 20px;
-      top: 100px;
-      background: rgba(255,255,255,0.5);
-      backdrop-filter: blur(4px);
-      border-radius: 12px;
-      box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-    }
-
-    .sidebar .btn-registrate {
-      width: 100%;
-      max-width: 220px;
-      padding: 12px;
-      border-radius: 10px;
-      text-align: center;
-      font-weight: 700;
-      color: #fff;
-      background: var(--color-primary);
-      border: none;
-      box-shadow: var(--shadow-sm);
-      transition: background 0.2s ease;
-    }
-
-    .sidebar .btn-registrate:hover {
-      background: var(--color-primary-700);
-    }
-
-    .sidebar .side-links {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .sidebar .side-links a {
-      display: block;
-      width: 100%;
-      max-width: 220px;
-      padding: 10px 12px;
-      border-radius: 8px;
-      text-align: center;
-      font-weight: 600;
-      color: #fff;
-      background: var(--color-primary);
-      border: none;
-      transition: background 0.2s ease, transform 0.1s ease;
-      text-decoration: none;
-    }
-
-    .sidebar .side-links a:hover {
-      background: var(--color-primary-700);
-      transform: translateY(-2px);
-    }
-
-    @media (max-width: 1280px) {
-      .sidebar { display: none; }
-    }
-  </style>
+  <script src="js/js.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 
-<body>
-  <!-- CABECERA SIMPLIFICADA -->
+<body class="page-index">
   <header class="header-nav">
     <div class="logo-container">
-      <img src="./img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
+      <img src="img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
     </div>
-
-    <nav class="nav-links">
-      <a href="./index.html">INICIO</a>
-      <a href="./registro.html">REGISTRO</a>
-      <a href="#">SOBRE NOSOTROS</a>
-      <a href="#">CONTACTO</a>
+    <nav class="menu" role="navigation" aria-label="Main navigation">
+      <a href="index.html">Inicio</a>
+      <a href="listado-colegios.html">Empleos</a>
+      <a href="listado-maestros.html">Centros/Maestros</a>
+      <a href="mensajes.html">Mensajes</a>
+      <a href="contactos.html">Contactos</a>
     </nav>
   </header>
-
-  <!-- LOGIN -->
-  <main class="perfil-container" style="padding-top: 90px; justify-content: center; align-items: center; min-height: 100vh;">
-    <div class="login-lightbox" style="max-width: 420px; text-align: center;">
+<!-- LOGIN MODAL -->
+  <div class="modal-overlay active" id="login-overlay">
+    <div class="login-lightbox">
+      <button class="modal-close" aria-label="Cerrar modal">×</button>
       <h2>Bienvenido</h2>
       <p class="text-muted mb-8">Inicia sesión para continuar</p>
 
       <form id="login-form" action="#" method="POST">
         <div class="form-group mb-8">
           <label for="mail">Correo electrónico</label>
-          <input type="email" id="mail" name="mail" placeholder="tu@correo.com" required />
+          <input type="email" id="mail" name="mail" placeholder="usuario@ejemplo.com" required />
         </div>
 
         <div class="form-group mb-8">
           <label for="password">Contraseña</label>
-          <input type="password" id="password" name="password" placeholder="********" required />
+          <input type="password" id="password" name="password" placeholder="123456" required />
         </div>
 
-        <p id="mensaje" style="text-align:center; margin-bottom: 10px;"></p>
+        <p id="mensaje"></p>
 
-        <button type="submit" class="btn btn-primary" style="width:100%;">Acceder</button>
+        <button type="submit" class="btn btn-primary">Acceder</button>
       </form>
 
       <div class="center" style="margin-top: 12px;">
         <a href="#" class="btn-outline" style="display:inline-block; margin-top:8px;">He olvidado mis credenciales</a>
         <br />
-        <a href="./registro.html" class="btn-outline" style="display:inline-block; margin-top:8px;">Crear usuario</a>
+        <a href="registro.html" class="btn-outline">Crear usuario</a>
       </div>
     </div>
-  </main>
+  </div>
+
 
   <!-- LEMA -->
-  <section class="main-content" style="margin-top: 60px;">
-    <div class="content-box center">
-      <p>“Conectando Maestros y Colegios para un Futuro Educativo Mejor”</p>
-    </div>
-  </section>
+  <main class="main-container">
+    <section class="main-content" style="margin-top: 60px;">
+      <div class="content-box center">
+        <p>“Conectando Maestros y Colegios para un Futuro Educativo Mejor”</p>
+      </div>
+    </section>
+  </main>
 
   <!-- SIDEBAR DERECHA -->
   <aside class="sidebar">
-    <a href="./registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+    <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
     <nav class="side-links">
       <a href="#">EVENTOS Y TALLERES</a>
       <a href="#">RECURSOS EDUCATIVOS</a>
@@ -143,5 +74,6 @@
       <a href="#">AYUDA Y SOPORTE</a>
     </nav>
   </aside>
-</body>
+  </body>
+
 </html>

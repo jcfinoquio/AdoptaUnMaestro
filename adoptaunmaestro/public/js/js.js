@@ -3,40 +3,90 @@ document.addEventListener("DOMContentLoaded", () => {
   /* ===========================
      FORMULARIO DE LOGIN
   =========================== */
-  const form = document.getElementById("login-form");
-  const mensaje = document.getElementById("mensaje");
-  const inputEmail = document.getElementById("mail");
-  const lightbox = document.querySelector(".login-container");
+const form = document.getElementById("login-form");
+const mensaje = document.getElementById("mensaje");
+const inputEmail = document.getElementById("mail");
+const inputPassword = document.getElementById("password");
+const modalOverlay = document.getElementById("modal-login");
 
-  const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  form?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = inputEmail?.value.trim() || "";
+// Funcionalidad del modal
+document.getElementById('abrir-modal')?.addEventListener('click', function() {
+    modalOverlay.classList.add('active');
+    document.body.classList.add('modal-active');
+});
 
-  if (!email) {
-    mensaje.textContent = "Por favor, introduce tu correo electrónico.";
-    mensaje.style.color = "red";
-    return;
-  }
-  if (!validarEmail(email)) {
-    mensaje.textContent = "El formato del correo electrónico no es válido.";
-    mensaje.style.color = "red";
-    return;
-  }
-  mensaje.textContent = "Correo electrónico válido ✅";
-  mensaje.style.color = "green";
+document.getElementById('cerrar-modal')?.addEventListener('click', function() {
+    cerrarModal();
+});
 
-  // ✅ Cerrar el lightbox correctamente
-  if (lightbox) {
-    lightbox.classList.add("oculto");
-    document.body.style.overflow = "auto";
-  }
-    // ToDo: Aquí logica para enviar los datos al servidor con fetch/AJAX
-  });
+// Cerrar modal al hacer clic fuera del contenido
+modalOverlay?.addEventListener('click', function(e) {
+    if (e.target === this) {
+        cerrarModal();
+    }
+});
+
+// Función para cerrar el modal
+function cerrarModal() {
+    modalOverlay.classList.remove('active');
+    document.body.classList.remove('modal-active');
+    // Limpiar mensajes y campos
+    mensaje.textContent = '';
+    form.reset();
+}
+
+// Manejo del formulario
+form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = inputEmail?.value.trim() || "";
+    const password = inputPassword?.value || "";
+
+    // Validaciones
+    if (!email) {
+        mensaje.textContent = "Por favor, introduce tu correo electrónico.";
+        mensaje.style.color = "red";
+        return;
+    }
+    
+    if (!validarEmail(email)) {
+        mensaje.textContent = "El formato del correo electrónico no es válido.";
+        mensaje.style.color = "red";
+        return;
+    }
+    
+    if (!password) {
+        mensaje.textContent = "Por favor, introduce tu contraseña.";
+        mensaje.style.color = "red";
+        return;
+    }
+
+    // Simulación de envío
+    mensaje.textContent = "Iniciando sesión...";
+    mensaje.style.color = "blue";
+
+    setTimeout(() => {
+        // Simular respuesta del servidor
+        if (email === "usuario@ejemplo.com" && password === "123456") {
+            mensaje.textContent = "¡Login exitoso! ✅";
+            mensaje.style.color = "green";
+            
+            // Cerrar modal después de éxito
+            setTimeout(() => {
+                cerrarModal();
+                // Redirigir o actualizar la interfaz
+                alert("Bienvenido!");
+            }, 1000);
+        } else {
+            mensaje.textContent = "Credenciales incorrectas. Inténtalo de nuevo.";
+            mensaje.style.color = "red";
+        }
+    }, 1500);
+});
 
 /* ===========================
-     CONTADORES DE VISITAS
+    CONTADORES DE VISITAS
 =========================== */
 
 // Esta función incrementa las visitas de todos los elementos que sigan el patrón "visitas-*"
