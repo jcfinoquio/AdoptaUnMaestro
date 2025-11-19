@@ -646,88 +646,88 @@ document.addEventListener("DOMContentLoaded", () => {
     setupEventListeners();
     renderMaestros();
 
-/*=======================
-MENSAJES
-======================= */
+    /*=======================
+    MENSAJES
+    ======================= */
 
   }
 })
 
 // Abrir modal y cargar email
 function openReplyModal(email) {
-    const modal = document.getElementById("reply-modal");
-    const inputTo = document.getElementById("reply-to");
+  const modal = document.getElementById("reply-modal");
+  const inputTo = document.getElementById("reply-to");
 
-    inputTo.value = email;      // Rellena el campo "Para:"
-    modal.classList.add("active"); // Muestra el modal
+  inputTo.value = email;      // Rellena el campo "Para:"
+  modal.classList.add("active"); // Muestra el modal
 }
 
 // Cerrar modal
 document.getElementById("close-reply-modal").addEventListener("click", () => {
-    document.getElementById("reply-modal").classList.remove("active");
+  document.getElementById("reply-modal").classList.remove("active");
 });
 
 // También cerrar si se hace clic fuera de la ventana
 document.getElementById("reply-modal").addEventListener("click", (e) => {
-    if (e.target.id === "reply-modal") {
-        e.target.classList.remove("active");
-    }
+  if (e.target.id === "reply-modal") {
+    e.target.classList.remove("active");
+  }
 });
 
 
 
 function toggleExpandM(button) {
-    const msgContainer = button.closest(".message-box");
-    const expandedClass = "msg-expanded-unique";
-    const initialHeight = "20vh";
+  const msgContainer = button.closest(".message-box");
+  const expandedClass = "msg-expanded-unique";
+  const initialHeight = "20vh";
 
-    // Si se está expandiendo
-    if (!msgContainer.classList.contains(expandedClass)) {
-        msgContainer.classList.add(expandedClass);
+  // Si se está expandiendo
+  if (!msgContainer.classList.contains(expandedClass)) {
+    msgContainer.classList.add(expandedClass);
 
-        // Poner altura automática para medir el contenido
-        msgContainer.style.maxHeight = msgContainer.scrollHeight + "px";
+    // Poner altura automática para medir el contenido
+    msgContainer.style.maxHeight = msgContainer.scrollHeight + "px";
 
-        button.textContent = "Leer menos";
-    }
-    // Si se está contrayendo
-    else {
-        msgContainer.classList.remove(expandedClass);
+    button.textContent = "Leer menos";
+  }
+  // Si se está contrayendo
+  else {
+    msgContainer.classList.remove(expandedClass);
 
-        msgContainer.style.maxHeight = initialHeight;
+    msgContainer.style.maxHeight = initialHeight;
 
-        button.textContent = "Leer más";
-    }
+    button.textContent = "Leer más";
+  }
 }
 
 // ==================
 // PERFIL
 //=========================
 // Handlers para likes (guardado en sessionStorage)
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.contador-likes');
-      if (!btn) return;
-      const id = btn.dataset.id;
-      const key = 'likes_pub_' + id;
-      const current = Number(sessionStorage.getItem(key) || 0);
-      const newVal = current + 1;
-      sessionStorage.setItem(key, newVal);
-      const span = btn.querySelector('span');
-      if (span) span.textContent = newVal;
-      btn.setAttribute('aria-pressed', 'true');
-    });
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.contador-likes');
+  if (!btn) return;
+  const id = btn.dataset.id;
+  const key = 'likes_pub_' + id;
+  const current = Number(sessionStorage.getItem(key) || 0);
+  const newVal = current + 1;
+  sessionStorage.setItem(key, newVal);
+  const span = btn.querySelector('span');
+  if (span) span.textContent = newVal;
+  btn.setAttribute('aria-pressed', 'true');
+});
 
-    // Inicializar visitas (ejemplo)
-    ['1', '2', '3'].forEach(id => {
-      const visitasEl = document.getElementById('visitas-publi' + id);
-      if (visitasEl && !sessionStorage.getItem('visitas_pub_' + id)) {
-        sessionStorage.setItem('visitas_pub_' + id, Math.floor(Math.random() * 120));
-      }
-      if (visitasEl) visitasEl.textContent = sessionStorage.getItem('visitas_pub_' + id) || '0';
-    });
-    const vp = document.getElementById('visitas-perfil');
-    if (vp && !sessionStorage.getItem('visitas_perfil')) sessionStorage.setItem('visitas_perfil', Math.floor(Math.random() * 400));
-    if (vp) vp.textContent = sessionStorage.getItem('visitas_perfil') || '0';
+// Inicializar visitas (ejemplo)
+['1', '2', '3'].forEach(id => {
+  const visitasEl = document.getElementById('visitas-publi' + id);
+  if (visitasEl && !sessionStorage.getItem('visitas_pub_' + id)) {
+    sessionStorage.setItem('visitas_pub_' + id, Math.floor(Math.random() * 120));
+  }
+  if (visitasEl) visitasEl.textContent = sessionStorage.getItem('visitas_pub_' + id) || '0';
+});
+const vp = document.getElementById('visitas-perfil');
+if (vp && !sessionStorage.getItem('visitas_perfil')) sessionStorage.setItem('visitas_perfil', Math.floor(Math.random() * 400));
+if (vp) vp.textContent = sessionStorage.getItem('visitas_perfil') || '0';
 
 
 

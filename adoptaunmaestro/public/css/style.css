@@ -3,14 +3,14 @@
    ==================================================== */
 
 /* === IMPORTACIÓN DE FUENTES === */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
 
 /* === VARIABLES CSS === */
 :root {
   /* Colores principales */
-  --color-primary: #1FA58A;
+  --color-primary: #1fa58a;
   --color-primary-700: #17a079;
-  --color-accent: #0D6EFD;
+  --color-accent: #0d6efd;
   --color-accent-700: #17a079;
   --bg: #f6f8fb;
   --surface: #ffffff;
@@ -32,7 +32,8 @@
   --shadow-lg: 0 18px 40px rgba(2, 6, 23, 0.12);
 
   /* Tipografía */
-  --font-sans: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
   --font-serif: Georgia, "Times New Roman", Times, serif;
 
   /* Layout */
@@ -106,7 +107,9 @@ button {
   display: flex;
   align-items: center;
   gap: var(--gap);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.4));
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.6),
+      rgba(255, 255, 255, 0.4));
   backdrop-filter: blur(4px);
   border-bottom: 1px solid rgba(15, 23, 42, 0.04);
   padding: 0 1.2rem;
@@ -130,7 +133,6 @@ button {
   margin: auto;
   align-items: center;
   position: sticky;
-
 }
 
 .menu a {
@@ -268,7 +270,9 @@ label {
   max-width: 420px;
   width: 90%;
   text-align: center;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9));
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.9));
   padding: 30px;
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -337,7 +341,7 @@ hr {
   align-items: center;
   gap: 12px;
   margin: 0.5rem;
-  padding:0.5rem;
+  padding: 0.5rem;
   background: transparent;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
@@ -372,6 +376,7 @@ hr {
   flex-direction: column;
   gap: 8px;
 }
+
 /*
 .sidebar .side-links a {
   display: block;
@@ -398,7 +403,7 @@ hr {
   padding: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   position: sticky;
- display: flex;
+  display: flex;
   top: 20px;
 }
 
@@ -425,8 +430,8 @@ hr {
 }
 
 .perfil-meta {
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.10),
-    inset 0 -4px 8px rgba(255, 255, 255, 0.10);
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 1rem;
 }
@@ -530,7 +535,8 @@ hr {
   color: red;
   font-weight: 600;
 }
-.page-index h2{
+
+.page-index h2 {
   font-size: 2rem;
   font-style: fantasy;
 }
@@ -1289,6 +1295,7 @@ hr {
   border-color: #3498db;
   transform: scale(1.05);
 }
+
 .contact-card table {
   width: 100%;
   margin-top: 10px;
@@ -1301,7 +1308,8 @@ hr {
 }
 
 .contact-card table td:first-child {
-  font-weight: 600;   /* Etiquetas en negrita (Especialidad, Centro...) */
+  font-weight: 600;
+  /* Etiquetas en negrita (Especialidad, Centro...) */
   width: 40%;
 }
 
@@ -1340,7 +1348,7 @@ hr {
 }
 
 .job-offer:not(.expanded)::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -1487,8 +1495,8 @@ hr {
   padding: 15px;
   border-radius: var(--border-radius);
   margin-top: 20px;
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.10),
-    inset 0 -4px 8px rgba(255, 255, 255, 0.10);
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1);
 }
 
 .stat-item {
@@ -1574,7 +1582,9 @@ hr {
   padding: 8px 10px;
   border-radius: 10px;
   border: 1px solid rgba(12, 24, 40, 0.06);
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+  background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(255, 255, 255, 0.85));
   cursor: pointer;
   font-weight: 600;
   transition: all 0.2s ease;
@@ -1611,7 +1621,8 @@ hr {
 
 /* Caja de mensaje individual */
 .message-box {
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.10), inset 0 -4px 8px rgba(255, 255, 255, 0.10);
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -4px 8px rgba(255, 255, 255, 0.1);
   background: #e6e6e675;
   padding: 1.5rem;
   border-radius: 8px;
@@ -1623,7 +1634,7 @@ hr {
 }
 
 .message-box.msg-expanded-unique {
-    /* El JS establece la altura exacta */
+  /* El JS establece la altura exacta */
 }
 
 .message-box:hover {
@@ -1660,7 +1671,7 @@ hr {
   line-height: 1.5;
   color: #444;
   margin-bottom: 1rem;
-  position:relative;
+  position: relative;
 }
 
 .message-content.expanded {
@@ -1675,13 +1686,15 @@ hr {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
-  clear: both; /* Limpiar cualquier float */
+  clear: both;
+  /* Limpiar cualquier float */
   position: relative;
   z-index: 10;
 }
 
 /* Botones de acción */
-.read-more-butn, .reply-btn {
+.read-more-butn,
+.reply-btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
@@ -1689,9 +1702,10 @@ hr {
   font-size: 0.9rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.2);
   display: inline-flex;
-  align-items:center;
+  align-items: center;
   gap: 1rem;
   position: relative;
   z-index: 20;
@@ -1702,7 +1716,7 @@ hr {
 .read-more-butn {
   background: #6ebef3;
   color: white;
-  float:none;
+  float: none;
   position: static;
 }
 
@@ -1714,7 +1728,7 @@ hr {
 
 /* Botón "Responder" */
 .reply-btn {
-   background: transparent;
+  background: transparent;
   color: var(--color-primary, #007bff);
   border: 1px solid var(--color-primary, #007bff);
   float: none;
@@ -1760,6 +1774,7 @@ hr {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1864,21 +1879,22 @@ hr {
     padding: 0.5rem;
     gap: 1rem;
   }
-  
+
   .message-box {
     padding: 1.25rem;
   }
-  
+
   .message-buttons {
     flex-direction: column;
     gap: 0.5rem;
   }
-  
-  .read-more-btn, .reply-btn {
+
+  .read-more-btn,
+  .reply-btn {
     width: 100%;
     justify-content: center;
   }
-  
+
   .reply-lightbox {
     padding: 1.5rem;
     margin: 1rem;
@@ -1889,11 +1905,11 @@ hr {
   .message-box {
     padding: 1rem;
   }
-  
+
   .reply-lightbox {
     padding: 1.25rem;
   }
-  
+
   .message-header {
     font-size: 1rem;
   }
