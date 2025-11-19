@@ -1617,6 +1617,12 @@ hr {
   position: relative;
   transition: all 0.3s ease;
   border-left: 4px solid #6ebef3;
+  overflow: hidden;
+  max-height: 20vh;
+}
+
+.message-box.msg-expanded-unique {
+    /* El JS establece la altura exacta */
 }
 
 .message-box:hover {
@@ -1653,6 +1659,7 @@ hr {
   line-height: 1.5;
   color: #444;
   margin-bottom: 1rem;
+  position:relative;
 }
 
 .message-content.expanded {
@@ -1667,10 +1674,13 @@ hr {
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  clear: both; /* Limpiar cualquier float */
+  position: relative;
+  z-index: 10;
 }
 
 /* Botones de acción */
-.read-more-btn, .reply-btn {
+.read-more-butn, .reply-btn {
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 4px;
@@ -1679,18 +1689,23 @@ hr {
   font-weight: 500;
   transition: all 0.2s ease;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(255, 255, 255, 0.2);
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
+  display: inline-flex;
+  align-items:center;
+  gap: 1rem;
+  position: relative;
+  z-index: 20;
+  flex-shrink: 0;
 }
 
 /* Botón "Leer más" */
-.read-more-btn {
+.read-more-butn {
   background: #6ebef3;
   color: white;
+  float:none;
+  position: static;
 }
 
-.read-more-btn:hover {
+.read-more-butn:hover {
   background: #5aa8e0;
   transform: translateY(-1px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -1698,9 +1713,12 @@ hr {
 
 /* Botón "Responder" */
 .reply-btn {
-  background: transparent;
+   background: transparent;
   color: var(--color-primary, #007bff);
   border: 1px solid var(--color-primary, #007bff);
+  float: none;
+  position: static;
+  margin-right: 0;
 }
 
 .reply-btn:hover {
@@ -1878,41 +1896,6 @@ hr {
   .message-header {
     font-size: 1rem;
   }
-}
-
-/* Estados de carga (para futuras mejoras) */
-.message-box.loading {
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.message-box.loading::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 8px;
-}
-
-/* Indicador visual para mensajes no leídos */
-.message-box.unread {
-  background: #f0f7ff;
-  border-left-color: #007bff;
-}
-
-.message-box.unread .message-header {
-  color: #007bff;
-}
-
-/* Estilos para el estado de los botones */
-.read-more-btn:disabled, 
-.reply-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none !important;
 }
 
 /* ====================================================

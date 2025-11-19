@@ -645,156 +645,76 @@ document.addEventListener("DOMContentLoaded", () => {
     // Inicializar
     setupEventListeners();
     renderMaestros();
+
+/*=======================
+MENSAJES
+======================= */
+
   }
-// =============================================
-// MENSAJES
-// =============================================
-
-
-  // Función para expandir/contraer mensajes
-  window.toggleExpandMessage = function(button) {
-    const messageBox = button.closest('.message-box');
-    if (!messageBox) return;
-
-    // Buscar o crear el contenedor de contenido
-    let messageContent = messageBox.querySelector('.message-content');
-    
-    if (!messageContent) {
-      // Si no existe, crear la estructura
-      createMessageStructure(messageBox);
-      messageContent = messageBox.querySelector('.message-content');
-    }
-
-    if (messageContent) {
-      messageContent.classList.toggle('expanded');
-      button.textContent = messageContent.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
-    }
-  };
-
-  function createMessageStructure(messageBox) {
-    // Guardar elementos existentes
-    const header = messageBox.querySelector('.message-header');
-    const meta = messageBox.querySelector('.message-meta');
-    const buttons = messageBox.querySelectorAll('button');
-    
-    // Encontrar el texto del mensaje (elementos de texto sueltos)
-    let messageText = '';
-    const nodes = messageBox.childNodes;
-    
-    nodes.forEach(node => {
-      if (node.nodeType === 3 && node.textContent.trim()) {
-        messageText += node.textContent;
-      }
-    });
-
-    // Reconstruir la estructura
-    messageBox.innerHTML = '';
-    
-    if (header) messageBox.appendChild(header);
-    if (meta) messageBox.appendChild(meta);
-    
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'message-content';
-    contentDiv.textContent = messageText.trim();
-    messageBox.appendChild(contentDiv);
-    
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.className = 'message-buttons';
-    
-    // Recrear botones manteniendo sus funcionalidades
-    buttons.forEach(button => {
-      if (button.classList.contains('read-more-btn')) {
-        button.onclick = function() { window.toggleExpandMessage(this); };
-      }
-      buttonsContainer.appendChild(button.cloneNode(true));
-    });
-    
-    messageBox.appendChild(buttonsContainer);
-  }
-
-  // Función para abrir modal de respuesta
-  window.openReplyModal = function(email) {
-    const modal = document.getElementById('reply-modal');
-    const replyToInput = document.getElementById('reply-to');
-    
-    if (replyToInput && email) {
-      replyToInput.value = email;
-    }
-    
-    if (modal) {
-      modal.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      
-      // Enfocar el campo de asunto
-      setTimeout(() => {
-        const subjectInput = document.getElementById('reply-subject');
-        if (subjectInput) subjectInput.focus();
-      }, 100);
-    }
-  };
-
-  // Función para cerrar modal de respuesta
-  window.closeReplyModal = function() {
-    const modal = document.getElementById('reply-modal');
-    if (modal) {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    }
-  };
-
-  // Configurar el modal de mensajes
-  const closeReplyBtn = document.getElementById('close-reply-modal');
-  const replyModal = document.getElementById('reply-modal');
-  const replyForm = document.getElementById('reply-form');
-
-  // Cerrar modal con el botón X
-  if (closeReplyBtn) {
-    closeReplyBtn.addEventListener('click', window.closeReplyModal);
-  }
-
-  // Cerrar modal haciendo clic fuera
-  if (replyModal) {
-    replyModal.addEventListener('click', function(event) {
-      if (event.target === replyModal) {
-        window.closeReplyModal();
-      }
-    });
-  }
-
-  // Manejar envío del formulario de respuesta
-  if (replyForm) {
-    replyForm.addEventListener('submit', function(event) {
-      event.preventDefault();
-      
-      const to = document.getElementById('reply-to').value;
-      const subject = document.getElementById('reply-subject').value;
-      const message = document.getElementById('reply-message').value;
-      
-      if (!to || !subject || !message) {
-        alert('Por favor, completa todos los campos');
-        return;
-      }
-      
-      // Simulación de envío exitoso
-      console.log('Enviando mensaje:', { to, subject, message });
-      alert(`Mensaje enviado correctamente a: ${to}`);
-      
-      // Limpiar y cerrar
-      replyForm.reset();
-      window.closeReplyModal();
-    });
-  }
-
-  // Cerrar modal con tecla Escape
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape') {
-      window.closeReplyModal();
-    }
-  });
-
-  // Normalizar botones existentes en mensajes
-  document.querySelectorAll('.read-more-butn').forEach(btn => {
-    btn.className = 'read-more-btn';
-    btn.setAttribute('onclick', 'toggleExpandMessage(this)');
-  });
 })
+
+// Abrir modal y cargar email
+function openReplyModal(email) {
+    const modal = document.getElementById("reply-modal");
+    const inputTo = document.getElementById("reply-to");
+
+    inputTo.value = email;      // Rellena el campo "Para:"
+    modal.classList.add("active"); // Muestra el modal
+}
+
+// Cerrar modal
+document.getElementById("close-reply-modal").addEventListener("click", () => {
+    document.getElementById("reply-modal").classList.remove("active");
+});
+
+// También cerrar si se hace clic fuera de la ventana
+document.getElementById("reply-modal").addEventListener("click", (e) => {
+    if (e.target.id === "reply-modal") {
+        e.target.classList.remove("active");
+    }
+});
+
+
+
+function toggleExpandM(button) {
+    const msgContainer = button.closest(".message-box");
+    const expandedClass = "msg-expanded-unique";
+    const initialHeight = "20vh";
+
+    // Si se está expandiendo
+    if (!msgContainer.classList.contains(expandedClass)) {
+        msgContainer.classList.add(expandedClass);
+
+        // Poner altura automática para medir el contenido
+        msgContainer.style.maxHeight = msgContainer.scrollHeight + "px";
+
+        button.textContent = "Leer menos";
+    }
+    // Si se está contrayendo
+    else {
+        msgContainer.classList.remove(expandedClass);
+
+        msgContainer.style.maxHeight = initialHeight;
+
+        button.textContent = "Leer más";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
