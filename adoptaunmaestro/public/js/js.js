@@ -436,7 +436,7 @@ if (loginForm) {
           </div>
           <div class="colegio-actions">
             <button class="btn-outline btn-view" data-id="${c.id}" aria-label="Ver ficha de ${c.nombre}">Ver ficha</button>
-            <button class="btn-primary" data-contact="${c.id}">Contactar centro</button>
+            <button class="btn-primary btn" data-contact="${c.id}">Contactar centro</button>
           </div>
         </article>
       `).join('');
@@ -606,7 +606,174 @@ if (loginForm) {
         anios: 3,
         avatar: 'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=200&h=200&fit=crop&crop=face',
         resumen: 'Formación en TEFL y experiencia internacional en UK.'
-      }
+      },
+{
+  id: 6,
+  nombre: 'Miguel Torres',
+  especialidad: 'Educación Física',
+  anios: 10,
+  avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Entrenador y maestro de deportes, fomenta hábitos saludables y trabajo en equipo.'
+},
+{
+  id: 7,
+  nombre: 'Sofía Ramírez',
+  especialidad: 'Arte',
+  anios: 6,
+  avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Creativa y apasionada por el arte y la expresión visual en la educación.'
+},
+{
+  id: 8,
+  nombre: 'Pedro Sánchez',
+  especialidad: 'Música',
+  anios: 8,
+  avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor de música con experiencia en coro, instrumentos y pedagogía musical.'
+},
+{
+  id: 9,
+  nombre: 'Isabel Navarro',
+  especialidad: 'Inglés',
+  anios: 9,
+  avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a2c9f2?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Maestra con certificación C1, especializada en enseñanza divertida e interactiva.'
+},
+{
+  id: 10,
+  nombre: 'Antonio Herrera',
+  especialidad: 'Matemáticas',
+  anios: 12,
+  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor con amplia experiencia en secundaria y preparación de exámenes.'
+},
+{
+  id: 11,
+  nombre: 'Elena Díaz',
+  especialidad: 'Ciencias Sociales',
+  anios: 5,
+  avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Apasionada por la historia y geografía, fomenta debates y pensamiento crítico.'
+},
+{
+  id: 12,
+  nombre: 'Luis Gómez',
+  especialidad: 'Tecnología',
+  anios: 7,
+  avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor de informática y programación, motivador del aprendizaje digital.'
+},
+{
+  id: 13,
+  nombre: 'Marta Vázquez',
+  especialidad: 'Educación Infantil',
+  anios: 4,
+  avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Experta en desarrollo infantil, juegos educativos y atención individualizada.'
+},
+{
+  id: 14,
+  nombre: 'Diego Ruiz',
+  especialidad: 'Química',
+  anios: 8,
+  avatar: 'https://images.unsplash.com/photo-1521120098172-760b0c03c8e5?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor entusiasta de laboratorio, fomenta experimentos prácticos y seguros.'
+},
+{
+  id: 15,
+  nombre: 'Laura Morales',
+  especialidad: 'Física',
+  anios: 6,
+  avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Apasionada por la física aplicada y el pensamiento crítico en ciencias.'
+},
+{
+  id: 16,
+  nombre: 'Jorge Castillo',
+  especialidad: 'Geografía',
+  anios: 7,
+  avatar: 'https://images.unsplash.com/photo-1502767089025-6572583495b0?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Fomenta el conocimiento del mundo y la cultura a través de proyectos prácticos.'
+},
+{
+  id: 17,
+  nombre: 'Patricia Blanco',
+  especialidad: 'Lengua y Literatura',
+  anios: 9,
+  avatar: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Maestra creativa en lectura, escritura y análisis literario.'
+},
+{
+  id: 18,
+  nombre: 'Fernando Herrera',
+  especialidad: 'Educación Física',
+  anios: 11,
+  avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor de deportes y hábitos saludables, especialista en coordinación motriz.'
+},
+{
+  id: 19,
+  nombre: 'Raquel Jiménez',
+  especialidad: 'Arte',
+  anios: 5,
+  avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Fomenta la creatividad y el pensamiento visual en proyectos artísticos.'
+},
+{
+  id: 20,
+  nombre: 'Alberto Santos',
+  especialidad: 'Música',
+  anios: 6,
+  avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor de música con experiencia en instrumentos y teoría musical.'
+},
+{
+  id: 21,
+  nombre: 'Silvia Ramos',
+  especialidad: 'Inglés',
+  anios: 10,
+  avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a2c9f2?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Enseña inglés de forma interactiva y divertida para primaria y secundaria.'
+},
+{
+  id: 22,
+  nombre: 'Ricardo Medina',
+  especialidad: 'Matemáticas',
+  anios: 8,
+  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Apasionado por el razonamiento lógico y resolución de problemas prácticos.'
+},
+{
+  id: 23,
+  nombre: 'Mónica Fuentes',
+  especialidad: 'Ciencias Sociales',
+  anios: 6,
+  avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Especialista en historia, geografía y proyectos interdisciplinarios.'
+},
+{
+  id: 24,
+  nombre: 'Víctor Delgado',
+  especialidad: 'Tecnología',
+  anios: 7,
+  avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor de informática y robótica educativa, motivador del aprendizaje digital.'
+},{
+  id: 25,
+  nombre: 'Javier Morales',
+  especialidad: 'Ciencias Naturales',
+  anios: 7,
+  avatar: 'https://images.unsplash.com/photo-1502767089025-6572583495b0?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Profesor dedicado a fomentar la curiosidad y el pensamiento crítico en ciencias.'
+},
+{
+  id: 26,
+  nombre: 'Lucía Fernández',
+  especialidad: 'Lengua y Literatura',
+  anios: 5,
+  avatar: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=200&h=200&fit=crop&crop=face',
+  resumen: 'Especialista en escritura creativa y comprensión lectora en primaria y secundaria.'
+}
     ];
 
     const MAESTROS_PER_PAGE = 15;

@@ -129,6 +129,8 @@ button {
   gap: 1rem;
   margin: auto;
   align-items: center;
+  position: sticky;
+
 }
 
 .menu a {
@@ -394,6 +396,7 @@ hr {
   padding: 25px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   position: sticky;
+ display: flex;
   top: 20px;
 }
 
@@ -625,23 +628,21 @@ hr {
 
 .coles-container.list-main {
   width: 100%;
-  max-width: var(--container-max);
-  margin: 0 auto 40px;
+  margin: auto;
+  padding: 1vh;
   display: flex;
   gap: var(--gap);
-  padding: 0 2vw;
   align-items: flex-start;
 }
 
 .list-content {
-  flex: 1 1 78%;
-  max-width: 1300px;
+  flex: 1;
+  max-width: 2000px;
 }
 
 .card-shell {
-  margin: 0 auto;
+  margin: auto;
   width: 100%;
-  max-width: 1300px;
   padding: 28px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.95);
@@ -749,6 +750,7 @@ hr {
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(12, 24, 40, 0.08);
   padding: 18px;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -946,20 +948,21 @@ hr {
 
 .maestros-main {
   width: 100%;
-  max-width: 1500px;
-  margin: 92px auto 40px;
+  margin: auto;
   display: flex;
-  gap: 10px;
-  padding: 0 2vw;
+  gap: 2vw;
+  padding-top: 10vh;
   align-items: flex-start;
+  padding-right: 2vw;
+  padding-left: 2vw;
 }
 
 .maestros-content {
-  flex: 1 1 78%;
-  max-width: 1300px;
+  flex: 1;
+  width: 100%;
 }
 
-.maestros-lightbox.form-box {
+.maestros-lightbox .form-box {
   margin: 0 auto;
   width: 100%;
   max-width: 1300px;
@@ -1082,6 +1085,7 @@ hr {
   border-radius: 14px;
   box-shadow: 0 8px 20px rgba(12, 24, 40, 0.08);
   padding: 18px;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
