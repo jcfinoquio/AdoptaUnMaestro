@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Perfil - Adopta un Maestro</title>
   <link rel="stylesheet" href="css/style.css" />
-  <style src="js/js.js"></style>
+  <script src="js/js.js" defer></script>
 </head>
 
 <body>
@@ -15,13 +15,13 @@
       <img src="img/logo.jpeg" alt="Logo Adopta un Maestro" class="logo" />
     </div>
     <nav class="menu" role="navigation" aria-label="Main navigation">
-                <a href="index.html">Inicio</a>
-                <a href="empleos.html">Empleos</a>                
-                <a href="listado-colegios.html">Colegios</a>
-                <a href="listado-maestros.html">Maestros</a>
-                <a href="mensajes.html">Mensajes</a>
-                <a href="contactos.html">Contactos</a>
-            </nav>
+      <a href="index.html">Inicio</a>
+      <a href="empleos.html">Empleos</a>
+      <a href="listado-colegios.html">Colegios</a>
+      <a href="listado-maestros.html">Maestros</a>
+      <a href="mensajes.html">Mensajes</a>
+      <a href="contactos.html">Contactos</a>
+    </nav>
   </header>
 
   <!-- Main -->
@@ -29,7 +29,8 @@
 
     <!-- Left profile card -->
     <aside class="sidebar-maestros" id="sidebar-maestros-izquierda">
-      <div class="perfil-avatar" aria-hidden="true"><img src="img/perfil.jpeg" alt="foto primer plano perfil" class="foto-perfil"></div>
+      <div class="perfil-avatar" aria-hidden="true"><img src="img/perfil.jpeg" alt="foto primer plano perfil"
+          class="foto-perfil"></div>
       <div class="perfil-meta">
         <h4 title="María López">María López</h4>
         <div class="meta-sub">Maestra de Primaria · 6 años</div>
@@ -55,7 +56,7 @@
         </div>
 
         <div class="entrada-body">
-          <img src="img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase" />
+          <img src="https://images.pexels.com/photos/440731/pexels-photo-440731.jpeg" alt="Niño leyendo en clase" />
           <p class="text-muted" style="margin-top:8px;">Breve descripción de la entrada que resume el contenido y atrae
             al lector.</p>
         </div>
@@ -79,13 +80,27 @@
         <div class="entrada-header">
           <div>
             <h3>ENTRADA 2</h3>
-            <p>¿Valoramos actualmente a los maestros?</p>
           </div>
           <div class="text-muted">Publicado: 2 nov 2025</div>
         </div>
         <div class="entrada-body">
-          <img src="img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase" />
+          <img
+            src="https://images.pexels.com/photos/815560/pexels-photo-815560.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1920"
+            alt="Niño leyendo en clase" />
           <p class="text-muted" style="margin-top:8px;">Otra descripción breve que acompaña la imagen.</p>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione beatae sed ipsum incidunt magni quisquam
+            molestias, similique magnam tenetur id velit non, molestiae rem ipsam, fugit et culpa repellat excepturi.
+            Inventore perferendis eveniet perspiciatis sint deserunt cumque repellat similique ab? Tempora corporis ut,
+            fugit quasi rerum id reiciendis sunt dolor placeat incidunt. Optio cum saepe eius. Consequatur, at incidunt?
+            Magni.
+            Possimus maxime rerum odit! Veritatis qui voluptates assumenda amet minima consequatur aut. Dolores dicta
+            corrupti suscipit at saepe, sit, totam maiores culpa sunt maxime pariatur. Inventore nesciunt qui quidem
+            quis!
+            Temporibus officia voluptatum facilis dolorum aliquid obcaecati dolor illo porro fugit, perspiciatis rerum
+            soluta odit optio nihil vel tempore, facere nemo iure quas eveniet error labore non quis! Sequi, eos.
+            Voluptatibus ipsam non hic, nesciunt consectetur perferendis harum in reiciendis illum nam molestiae iusto.
+            Distinctio aut rerum, voluptas placeat laudantium minus aliquid doloremque laborum iure, provident deleniti
+            assumenda eos cumque.</p>
         </div>
         <div class="entrada-footer">
           <div class="likes">
@@ -105,12 +120,22 @@
         <div class="entrada-header">
           <div>
             <h3>ENTRADA 3</h3>
-            <p>¿Valoramos actualmente a los maestros?</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt, distinctio soluta minus non officia quis
+              quas fugiat at ut similique? Nesciunt perferendis deleniti odit at eius optio necessitatibus molestiae
+              provident?
+              Facilis nemo, quia excepturi quisquam recusandae esse fugiat molestiae illum, ducimus aliquid iste.
+              Ratione, tenetur autem molestiae expedita temporibus necessitatibus ipsa. Expedita soluta mollitia
+              accusantium, odio dolor itaque dignissimos inventore!
+              Alias debitis dicta unde vel id! Ut dicta saepe perspiciatis, repellendus aspernatur nam dignissimos
+              eligendi nesciunt voluptates ex inventore minima quas libero ullam dolores quaerat iusto qui vel. Id,
+              praesentium!</p>
           </div>
-          <div class="text-muted">Publicado: 28 oct 2025</div>
+          <div class="text-muted">Publicado: HOY</div>
         </div>
         <div class="entrada-body">
-          <img src="img/ninio-entrada-perfil.jpeg" alt="Niño leyendo en clase" />
+          <img
+            src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=900&w=1920"
+            alt="Niño leyendo en clase" />
         </div>
         <div class="entrada-footer">
           <div class="likes">
@@ -127,45 +152,17 @@
     </section>
 
     <!-- SIDEBAR DERECHA -->
-    <aside class="sidebar" id="sidebar-index">
-      <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+    <aside class="sidebar">
+      <a href="registro.html" class="btn btn-registrate">REGÍSTRATE AQUÍ</a>
       <nav class="side-links">
-        <a href="#">EVENTOS Y TALLERES</a>
-        <a href="#">RECURSOS EDUCATIVOS</a>
-        <a href="#">FOROS</a>
-        <a href="#">SOBRE NOSOTROS</a>
-        <a href="#">AYUDA Y SOPORTE</a>
+        <a href="#" class="btn btn-outline">EVENTOS Y TALLERES</a>
+        <a href="#" class="btn btn-primary">RECURSOS EDUCATIVOS</a>
+        <a href="#" class="btn btn-outline">FOROS</a>
+        <a href="#" class="btn btn-primary">SOBRE NOSOTROS</a>
+        <a href="#" class="btn btn-outline">AYUDA Y SOPORTE</a>
       </nav>
     </aside>
   </main>
-
-  <script>
-    // Handlers para likes (guardado en sessionStorage)
-    document.addEventListener('click', (e) => {
-      const btn = e.target.closest('.contador-likes');
-      if (!btn) return;
-      const id = btn.dataset.id;
-      const key = 'likes_pub_' + id;
-      const current = Number(sessionStorage.getItem(key) || 0);
-      const newVal = current + 1;
-      sessionStorage.setItem(key, newVal);
-      const span = btn.querySelector('span');
-      if (span) span.textContent = newVal;
-      btn.setAttribute('aria-pressed', 'true');
-    });
-
-    // Inicializar visitas (ejemplo)
-    ['1', '2', '3'].forEach(id => {
-      const visitasEl = document.getElementById('visitas-publi' + id);
-      if (visitasEl && !sessionStorage.getItem('visitas_pub_' + id)) {
-        sessionStorage.setItem('visitas_pub_' + id, Math.floor(Math.random() * 120));
-      }
-      if (visitasEl) visitasEl.textContent = sessionStorage.getItem('visitas_pub_' + id) || '0';
-    });
-    const vp = document.getElementById('visitas-perfil');
-    if (vp && !sessionStorage.getItem('visitas_perfil')) sessionStorage.setItem('visitas_perfil', Math.floor(Math.random() * 400));
-    if (vp) vp.textContent = sessionStorage.getItem('visitas_perfil') || '0';
-  </script>
 </body>
 
 </html>

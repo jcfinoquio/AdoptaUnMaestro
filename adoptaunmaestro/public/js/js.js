@@ -700,7 +700,34 @@ function toggleExpandM(button) {
     }
 }
 
+// ==================
+// PERFIL
+//=========================
+// Handlers para likes (guardado en sessionStorage)
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.contador-likes');
+      if (!btn) return;
+      const id = btn.dataset.id;
+      const key = 'likes_pub_' + id;
+      const current = Number(sessionStorage.getItem(key) || 0);
+      const newVal = current + 1;
+      sessionStorage.setItem(key, newVal);
+      const span = btn.querySelector('span');
+      if (span) span.textContent = newVal;
+      btn.setAttribute('aria-pressed', 'true');
+    });
 
+    // Inicializar visitas (ejemplo)
+    ['1', '2', '3'].forEach(id => {
+      const visitasEl = document.getElementById('visitas-publi' + id);
+      if (visitasEl && !sessionStorage.getItem('visitas_pub_' + id)) {
+        sessionStorage.setItem('visitas_pub_' + id, Math.floor(Math.random() * 120));
+      }
+      if (visitasEl) visitasEl.textContent = sessionStorage.getItem('visitas_pub_' + id) || '0';
+    });
+    const vp = document.getElementById('visitas-perfil');
+    if (vp && !sessionStorage.getItem('visitas_perfil')) sessionStorage.setItem('visitas_perfil', Math.floor(Math.random() * 400));
+    if (vp) vp.textContent = sessionStorage.getItem('visitas_perfil') || '0';
 
 
 
