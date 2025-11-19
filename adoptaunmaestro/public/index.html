@@ -28,28 +28,26 @@
     <div class="login-lightbox">
       <button class="modal-close" id="cerrar-modal" aria-label="Cerrar modal">&times;</button>
       <h2>Bienvenido</h2>
-      <p class="text-muted mb-8">ℹ️Inicia sesión para continuar</p>
-
-      <form id="login-form" action="#" method="POST">
-        <div class="form-group mb-8">
+      <p class="text-muted">ℹ️ <em>Inicia sesión para continuar</em> </p>
+      <p id="mensaje"></p>
+      <form id="login-form" action="#" method="POST" novalidate>
+        <div class="form-group">
           <label for="mail">Correo electrónico</label>
-          <input type="email" id="mail" name="mail" placeholder="usuario@ejemplo.com" required />
+          <input type="email" id="mail" name="mail" placeholder="usuario@ejemplo.com" />
         </div>
-        <div class="form-group mb-8">
+        <div class="form-group">
           <label for="password">Contraseña</label>
-          <input type="password" id="password" name="password" placeholder="123456" required />
+          <input type="password" id="password" name="password" placeholder="123456" />
         </div>
-        <p id="mensaje"></p>
         <button type="submit" class="btn btn-primary">Acceder</button>
       </form>
       <div class="center" style="margin-top: 12px;">
-        <a href="#" class="btn-outline" style="display:inline-block; margin-top:8px;">He olvidado mis credenciales</a>
+        <a href="registro.html" class="btn btn-outline" style="display:inline-block; margin-bottom:15px">He olvidado mis credenciales</a>
         <br />
-        <a href="registro.html" class="btn-outline">Crear usuario</a>
+        <a href="registro.html" class="btn btn-primary">Crear usuario</a>
       </div>
     </div>
   </div>
-
 
   <!-- LEMA -->
   <main class="main-container">
@@ -58,19 +56,19 @@
         <p>“Conectando Maestros y Colegios para un Futuro Educativo Mejor”</p>
       </div>
     </section>
-  </main>
 
   <!-- SIDEBAR DERECHA -->
-  <aside class="sidebar" id="sidebar-index">
-    <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
-    <nav class="side-links">
-      <a href="#">EVENTOS Y TALLERES</a>
-      <a href="#">RECURSOS EDUCATIVOS</a>
-      <a href="#">FOROS</a>
-      <a href="#">SOBRE NOSOTROS</a>
-      <a href="#">AYUDA Y SOPORTE</a>
-    </nav>
-  </aside>
+    <aside class="sidebar"  style="margin-top:10vh;">
+                <a href="registro.html" class="btn btn-registrate">REGÍSTRATE AQUÍ</a>
+                <nav class="side-links">
+                    <a href="#" class="btn btn-outline">EVENTOS Y TALLERES</a>
+                    <a href="#" class="btn btn-primary">RECURSOS EDUCATIVOS</a>
+                    <a href="#" class="btn btn-outline">FOROS</a>
+                    <a href="#" class="btn btn-primary">SOBRE NOSOTROS</a>
+                    <a href="#" class="btn btn-outline">AYUDA Y SOPORTE</a>
+                </nav>
+            </aside>
+            </main>
 </body>
 
 </html>

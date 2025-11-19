@@ -1,93 +1,115 @@
 document.addEventListener("DOMContentLoaded", () => {
-  /* ===========================
-     FORMULARIO DE LOGIN
-  =========================== */
-  const loginForm = document.getElementById("login-form");
+  // ===========================
+// FORMULARIO DE LOGIN
+// ===========================
+const loginForm = document.getElementById("login-form");
 
-  if (loginForm) {
-    const mensaje = document.getElementById("mensaje");
-    const inputEmail = document.getElementById("mail");
-    const inputPassword = document.getElementById("password");
-    const modalOverlay = document.getElementById("login-overlay");
-    const btnCerrarModal = document.getElementById("cerrar-modal");
+if (loginForm) {
+  const mensaje = document.getElementById("mensaje");
+  const inputEmail = document.getElementById("mail");
+  const inputPassword = document.getElementById("password");
+  const modalOverlay = document.getElementById("login-overlay");
+  const btnCerrarModal = document.getElementById("cerrar-modal");
 
-    // Función para validar formato de email
-    const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // Función para validar formato de email
+  const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    // Funcionalidad del modal
-    document.getElementById('abrir-modal')?.addEventListener('click', function () {
-      modalOverlay.classList.add('active');
-      document.body.classList.add('modal-active');
-    });
+  // Abrir modal
+  document.getElementById('abrir-modal')?.addEventListener('click', () => {
+    modalOverlay.classList.add('active');
+    document.body.classList.add('modal-active');
+  });
 
-    document.getElementById('cerrar-modal')?.addEventListener('click', function () {
-      cerrarModal();
-    });
+  // Validación previa mientras se escribe o se cambia de campo
+[inputEmail, inputPassword].forEach(input => {
+  input.addEventListener("blur", () => { // Se puede cambiar a "input" para validar mientras escribe
+    const valor = input.value.trim();
 
-    // Cerrar modal al hacer clic fuera del contenido
-    modalOverlay?.addEventListener('click', function (e) {
-      if (e.target === this) {
-        cerrarModal();
-      }
-    });
-
-    // Función para cerrar el modal
-    function cerrarModal() {
-      modalOverlay.classList.remove('active');
-      document.body.classList.remove('modal-active');
-      // Limpiar mensajes y campos
-      mensaje.textContent = '';
-      loginForm.reset();
+    if (!valor) {
+      mostrarMensaje("", ""); // No mostrar nada si está vacío
+      return;
     }
 
-    // Manejo del formulario
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const email = inputEmail?.value.trim() || "";
-      const password = inputPassword?.value || "";
-
-      // Validaciones
-      if (!email) {
-        mensaje.textContent = "Por favor, introduce tu correo electrónico.";
-        mensaje.style.color = "red";
-        return;
+    if (input === inputEmail) {
+      if (!validarEmail(valor)) {
+        mostrarMensaje("Formato de correo inválido.", "red");
+      } else {
+        mostrarMensaje("", ""); // Quita mensaje si es válido
       }
+    }
 
-      if (!validarEmail(email)) {
-        mensaje.textContent = "El formato del correo electrónico no es válido.";
-        mensaje.style.color = "red";
-        return;
+    if (input === inputPassword) {
+      if (valor.length < 4) { // ejemplo de validación mínima de contraseña
+        mostrarMensaje("La contraseña es demasiado corta.", "red");
+      } else {
+        mostrarMensaje("", "");
       }
+    }
+  });
+});
 
-      if (!password) {
-        mensaje.textContent = "Por favor, introduce tu contraseña.";
-        mensaje.style.color = "red";
-        return;
-      }
+  // Cerrar modal con botón
+  btnCerrarModal?.addEventListener('click', cerrarModal);
 
-      // Simulación de envío
-      mensaje.textContent = "Iniciando sesión...";
-      mensaje.style.color = "blue";
+  // Cerrar modal al hacer clic fuera del contenido
+  modalOverlay?.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) cerrarModal();
+  });
 
-      setTimeout(() => {
-        // Simular respuesta del servidor
-        if (email === "usuario@ejemplo.com" && password === "123456") {
-          mensaje.textContent = "¡Login exitoso! ✅";
-          mensaje.style.color = "green";
-
-          // Cerrar modal después de éxito
-          setTimeout(() => {
-            cerrarModal();
-            // Redirigir o actualizar la interfaz
-            alert("Bienvenido!");
-          }, 1000);
-        } else {
-          mensaje.textContent = "Credenciales incorrectas. Inténtalo de nuevo.";
-          mensaje.style.color = "red";
-        }
-      }, 1500);
-    });
+  // Función para cerrar modal y limpiar mensajes
+  function cerrarModal() {
+    modalOverlay.classList.remove('active');
+    document.body.classList.remove('modal-active');
+    mensaje.textContent = '';
+    loginForm.reset();
   }
+
+  // Manejo del formulario
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = inputEmail.value.trim();
+    const password = inputPassword.value;
+
+    // Validaciones
+    if (!email) {
+      mostrarMensaje("Por favor, introduce tu correo electrónico.", "red");
+      return;
+    }
+
+    if (!validarEmail(email)) {
+      mostrarMensaje("El formato del correo electrónico no es válido.", "red");
+      return;
+    }
+
+    if (!password) {
+      mostrarMensaje("Por favor, introduce tu contraseña.", "red");
+      return;
+    }
+
+    // Simulación de envío
+    mostrarMensaje("Iniciando sesión...", "blue");
+
+    setTimeout(() => {
+      // Simular respuesta del servidor
+      if (email === "usuario@ejemplo.com" && password === "123456") {
+        mostrarMensaje("¡Login exitoso! ✅", "green");
+
+        setTimeout(() => {
+          cerrarModal();
+          alert("Bienvenido!");
+        }, 1000);
+      } else {
+        mostrarMensaje("Credenciales incorrectas. Inténtalo de nuevo.", "red");
+      }
+    }, 1500);
+  });
+
+  // Función auxiliar para actualizar el <p id="mensaje">
+  function mostrarMensaje(texto, color) {
+    mensaje.textContent = texto;
+    mensaje.style.color = color;
+  }
+}
 
   /* ===========================
     FUNCIONALIDAD EMPLEOS
