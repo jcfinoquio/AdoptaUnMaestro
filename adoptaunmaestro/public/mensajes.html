@@ -17,7 +17,7 @@
             </div>
             <nav class="menu" role="navigation" aria-label="Main navigation">
                 <a href="index.html">Inicio</a>
-                <a href="empleos.html">Empleos</a>                
+                <a href="empleos.html">Empleos</a>
                 <a href="listado-colegios.html">Colegios</a>
                 <a href="listado-maestros.html">Maestros</a>
                 <a href="mensajes.html">Mensajes</a>
@@ -27,7 +27,8 @@
 
         <div class="layout">
             <aside class="sidebar-maestros" id="sidebar-maestros-izquierda">
-                <div class="perfil-avatar" aria-hidden="true"><img src="img/perfil.jpeg" alt="foto primer plano perfil" class="foto-perfil"></div>
+                <div class="perfil-avatar" aria-hidden="true"><img src="img/perfil.jpeg" alt="foto primer plano perfil"
+                        class="foto-perfil"></div>
                 <div class="perfil-meta">
                     <h4 title="María López">María López</h4>
                     <div class="meta-sub">Maestra de Primaria · 6 años</div>
@@ -41,41 +42,384 @@
 
 
             <div class="messages-container">
+                <!-- Mensaje 1 -->
                 <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('maria.lopez@ejemplo.com')">Responder</button>
                     <div class="message-header">María López (Directora CEIP Los Almendros)</div>
                     <div class="message-meta">📅 Hoy, 09:12</div>
                     Gracias por enviar tu perfil. Estamos buscando un maestro de apoyo para primaria y tu experiencia
                     nos encaja muy bien. ¿Podrías indicarnos tu disponibilidad para una entrevista esta semana?
-                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
                 </div>
 
+                <!-- Mensaje 2 -->
                 <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('javier.ruiz@ejemplo.com')">Responder</button>
                     <div class="message-header">Javier Ruiz (Maestro de Música)</div>
                     <div class="message-meta">📅 Ayer, 18:47</div>
                     ¡Hola! Vi que te interesa colaborar en actividades extraescolares. Yo coordino un taller de
                     creatividad musical y quizá podrías participar como apoyo. Si te interesa, te mando más info.
-                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
                 </div>
 
+                <!-- Mensaje 3 -->
                 <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn"
+                        onclick="openReplyModal('orientacion.monteverde@ejemplo.com')">Responder</button>
                     <div class="message-header">IES Monteverde (Departamento de Orientación)</div>
                     <div class="message-meta">📅 12/03/2025, 15:22</div>
                     Estamos organizando un programa de refuerzo para alumnos con dificultades de aprendizaje. Tu perfil
                     nos ha parecido interesante y querríamos saber si tienes experiencia previa en adaptaciones
                     curriculares o trabajo en grupos reducidos.
+                </div>
+
+                <!-- Mensaje 4 -->
+                <div class="message-box">
                     <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('laura.fernandez@ejemplo.com')">Responder</button>
+                    <div class="message-header">Laura Fernández (Directora CEIP Valle Verde)</div>
+                    <div class="message-meta">📅 Hoy, 11:05</div>
+                    Gracias por enviar tu perfil. Buscamos un docente de inglés para primaria y tu experiencia nos
+                    parece muy adecuada. ¿Puedes indicarnos tus horarios disponibles esta semana?
+                </div>
+
+                <!-- Mensaje 5 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('pedro.gomez@ejemplo.com')">Responder</button>
+                    <div class="message-header">Pedro Gómez (Maestro de Educación Física)</div>
+                    <div class="message-meta">📅 18/03/2025, 10:30</div>
+                    Hola, estamos preparando un programa de deportes escolares. Tu experiencia en actividades físicas
+                    podría ser muy útil. ¿Te interesa coordinar algunas sesiones con nosotros?
+                </div>
+
+                <!-- Mensaje 6 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn"
+                        onclick="openReplyModal('coordinacion.amanecer@ejemplo.com')">Responder</button>
+                    <div class="message-header">CEIP Amanecer (Coordinación Extraescolar)</div>
+                    <div class="message-meta">📅 16/03/2025, 14:12</div>
+                    Estamos buscando un apoyo para talleres de ciencia y matemáticas. Tu perfil nos ha parecido
+                    interesante y quisiéramos conocer tu disponibilidad para empezar.
+                </div>
+
+                <!-- Mensaje 7 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('sofia.ramirez@ejemplo.com')">Responder</button>
+                    <div class="message-header">Sofía Ramírez (Maestra de Arte)</div>
+                    <div class="message-meta">📅 15/03/2025, 09:50</div>
+                    Hemos visto tu experiencia en proyectos artísticos y creemos que podrías colaborar en nuestro
+                    taller de creatividad. ¿Tienes disponibilidad esta semana?
+                </div>
+
+                <!-- Mensaje 8 -->
+                <div class="message-box">
+
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn"
+                        onclick="openReplyModal('orientacion.lasencinas@ejemplo.com')">Responder</button>
+                    <div class="message-header">IES Las Encinas (Departamento de Orientación)</div>
+                    <div class="message-meta">📅 14/03/2025, 16:00</div>
+                    Nos interesa tu experiencia en adaptación curricular para alumnos con necesidades educativas
+                    especiales. ¿Podrías indicarnos cuándo podrías asistir a una reunión?
+                </div>
+
+
+                <!-- Mensaje 9 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('antonio.herrera@ejemplo.com')">Responder</button>
+                    <div class="message-header">Antonio Herrera (Profesor de Matemáticas)</div>
+                    <div class="message-meta">📅 13/03/2025, 12:20</div>
+                    Tu perfil nos ha llamado la atención para impartir refuerzo en matemáticas. ¿Podrías enviarnos
+                    tus horarios disponibles para coordinar una sesión de prueba?
+                </div>
+
+                <!-- Mensaje 10 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn"
+                        onclick="openReplyModal('coordinacion.losolivos@ejemplo.com')">Responder</button>
+                    <div class="message-header">CEIP Los Olivos (Coordinación Infantil)</div>
+                    <div class="message-meta">📅 12/03/2025, 10:45</div>
+                    Estamos organizando actividades para alumnos de educación infantil. Tu experiencia nos interesa
+                    y quisiéramos saber tu disponibilidad para una entrevista.
+                </div>
+
+                <!-- Mensaje 11 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('laura.perez@ejemplo.com')">Responder</button>
+                    <div class="message-header">Laura Pérez (Maestra de Lengua y Literatura)</div>
+                    <div class="message-meta">📅 11/03/2025, 08:30</div>
+                    Hola, estamos buscando un docente de lengua para talleres de lectura. Tu perfil nos encaja y
+                    quisiéramos saber si podrías colaborar con nosotros.
+                </div>
+
+                <!-- Mensaje 12 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('ruben.torres@ejemplo.com')">Responder</button>
+                    <div class="message-header">Rubén Torres (Profesor de Geografía)</div>
+                    <div class="message-meta">📅 10/03/2025, 17:15</div>
+                    Buenas tardes, estamos planificando actividades sobre geografía local. Tu experiencia nos
+                    interesa y queremos conocer tu disponibilidad para participar.
+                </div>
+
+                <!-- Mensaje 13 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('sara.molina@ejemplo.com')">Responder</button>
+                    <div class="message-header">Sara Molina (Maestra de Ciencias Naturales)</div>
+                    <div class="message-meta">📅 09/03/2025, 14:50</div>
+                    Estamos buscando apoyo en laboratorios de ciencias para secundaria. Tu perfil es muy
+                    interesante. ¿Podrías indicarnos cuándo podrías asistir?
+                </div>
+
+                <!-- Mensaje 14 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('musica.altamira@ejemplo.com')">Responder</button>
+                    <div class="message-header">IES Altamira (Departamento de Música)</div>
+                    <div class="message-meta">📅 08/03/2025, 09:40</div>
+                    Nos gustaría contar contigo para coordinar actividades musicales en primaria. ¿Podrías
+                    informarnos de tu disponibilidad?
+                </div>
+
+                <!-- Mensaje 15 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('patricia.leon@ejemplo.com')">Responder</button>
+                    <div class="message-header">Patricia León (Profesora de Música)</div>
+                    <div class="message-meta">📅 07/03/2025, 13:20</div>
+                    Hemos visto tu experiencia y creemos que podrías colaborar en nuestro coro escolar. ¿Te
+                    interesa participar?
+                </div>
+
+                <!-- Mensaje 16 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('david.lara@ejemplo.com')">Responder</button>
+                    <div class="message-header">David Lara (Profesor de Historia)</div>
+                    <div class="message-meta">📅 06/03/2025, 11:15</div>
+                    Tu perfil nos parece adecuado para impartir talleres de historia local. ¿Podrías indicarnos
+                    tus horarios disponibles?
+                </div>
+
+                <!-- Mensaje 17 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('nuria.vidal@ejemplo.com')">Responder</button>
+                    <div class="message-header">Nuria Vidal (Maestra de Infantil)</div>
+                    <div class="message-meta">📅 05/03/2025, 10:10</div>
+                    Estamos organizando un programa de actividades para educación infantil y tu experiencia nos
+                    interesa. ¿Podrías confirmar disponibilidad para esta semana?
+                </div>
+
+                <!-- Mensaje 18 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('javier.ortiz@ejemplo.com')">Responder</button>
+                    <div class="message-header">Javier Ortiz (Profesor de Tecnología)</div>
+                    <div class="message-meta">📅 04/03/2025, 15:30</div>
+                    Hola, buscamos un docente de tecnología para primaria y secundaria. Tu perfil nos encaja
+                    perfectamente. ¿Tienes disponibilidad para una reunión?
+                </div>
+
+                <!-- Mensaje 19 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('elena.gomez@ejemplo.com')">Responder</button>
+                    <div class="message-header">Elena Gómez (Profesora de Inglés)</div>
+                    <div class="message-meta">📅 03/03/2025, 09:05</div>
+                    Estamos interesados en tu experiencia en inglés para apoyo en primaria. ¿Podrías indicarnos
+                    tus horarios disponibles esta semana?
+                </div>
+
+                <!-- Mensaje 20 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('miguel.santos@ejemplo.com')">Responder</button>
+                    <div class="message-header">Miguel Santos (Profesor de Educación Física)</div>
+                    <div class="message-meta">📅 02/03/2025, 16:45</div>
+                    Buenas tardes, nos interesa tu experiencia en deportes escolares. ¿Podrías asistir a una
+                    reunión para planificar actividades?
+                </div>
+
+                <!-- Mensaje 21 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('maria.lopez@ejemplo.com')">Responder</button>
+                    <div class="message-header">María López (Directora CEIP Los Almendros)</div>
+                    <div class="message-meta">📅 01/03/2025, 10:15</div>
+                    Nos gustaría contar contigo para un proyecto de apoyo educativo en primaria. ¿Podrías
+                    confirmarnos tu disponibilidad?
+                </div>
+
+                <!-- Mensaje 22 -->
+                <div class="message-box">
+
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('laura.perez@ejemplo.com')">Responder</button>
+                    <div class="message-header">Laura Pérez (Maestra de Lengua y Literatura)</div>
+                    <div class="message-meta">📅 28/02/2025, 13:50</div>
+                    Hola, buscamos apoyo en talleres de lectura y escritura creativa. Tu experiencia nos interesa.
+                    ¿Puedes asistir a una reunión esta semana?
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('laura.perez@ejemplo.com')">Responder</button>
+                </div>
+
+                <!-- Mensaje 23 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('ruben.torres@ejemplo.com')">Responder</button>
+                    <div class="message-header">Rubén Torres (Profesor de Geografía)</div>
+                    <div class="message-meta">📅 27/02/2025, 11:30</div>
+                    Nos interesa tu perfil para coordinar actividades sobre geografía e historia local.
+                    ¿Podrías indicarnos tu disponibilidad?
+                </div>
+
+                <!-- Mensaje 24 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('sara.molina@ejemplo.com')">Responder</button>
+                    <div class="message-header">Sara Molina (Maestra de Ciencias Naturales)</div>
+                    <div class="message-meta">📅 26/02/2025, 14:20</div>
+                    Estamos organizando un proyecto de laboratorio para alumnos de secundaria. Tu perfil es muy
+                    interesante. ¿Podrías participar?
+                </div>
+
+                <!-- Mensaje 25 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('musica.altamira@ejemplo.com')">Responder</button>
+                    <div class="message-header">IES Altamira (Departamento de Música)</div>
+                    <div class="message-meta">📅 25/02/2025, 10:45</div>
+                    Nos gustaría contar contigo para coordinar actividades musicales. ¿Tienes disponibilidad
+                    para reunirte?
+                </div>
+
+                <!-- Mensaje 26 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('patricia.leon@ejemplo.com')">Responder</button>
+                    <div class="message-header">Patricia León (Profesora de Música)</div>
+                    <div class="message-meta">📅 24/02/2025, 12:10</div>
+                    Hola, creemos que podrías colaborar en nuestro coro escolar y talleres de instrumentos.
+                    ¿Te interesa participar?
+                </div>
+
+                <!-- Mensaje 27 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('david.lara@ejemplo.com')">Responder</button>
+                    <div class="message-header">David Lara (Profesor de Historia)</div>
+                    <div class="message-meta">📅 23/02/2025, 09:30</div>
+                    Estamos planificando talleres de historia para secundaria y tu perfil nos interesa.
+                    ¿Podrías confirmarnos tus horarios disponibles?
+                </div>
+
+                <!-- Mensaje 28 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('nuria.vidal@ejemplo.com')">Responder</button>
+                    <div class="message-header">Nuria Vidal (Maestra de Infantil)</div>
+                    <div class="message-meta">📅 22/02/2025, 11:05</div>
+                    Buscamos un apoyo para actividades de educación infantil. Tu perfil nos interesa mucho.
+                    ¿Puedes confirmarnos disponibilidad?
+                </div>
+
+                <!-- Mensaje 29 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('javier.ortiz@ejemplo.com')">Responder</button>
+                    <div class="message-header">Javier Ortiz (Profesor de Tecnología)</div>
+                    <div class="message-meta">📅 21/02/2025, 16:45</div>
+                    Hola, necesitamos un docente de tecnología para primaria y secundaria. ¿Podrías indicarnos
+                    tu disponibilidad?
+                </div>
+
+                <!-- Mensaje 30 -->
+                <div class="message-box">
+
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('elena.gomez@ejemplo.com')">Responder</button>
+                    <div class="message-header">Elena Gómez (Profesora de Inglés)</div>
+                    <div class="message-meta">📅 20/02/2025, 08:50</div>
+                    Estamos interesados en tu experiencia en inglés para apoyo en primaria. ¿Podrías indicarnos
+                    tus horarios disponibles?
+                </div>
+
+                <!-- Mensaje 31 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('maria.lopez@ejemplo.com')">Responder</button>
+                    <div class="message-header">María López (Directora CEIP Los Almendros)</div>
+                    <div class="message-meta">📅 Hoy, 09:12</div>
+                    Gracias por enviar tu perfil. Estamos buscando un maestro de apoyo para primaria y tu experiencia
+                    nos encaja muy bien. ¿Podrías indicarnos tu disponibilidad para una entrevista esta semana?
+                </div>
+
+                <!-- Mensaje 32 -->
+                <div class="message-box">
+
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn" onclick="openReplyModal('javier.ruiz@ejemplo.com')">Responder</button>
+                    <div class="message-header">Javier Ruiz (Maestro de Música)</div>
+                    <div class="message-meta">📅 Ayer, 18:47</div>
+                    ¡Hola! Vi que te interesa colaborar en actividades extraescolares. Yo coordino un taller de
+                    creatividad musical y quizá podrías participar como apoyo. Si te interesa, te mando más info.
+                </div>
+
+                <!-- Mensaje 33 -->
+                <div class="message-box">
+                    <button class="read-more-butn" onclick="toggleExpand(this)">Leer más</button>
+                    <button class="reply-btn"
+                        onclick="openReplyModal('orientacion.monteverde@ejemplo.com')">Responder</button>
+                    <div class="message-header">IES Monteverde (Departamento de Orientación)</div>
+                    <div class="message-meta">📅 12/03/2025, 15:22</div>
+                    Estamos organizando un programa de refuerzo para alumnos con dificultades de aprendizaje. Tu perfil
+                    nos ha parecido interesante y querríamos saber si tienes experiencia previa en adaptaciones
+                    curriculares o trabajo en grupos reducidos.
+                </div>
+
+            </div>
+            <!-- Modal de respuesta -->
+            <div class="modal-overlay" id="reply-modal">
+                <div class="reply-lightbox">
+                    <button class="modal-close" id="close-reply-modal" aria-label="Cerrar modal">&times;</button>
+                    <h2>Enviar correo</h2>
+                    <form id="reply-form">
+                        <div class="form-group">
+                            <label for="reply-to">Para:</label>
+                            <input type="email" id="reply-to" name="reply-to" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="reply-subject">Asunto:</label>
+                            <input type="text" id="reply-subject" name="reply-subject" placeholder="Asunto" />
+                        </div>
+                        <div class="form-group">
+                            <label for="reply-message">Mensaje:</label>
+                            <textarea id="reply-message" name="reply-message" rows="5"
+                                placeholder="Escribe tu mensaje aquí"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </form>
                 </div>
             </div>
 
             <!-- SIDEBAR DERECHA -->
             <aside class="sidebar">
-                <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+                <a href="registro.html" class="btn btn-registrate">REGÍSTRATE AQUÍ</a>
                 <nav class="side-links">
-                    <a href="#">EVENTOS Y TALLERES</a>
-                    <a href="#">RECURSOS EDUCATIVOS</a>
-                    <a href="#">FOROS</a>
-                    <a href="#">SOBRE NOSOTROS</a>
-                    <a href="#">AYUDA Y SOPORTE</a>
+                    <a href="#" class="btn btn-outline">EVENTOS Y TALLERES</a>
+                    <a href="#" class="btn btn-primary">RECURSOS EDUCATIVOS</a>
+                    <a href="#" class="btn btn-outline">FOROS</a>
+                    <a href="#" class="btn btn-primary">SOBRE NOSOTROS</a>
+                    <a href="#" class="btn btn-outline">AYUDA Y SOPORTE</a>
                 </nav>
             </aside>
         </div>

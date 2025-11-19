@@ -1,115 +1,115 @@
 document.addEventListener("DOMContentLoaded", () => {
   // ===========================
-// FORMULARIO DE LOGIN
-// ===========================
-const loginForm = document.getElementById("login-form");
+  // FORMULARIO DE LOGIN
+  // ===========================
+  const loginForm = document.getElementById("login-form");
 
-if (loginForm) {
-  const mensaje = document.getElementById("mensaje");
-  const inputEmail = document.getElementById("mail");
-  const inputPassword = document.getElementById("password");
-  const modalOverlay = document.getElementById("login-overlay");
-  const btnCerrarModal = document.getElementById("cerrar-modal");
+  if (loginForm) {
+    const mensaje = document.getElementById("mensaje");
+    const inputEmail = document.getElementById("mail");
+    const inputPassword = document.getElementById("password");
+    const modalOverlay = document.getElementById("login-overlay");
+    const btnCerrarModal = document.getElementById("cerrar-modal");
 
-  // Función para validar formato de email
-  const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    // Función para validar formato de email
+    const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  // Abrir modal
-  document.getElementById('abrir-modal')?.addEventListener('click', () => {
-    modalOverlay.classList.add('active');
-    document.body.classList.add('modal-active');
-  });
+    // Abrir modal
+    document.getElementById('abrir-modal')?.addEventListener('click', () => {
+      modalOverlay.classList.add('active');
+      document.body.classList.add('modal-active');
+    });
 
-  // Validación previa mientras se escribe o se cambia de campo
-[inputEmail, inputPassword].forEach(input => {
-  input.addEventListener("blur", () => { // Se puede cambiar a "input" para validar mientras escribe
-    const valor = input.value.trim();
+    // Validación previa mientras se escribe o se cambia de campo
+    [inputEmail, inputPassword].forEach(input => {
+      input.addEventListener("blur", () => { // Se puede cambiar a "input" para validar mientras escribe
+        const valor = input.value.trim();
 
-    if (!valor) {
-      mostrarMensaje("", ""); // No mostrar nada si está vacío
-      return;
+        if (!valor) {
+          mostrarMensaje("", ""); // No mostrar nada si está vacío
+          return;
+        }
+
+        if (input === inputEmail) {
+          if (!validarEmail(valor)) {
+            mostrarMensaje("Formato de correo inválido.", "red");
+          } else {
+            mostrarMensaje("", ""); // Quita mensaje si es válido
+          }
+        }
+
+        if (input === inputPassword) {
+          if (valor.length < 4) { // ejemplo de validación mínima de contraseña
+            mostrarMensaje("La contraseña es demasiado corta.", "red");
+          } else {
+            mostrarMensaje("", "");
+          }
+        }
+      });
+    });
+
+    // Cerrar modal con botón
+    btnCerrarModal?.addEventListener('click', cerrarModal);
+
+    // Cerrar modal al hacer clic fuera del contenido
+    modalOverlay?.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) cerrarModal();
+    });
+
+    // Función para cerrar modal y limpiar mensajes
+    function cerrarModal() {
+      modalOverlay.classList.remove('active');
+      document.body.classList.remove('modal-active');
+      mensaje.textContent = '';
+      loginForm.reset();
     }
 
-    if (input === inputEmail) {
-      if (!validarEmail(valor)) {
-        mostrarMensaje("Formato de correo inválido.", "red");
-      } else {
-        mostrarMensaje("", ""); // Quita mensaje si es válido
+    // Manejo del formulario
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = inputEmail.value.trim();
+      const password = inputPassword.value;
+
+      // Validaciones
+      if (!email) {
+        mostrarMensaje("Por favor, introduce tu correo electrónico.", "red");
+        return;
       }
-    }
 
-    if (input === inputPassword) {
-      if (valor.length < 4) { // ejemplo de validación mínima de contraseña
-        mostrarMensaje("La contraseña es demasiado corta.", "red");
-      } else {
-        mostrarMensaje("", "");
+      if (!validarEmail(email)) {
+        mostrarMensaje("El formato del correo electrónico no es válido.", "red");
+        return;
       }
+
+      if (!password) {
+        mostrarMensaje("Por favor, introduce tu contraseña.", "red");
+        return;
+      }
+
+      // Simulación de envío
+      mostrarMensaje("Iniciando sesión...", "blue");
+
+      setTimeout(() => {
+        // Simular respuesta del servidor
+        if (email === "usuario@ejemplo.com" && password === "123456") {
+          mostrarMensaje("¡Login exitoso! ✅", "green");
+
+          setTimeout(() => {
+            cerrarModal();
+            alert("Bienvenido!");
+          }, 1000);
+        } else {
+          mostrarMensaje("Credenciales incorrectas. Inténtalo de nuevo.", "red");
+        }
+      }, 1500);
+    });
+
+    // Función auxiliar para actualizar el <p id="mensaje">
+    function mostrarMensaje(texto, color) {
+      mensaje.textContent = texto;
+      mensaje.style.color = color;
     }
-  });
-});
-
-  // Cerrar modal con botón
-  btnCerrarModal?.addEventListener('click', cerrarModal);
-
-  // Cerrar modal al hacer clic fuera del contenido
-  modalOverlay?.addEventListener('click', (e) => {
-    if (e.target === modalOverlay) cerrarModal();
-  });
-
-  // Función para cerrar modal y limpiar mensajes
-  function cerrarModal() {
-    modalOverlay.classList.remove('active');
-    document.body.classList.remove('modal-active');
-    mensaje.textContent = '';
-    loginForm.reset();
   }
-
-  // Manejo del formulario
-  loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = inputEmail.value.trim();
-    const password = inputPassword.value;
-
-    // Validaciones
-    if (!email) {
-      mostrarMensaje("Por favor, introduce tu correo electrónico.", "red");
-      return;
-    }
-
-    if (!validarEmail(email)) {
-      mostrarMensaje("El formato del correo electrónico no es válido.", "red");
-      return;
-    }
-
-    if (!password) {
-      mostrarMensaje("Por favor, introduce tu contraseña.", "red");
-      return;
-    }
-
-    // Simulación de envío
-    mostrarMensaje("Iniciando sesión...", "blue");
-
-    setTimeout(() => {
-      // Simular respuesta del servidor
-      if (email === "usuario@ejemplo.com" && password === "123456") {
-        mostrarMensaje("¡Login exitoso! ✅", "green");
-
-        setTimeout(() => {
-          cerrarModal();
-          alert("Bienvenido!");
-        }, 1000);
-      } else {
-        mostrarMensaje("Credenciales incorrectas. Inténtalo de nuevo.", "red");
-      }
-    }, 1500);
-  });
-
-  // Función auxiliar para actualizar el <p id="mensaje">
-  function mostrarMensaje(texto, color) {
-    mensaje.textContent = texto;
-    mensaje.style.color = color;
-  }
-}
 
   /* ===========================
     FUNCIONALIDAD EMPLEOS
@@ -607,173 +607,173 @@ if (loginForm) {
         avatar: 'https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?w=200&h=200&fit=crop&crop=face',
         resumen: 'Formación en TEFL y experiencia internacional en UK.'
       },
-{
-  id: 6,
-  nombre: 'Miguel Torres',
-  especialidad: 'Educación Física',
-  anios: 10,
-  avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Entrenador y maestro de deportes, fomenta hábitos saludables y trabajo en equipo.'
-},
-{
-  id: 7,
-  nombre: 'Sofía Ramírez',
-  especialidad: 'Arte',
-  anios: 6,
-  avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Creativa y apasionada por el arte y la expresión visual en la educación.'
-},
-{
-  id: 8,
-  nombre: 'Pedro Sánchez',
-  especialidad: 'Música',
-  anios: 8,
-  avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor de música con experiencia en coro, instrumentos y pedagogía musical.'
-},
-{
-  id: 9,
-  nombre: 'Isabel Navarro',
-  especialidad: 'Inglés',
-  anios: 9,
-  avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a2c9f2?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Maestra con certificación C1, especializada en enseñanza divertida e interactiva.'
-},
-{
-  id: 10,
-  nombre: 'Antonio Herrera',
-  especialidad: 'Matemáticas',
-  anios: 12,
-  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor con amplia experiencia en secundaria y preparación de exámenes.'
-},
-{
-  id: 11,
-  nombre: 'Elena Díaz',
-  especialidad: 'Ciencias Sociales',
-  anios: 5,
-  avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Apasionada por la historia y geografía, fomenta debates y pensamiento crítico.'
-},
-{
-  id: 12,
-  nombre: 'Luis Gómez',
-  especialidad: 'Tecnología',
-  anios: 7,
-  avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor de informática y programación, motivador del aprendizaje digital.'
-},
-{
-  id: 13,
-  nombre: 'Marta Vázquez',
-  especialidad: 'Educación Infantil',
-  anios: 4,
-  avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Experta en desarrollo infantil, juegos educativos y atención individualizada.'
-},
-{
-  id: 14,
-  nombre: 'Diego Ruiz',
-  especialidad: 'Química',
-  anios: 8,
-  avatar: 'https://images.unsplash.com/photo-1521120098172-760b0c03c8e5?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor entusiasta de laboratorio, fomenta experimentos prácticos y seguros.'
-},
-{
-  id: 15,
-  nombre: 'Laura Morales',
-  especialidad: 'Física',
-  anios: 6,
-  avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Apasionada por la física aplicada y el pensamiento crítico en ciencias.'
-},
-{
-  id: 16,
-  nombre: 'Jorge Castillo',
-  especialidad: 'Geografía',
-  anios: 7,
-  avatar: 'https://images.unsplash.com/photo-1502767089025-6572583495b0?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Fomenta el conocimiento del mundo y la cultura a través de proyectos prácticos.'
-},
-{
-  id: 17,
-  nombre: 'Patricia Blanco',
-  especialidad: 'Lengua y Literatura',
-  anios: 9,
-  avatar: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Maestra creativa en lectura, escritura y análisis literario.'
-},
-{
-  id: 18,
-  nombre: 'Fernando Herrera',
-  especialidad: 'Educación Física',
-  anios: 11,
-  avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor de deportes y hábitos saludables, especialista en coordinación motriz.'
-},
-{
-  id: 19,
-  nombre: 'Raquel Jiménez',
-  especialidad: 'Arte',
-  anios: 5,
-  avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Fomenta la creatividad y el pensamiento visual en proyectos artísticos.'
-},
-{
-  id: 20,
-  nombre: 'Alberto Santos',
-  especialidad: 'Música',
-  anios: 6,
-  avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor de música con experiencia en instrumentos y teoría musical.'
-},
-{
-  id: 21,
-  nombre: 'Silvia Ramos',
-  especialidad: 'Inglés',
-  anios: 10,
-  avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a2c9f2?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Enseña inglés de forma interactiva y divertida para primaria y secundaria.'
-},
-{
-  id: 22,
-  nombre: 'Ricardo Medina',
-  especialidad: 'Matemáticas',
-  anios: 8,
-  avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Apasionado por el razonamiento lógico y resolución de problemas prácticos.'
-},
-{
-  id: 23,
-  nombre: 'Mónica Fuentes',
-  especialidad: 'Ciencias Sociales',
-  anios: 6,
-  avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Especialista en historia, geografía y proyectos interdisciplinarios.'
-},
-{
-  id: 24,
-  nombre: 'Víctor Delgado',
-  especialidad: 'Tecnología',
-  anios: 7,
-  avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor de informática y robótica educativa, motivador del aprendizaje digital.'
-},{
-  id: 25,
-  nombre: 'Javier Morales',
-  especialidad: 'Ciencias Naturales',
-  anios: 7,
-  avatar: 'https://images.unsplash.com/photo-1502767089025-6572583495b0?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Profesor dedicado a fomentar la curiosidad y el pensamiento crítico en ciencias.'
-},
-{
-  id: 26,
-  nombre: 'Lucía Fernández',
-  especialidad: 'Lengua y Literatura',
-  anios: 5,
-  avatar: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=200&h=200&fit=crop&crop=face',
-  resumen: 'Especialista en escritura creativa y comprensión lectora en primaria y secundaria.'
-}
+      {
+        id: 6,
+        nombre: 'Miguel Torres',
+        especialidad: 'Educación Física',
+        anios: 10,
+        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Entrenador y maestro de deportes, fomenta hábitos saludables y trabajo en equipo.'
+      },
+      {
+        id: 7,
+        nombre: 'Sofía Ramírez',
+        especialidad: 'Arte',
+        anios: 6,
+        avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Creativa y apasionada por el arte y la expresión visual en la educación.'
+      },
+      {
+        id: 8,
+        nombre: 'Pedro Sánchez',
+        especialidad: 'Música',
+        anios: 8,
+        avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor de música con experiencia en coro, instrumentos y pedagogía musical.'
+      },
+      {
+        id: 9,
+        nombre: 'Isabel Navarro',
+        especialidad: 'Inglés',
+        anios: 9,
+        avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a2c9f2?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Maestra con certificación C1, especializada en enseñanza divertida e interactiva.'
+      },
+      {
+        id: 10,
+        nombre: 'Antonio Herrera',
+        especialidad: 'Matemáticas',
+        anios: 12,
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor con amplia experiencia en secundaria y preparación de exámenes.'
+      },
+      {
+        id: 11,
+        nombre: 'Elena Díaz',
+        especialidad: 'Ciencias Sociales',
+        anios: 5,
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Apasionada por la historia y geografía, fomenta debates y pensamiento crítico.'
+      },
+      {
+        id: 12,
+        nombre: 'Luis Gómez',
+        especialidad: 'Tecnología',
+        anios: 7,
+        avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor de informática y programación, motivador del aprendizaje digital.'
+      },
+      {
+        id: 13,
+        nombre: 'Marta Vázquez',
+        especialidad: 'Educación Infantil',
+        anios: 4,
+        avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Experta en desarrollo infantil, juegos educativos y atención individualizada.'
+      },
+      {
+        id: 14,
+        nombre: 'Diego Ruiz',
+        especialidad: 'Química',
+        anios: 8,
+        avatar: 'https://images.unsplash.com/photo-1521120098172-760b0c03c8e5?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor entusiasta de laboratorio, fomenta experimentos prácticos y seguros.'
+      },
+      {
+        id: 15,
+        nombre: 'Laura Morales',
+        especialidad: 'Física',
+        anios: 6,
+        avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Apasionada por la física aplicada y el pensamiento crítico en ciencias.'
+      },
+      {
+        id: 16,
+        nombre: 'Jorge Castillo',
+        especialidad: 'Geografía',
+        anios: 7,
+        avatar: 'https://images.unsplash.com/photo-1502767089025-6572583495b0?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Fomenta el conocimiento del mundo y la cultura a través de proyectos prácticos.'
+      },
+      {
+        id: 17,
+        nombre: 'Patricia Blanco',
+        especialidad: 'Lengua y Literatura',
+        anios: 9,
+        avatar: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Maestra creativa en lectura, escritura y análisis literario.'
+      },
+      {
+        id: 18,
+        nombre: 'Fernando Herrera',
+        especialidad: 'Educación Física',
+        anios: 11,
+        avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor de deportes y hábitos saludables, especialista en coordinación motriz.'
+      },
+      {
+        id: 19,
+        nombre: 'Raquel Jiménez',
+        especialidad: 'Arte',
+        anios: 5,
+        avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Fomenta la creatividad y el pensamiento visual en proyectos artísticos.'
+      },
+      {
+        id: 20,
+        nombre: 'Alberto Santos',
+        especialidad: 'Música',
+        anios: 6,
+        avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor de música con experiencia en instrumentos y teoría musical.'
+      },
+      {
+        id: 21,
+        nombre: 'Silvia Ramos',
+        especialidad: 'Inglés',
+        anios: 10,
+        avatar: 'https://images.unsplash.com/photo-1544725176-7c40e5a2c9f2?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Enseña inglés de forma interactiva y divertida para primaria y secundaria.'
+      },
+      {
+        id: 22,
+        nombre: 'Ricardo Medina',
+        especialidad: 'Matemáticas',
+        anios: 8,
+        avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Apasionado por el razonamiento lógico y resolución de problemas prácticos.'
+      },
+      {
+        id: 23,
+        nombre: 'Mónica Fuentes',
+        especialidad: 'Ciencias Sociales',
+        anios: 6,
+        avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Especialista en historia, geografía y proyectos interdisciplinarios.'
+      },
+      {
+        id: 24,
+        nombre: 'Víctor Delgado',
+        especialidad: 'Tecnología',
+        anios: 7,
+        avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor de informática y robótica educativa, motivador del aprendizaje digital.'
+      }, {
+        id: 25,
+        nombre: 'Javier Morales',
+        especialidad: 'Ciencias Naturales',
+        anios: 7,
+        avatar: 'https://images.unsplash.com/photo-1502767089025-6572583495b0?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Profesor dedicado a fomentar la curiosidad y el pensamiento crítico en ciencias.'
+      },
+      {
+        id: 26,
+        nombre: 'Lucía Fernández',
+        especialidad: 'Lengua y Literatura',
+        anios: 5,
+        avatar: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?w=200&h=200&fit=crop&crop=face',
+        resumen: 'Especialista en escritura creativa y comprensión lectora en primaria y secundaria.'
+      }
     ];
 
     const MAESTROS_PER_PAGE = 15;
@@ -911,4 +911,38 @@ if (loginForm) {
     setupEventListeners();
     renderMaestros();
   }
+
+  //MODAL RESPUESTA MENSAJES
+  const replyModal = document.getElementById("reply-modal");
+  const closeReplyModalBtn = document.getElementById("close-reply-modal");
+  const replyToInput = document.getElementById("reply-to");
+
+  function openReplyModal(email) {
+    replyToInput.value = email;
+    replyModal.classList.add("active");
+    document.body.classList.add("modal-active");
+  }
+
+  closeReplyModalBtn.addEventListener("click", () => {
+    replyModal.classList.remove("active");
+    document.body.classList.remove("modal-active");
+  });
+
+  // Cerrar modal al hacer clic fuera
+  replyModal.addEventListener("click", (e) => {
+    if (e.target === replyModal) {
+      replyModal.classList.remove("active");
+      document.body.classList.remove("modal-active");
+    }
+  });
+
+  // Manejo del envío del formulario (simulado)
+  document.getElementById("reply-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert(`Correo enviado a: ${replyToInput.value}`);
+    replyModal.classList.remove("active");
+    document.body.classList.remove("modal-active");
+    e.target.reset();
+  });
+
 });
