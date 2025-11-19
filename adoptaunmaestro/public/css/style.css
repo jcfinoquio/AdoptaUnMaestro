@@ -524,13 +524,6 @@ hr {
   right: 1vh;
 }
 
-/* Efectos del modal en index */
-.page-index .modal-overlay.active~.main-container {
-  opacity: 0.3;
-  filter: blur(2px);
-  transition: opacity 0.3s ease, filter 0.3s ease;
-}
-
 .page-index #mensaje {
   text-align: center;
   margin-bottom: 10px;
@@ -1606,61 +1599,320 @@ hr {
 /* ====================================================
    PÁGINA: MENSAJES (mensajes.html)
    ==================================================== */
+
+/* Contenedor principal de mensajes */
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Caja de mensaje individual */
 .message-box {
-      box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.10), inset 0 -4px 8px rgba(255, 255, 255, 0.10);
+  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.10), inset 0 -4px 8px rgba(255, 255, 255, 0.10);
   background: #e6e6e675;
-  padding: 25px;
-  border-radius: 6px;
-  max-height: 30vh;
-  overflow: hidden;
+  padding: 1.5rem;
+  border-radius: 8px;
   position: relative;
   transition: all 0.3s ease;
+  border-left: 4px solid #6ebef3;
 }
 
-.message-box.expanded {
-  max-height: none;
+.message-box:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), inset 0 4px 8px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
 }
 
-.read-more-butn {
-  position: relative;
-  float:right;
-  background: #6ebef3;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.20), inset 0 -4px 8px rgba(255, 255, 255, 0.20);
-}
-
-.read-more-butn:hover {
-  font-size: 1rem;
-  font-weight: 600;
-  text-shadow: 0 0 2px rgba(0, 0, 0, 1);
-  opacity: 1;
-}
-
-.reply-btn{  
-  margin-right: 0.5rem;
-  transition: background-color 0.2s ease;
-  position: relative;
-  float:right;
-  background: transparent;
-  color: var(--color-primary);
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.20), inset 0 -4px 8px rgba(255, 255, 255, 0.20);
-}
-.btn-.reply-btn:hover {
-  background: var(--color-primary);
-  color: white;
-}
-
+/* Cabecera del mensaje */
 .message-header {
   font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Metadatos del mensaje (fecha) */
+.message-meta {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Contenido del mensaje */
+.message-content {
+  max-height: 60px;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  line-height: 1.5;
+  color: #444;
+  margin-bottom: 1rem;
+}
+
+.message-content.expanded {
+  max-height: 900px;
+}
+
+/* Contenedor de botones */
+.message-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Botones de acción */
+.read-more-btn, .reply-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1), inset 0 -2px 4px rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Botón "Leer más" */
+.read-more-btn {
+  background: #6ebef3;
+  color: white;
+}
+
+.read-more-btn:hover {
+  background: #5aa8e0;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón "Responder" */
+.reply-btn {
+  background: transparent;
+  color: var(--color-primary, #007bff);
+  border: 1px solid var(--color-primary, #007bff);
+}
+
+.reply-btn:hover {
+  background: var(--color-primary, #007bff);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal de respuesta */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.reply-lightbox {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Botón cerrar modal */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+/* Título del modal */
+.reply-lightbox h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+/* Grupos de formulario */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary, #007bff);
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.form-group input[readonly] {
+  background-color: #f9f9f9;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Botón de enviar en el modal */
+.reply-lightbox .btn-primary {
+  width: 100%;
+  padding: 0.75rem;
+  background: var(--color-primary, #007bff);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.reply-lightbox .btn-primary:hover {
+  background: var(--color-primary-dark, #0056b3);
+  transform: translateY(-1px);
+}
+
+.reply-lightbox .btn-primary:active {
+  transform: translateY(0);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .messages-container {
+    padding: 0.5rem;
+    gap: 1rem;
+  }
+  
+  .message-box {
+    padding: 1.25rem;
+  }
+  
+  .message-buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .read-more-btn, .reply-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .reply-lightbox {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-box {
+    padding: 1rem;
+  }
+  
+  .reply-lightbox {
+    padding: 1.25rem;
+  }
+  
+  .message-header {
+    font-size: 1rem;
+  }
+}
+
+/* Estados de carga (para futuras mejoras) */
+.message-box.loading {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.message-box.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 8px;
+}
+
+/* Indicador visual para mensajes no leídos */
+.message-box.unread {
+  background: #f0f7ff;
+  border-left-color: #007bff;
+}
+
+.message-box.unread .message-header {
+  color: #007bff;
+}
+
+/* Estilos para el estado de los botones */
+.read-more-btn:disabled, 
+.reply-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
 }
 
 /* ====================================================

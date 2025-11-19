@@ -5,11 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mensajes</title>
-    <style src="js/js.js"></style>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">    
+    <script src="js/js.js" defer></script>
 </head>
 
-<body>
+<body class="page-mensajes">
     <div class="page-wrapper">
         <header class="header-nav">
             <div class="logo-container">
@@ -424,14 +424,6 @@
             </aside>
         </div>
     </div>
-
-    <script>
-        function toggleExpand(btn) {
-            const box = btn.parentElement;
-            box.classList.toggle("expanded");
-            btn.textContent = box.classList.contains("expanded") ? "Leer menos" : "Leer más";
-        }
-    </script>
 </body>
 
 </html>

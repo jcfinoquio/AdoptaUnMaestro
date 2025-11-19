@@ -1,110 +1,70 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // ===========================
-  // FORMULARIO DE LOGIN
-  // ===========================
-  const loginForm = document.getElementById("login-form");
 
+  /* ===========================
+     LOGIN
+  =========================== */
+  const loginForm = document.getElementById("login-form");
   if (loginForm) {
     const mensaje = document.getElementById("mensaje");
     const inputEmail = document.getElementById("mail");
     const inputPassword = document.getElementById("password");
-    const modalOverlay = document.getElementById("login-overlay");
+    const loginOverlay = document.getElementById("login-overlay");
     const btnCerrarModal = document.getElementById("cerrar-modal");
 
-    // Función para validar formato de email
     const validarEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    // Abrir modal
     document.getElementById('abrir-modal')?.addEventListener('click', () => {
-      modalOverlay.classList.add('active');
+      loginOverlay.classList.add('active');
       document.body.classList.add('modal-active');
     });
 
-    // Validación previa mientras se escribe o se cambia de campo
     [inputEmail, inputPassword].forEach(input => {
-      input.addEventListener("blur", () => { // Se puede cambiar a "input" para validar mientras escribe
+      input.addEventListener("blur", () => {
         const valor = input.value.trim();
-
-        if (!valor) {
-          mostrarMensaje("", ""); // No mostrar nada si está vacío
-          return;
-        }
+        if (!valor) return mostrarMensaje("", "");
 
         if (input === inputEmail) {
-          if (!validarEmail(valor)) {
-            mostrarMensaje("Formato de correo inválido.", "red");
-          } else {
-            mostrarMensaje("", ""); // Quita mensaje si es válido
-          }
+          mostrarMensaje(!validarEmail(valor) ? "Formato de correo inválido." : "", !validarEmail(valor) ? "red" : "");
         }
 
         if (input === inputPassword) {
-          if (valor.length < 4) { // ejemplo de validación mínima de contraseña
-            mostrarMensaje("La contraseña es demasiado corta.", "red");
-          } else {
-            mostrarMensaje("", "");
-          }
+          mostrarMensaje(valor.length < 4 ? "La contraseña es demasiado corta." : "", valor.length < 4 ? "red" : "");
         }
       });
     });
 
-    // Cerrar modal con botón
     btnCerrarModal?.addEventListener('click', cerrarModal);
-
-    // Cerrar modal al hacer clic fuera del contenido
-    modalOverlay?.addEventListener('click', (e) => {
+    loginOverlay?.addEventListener('click', (e) => {
       if (e.target === modalOverlay) cerrarModal();
     });
 
-    // Función para cerrar modal y limpiar mensajes
     function cerrarModal() {
-      modalOverlay.classList.remove('active');
+      loginOverlay.classList.remove('active');
       document.body.classList.remove('modal-active');
       mensaje.textContent = '';
       loginForm.reset();
     }
 
-    // Manejo del formulario
     loginForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const email = inputEmail.value.trim();
       const password = inputPassword.value;
 
-      // Validaciones
-      if (!email) {
-        mostrarMensaje("Por favor, introduce tu correo electrónico.", "red");
-        return;
-      }
+      if (!email) return mostrarMensaje("Por favor, introduce tu correo electrónico.", "red");
+      if (!validarEmail(email)) return mostrarMensaje("El formato del correo electrónico no es válido.", "red");
+      if (!password) return mostrarMensaje("Por favor, introduce tu contraseña.", "red");
 
-      if (!validarEmail(email)) {
-        mostrarMensaje("El formato del correo electrónico no es válido.", "red");
-        return;
-      }
-
-      if (!password) {
-        mostrarMensaje("Por favor, introduce tu contraseña.", "red");
-        return;
-      }
-
-      // Simulación de envío
       mostrarMensaje("Iniciando sesión...", "blue");
-
       setTimeout(() => {
-        // Simular respuesta del servidor
         if (email === "usuario@ejemplo.com" && password === "123456") {
           mostrarMensaje("¡Login exitoso! ✅", "green");
-
-          setTimeout(() => {
-            cerrarModal();
-            alert("Bienvenido!");
-          }, 1000);
+          setTimeout(() => { cerrarModal(); alert("Bienvenido!"); }, 1000);
         } else {
           mostrarMensaje("Credenciales incorrectas. Inténtalo de nuevo.", "red");
         }
       }, 1500);
     });
 
-    // Función auxiliar para actualizar el <p id="mensaje">
     function mostrarMensaje(texto, color) {
       mensaje.textContent = texto;
       mensaje.style.color = color;
@@ -112,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ===========================
-    FUNCIONALIDAD EMPLEOS
+     EMPLEOS
   =========================== */
   window.toggleExpand = function (btn) {
     const jobOffer = btn.closest('.job-offer');
@@ -122,94 +82,65 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Inicializar botones de empleos si existen
-  const readMoreButtons = document.querySelectorAll('.read-more-btn');
-  if (readMoreButtons.length > 0) {
-    readMoreButtons.forEach(button => {
+  document.querySelectorAll('.read-more-btn').forEach(button => {
+    button.addEventListener('click', function () { window.toggleExpand(this); });
+  });
+
+  document.querySelectorAll('.btn-primary').forEach(button => {
+    if (button.textContent === 'Postularme') {
       button.addEventListener('click', function () {
-        window.toggleExpand(this);
+        alert('¡Postulación enviada correctamente!');
+        this.textContent = 'Postulado';
+        this.classList.remove('btn-primary');
+        this.classList.add('btn-success');
+        this.disabled = true;
       });
-    });
-
-    // Botones de postulación
-    document.querySelectorAll('.btn-primary').forEach(button => {
-      if (button.textContent === 'Postularme') {
-        button.addEventListener('click', function () {
-          alert('¡Postulación enviada correctamente!');
-          this.textContent = 'Postulado';
-          this.classList.remove('btn-primary');
-          this.classList.add('btn-success');
-          this.disabled = true;
-        });
-      }
-    });
-  }
-
+    }
+  });
   /* ===========================
-    CONTADORES DE VISITAS
+     CONTADORES DE VISITAS
   =========================== */
-  const inicializarContadoresDeVisitas = () => {
-    const elementosVisitas = document.querySelectorAll("[id^='visitas-']");
-
-    elementosVisitas.forEach((elemento) => {
-      const clave = elemento.id;
-      let visitas = parseInt(localStorage.getItem(clave)) || 0;
-
-      // Incrementar y guardar
-      visitas++;
-      localStorage.setItem(clave, visitas);
-
-      // Mostrar en pantalla
-      elemento.textContent = visitas;
-    });
-  };
-
-  inicializarContadoresDeVisitas();
-
+  document.querySelectorAll("[id^='visitas-']").forEach(el => {
+    const key = el.id;
+    let visitas = parseInt(localStorage.getItem(key)) || 0;
+    visitas++;
+    localStorage.setItem(key, visitas);
+    el.textContent = visitas;
+  });
   /* ===========================
      CONTADORES DE LIKES
   =========================== */
-  const inicializarContadoresDeLikes = () => {
-    const botonesLike = document.querySelectorAll("[id^='contador-likes']");
+  document.querySelectorAll("[id^='contador-likes']").forEach(btn => {
+    const idNum = btn.id.replace("contador-likes", "");
+    const display = document.getElementById(`numero-likes${idNum}`);
+    if (!display) return;
 
-    botonesLike.forEach((boton) => {
-      const idNumero = boton.id.replace("contador-likes", "");
-      const contadorDisplay = document.getElementById(`numero-likes${idNumero}`);
+    const STORAGE_KEY = `likes-count${idNum}`;
+    const USER_LIKED_KEY = `user-liked${idNum}`;
 
-      if (!contadorDisplay) return;
+    let likes = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
+    display.textContent = likes;
 
-      const STORAGE_KEY = `likes-count${idNumero}`;
-      const USER_LIKED_KEY = `user-liked${idNumero}`;
+    if (sessionStorage.getItem(USER_LIKED_KEY) === "true") {
+      btn.classList.add("clicado");
+      btn.disabled = true;
+    }
 
-      let likes = parseInt(localStorage.getItem(STORAGE_KEY)) || 0;
-      contadorDisplay.textContent = likes;
-
-      const userLiked = sessionStorage.getItem(USER_LIKED_KEY) === "true";
-      if (userLiked) {
-        boton.classList.add("clicado");
-        boton.disabled = true;
+    btn.addEventListener("click", () => {
+      if (!sessionStorage.getItem(USER_LIKED_KEY)) {
+        likes++;
+        display.textContent = likes;
+        localStorage.setItem(STORAGE_KEY, likes);
+        btn.classList.add("clicado");
+        btn.disabled = true;
+        sessionStorage.setItem(USER_LIKED_KEY, "true");
       }
-
-      boton.addEventListener("click", () => {
-        if (!sessionStorage.getItem(USER_LIKED_KEY)) {
-          likes++;
-          contadorDisplay.textContent = likes;
-          localStorage.setItem(STORAGE_KEY, likes);
-          boton.classList.add("clicado");
-          boton.disabled = true;
-          sessionStorage.setItem(USER_LIKED_KEY, "true");
-        }
-      });
     });
-  };
-
-  inicializarContadoresDeLikes();
-
+  });
   /* ===========================
-    FUNCIONALIDADES REGISTRO
+     REGISTRO
   =========================== */
   const registroForm = document.getElementById('registroForm');
-
   if (registroForm) {
     const rolSelect = document.getElementById('rol');
     const bloqueMaestro = document.getElementById('bloqueMaestro');
@@ -222,167 +153,41 @@ document.addEventListener("DOMContentLoaded", () => {
       if (bloqueCentro) bloqueCentro.classList.toggle('hidden', rol !== 'centro');
     }
 
-    if (rolSelect) {
-      rolSelect.addEventListener('change', (e) => mostrarBloque(e.target.value));
-    }
+    rolSelect?.addEventListener('change', e => mostrarBloque(e.target.value));
+    if (rolSelect) mostrarBloque(rolSelect.value);
 
     let formCount = 0;
+    btnAddForm?.addEventListener('click', () => {
+      formCount++;
+      const wrapper = document.createElement('div');
+      wrapper.className = 'formation-block';
+      wrapper.innerHTML = `
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <div style="flex:1 1 45%;"><label>Título</label><input name="formacion[${formCount}][titulo]" type="text" placeholder="Título" /></div>
+          <div style="flex:1 1 45%;"><label>Centro formador</label><input name="formacion[${formCount}][centroFormador]" type="text" placeholder="Centro formador" /></div>
+          <div style="flex:1 1 30%;"><label>Año fin</label><input name="formacion[${formCount}][anioFin]" type="number" min="1900" max="2100" /></div>
+          <div style="flex:1 1 30%;"><label>Tipo</label><input name="formacion[${formCount}][tipoFormacion]" type="text" placeholder="Tipo" /></div>
+        </div>
+        <div style="text-align:right;margin-top:8px;">
+          <button type="button" class="btn-cancel" onclick="this.closest('.formation-block').remove()">Eliminar</button>
+        </div>
+      `;
+      formacionesCont.appendChild(wrapper);
+    });
 
-    if (btnAddForm && formacionesCont) {
-      btnAddForm.addEventListener('click', () => {
-        formCount++;
-        const idx = formCount;
-        const wrapper = document.createElement('div');
-        wrapper.className = 'formation-block';
-        wrapper.innerHTML = `
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <div style="flex:1 1 45%;">
-              <label>Título</label>
-              <input name="formacion[${idx}][titulo]" type="text" placeholder="Título (Ej: Máster en Educación)" />
-            </div>
-            <div style="flex:1 1 45%;">
-              <label>Centro formador</label>
-              <input name="formacion[${idx}][centroFormador]" type="text" placeholder="Centro formador" />
-            </div>
-            <div style="flex:1 1 30%;">
-              <label>Año fin</label>
-              <input name="formacion[${idx}][anioFin]" type="number" min="1900" max="2100" />
-            </div>
-            <div style="flex:1 1 30%;">
-              <label>Tipo</label>
-              <input name="formacion[${idx}][tipoFormacion]" type="text" placeholder="Tipo (FP, Grado...)" />
-            </div>
-          </div>
-          <div style="text-align:right;margin-top:8px;">
-            <button type="button" class="btn-cancel" onclick="this.closest('.formation-block').remove()">Eliminar</button>
-          </div>
-        `;
-        formacionesCont.appendChild(wrapper);
-      });
-    }
-
-    registroForm.addEventListener('submit', (e) => {
+    registroForm.addEventListener('submit', e => {
       if (!registroForm.checkValidity()) {
         e.preventDefault();
         registroForm.reportValidity();
       }
     });
-
-    if (rolSelect) {
-      mostrarBloque(rolSelect.value);
-    }
   }
-
   /* ===========================
-    LISTADO COLEGIOS
+     COLEGIOS Y MODAL
   =========================== */
   const resultadosColegios = document.getElementById('resultados');
-
   if (resultadosColegios) {
-    // Datos de ejemplo con imágenes reales de bancos gratuitos
-    const colegios = [
-      {
-        id: 1,
-        nombre: 'Colegio San José',
-        provincia: 'Sevilla',
-        tipo: 'Concertado',
-        ciudad: 'Sevilla',
-        telefono: '955 123 456',
-        logo: 'https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop',
-        resumen: 'Centro con enfoque STEM y apoyo a la inclusión.'
-      },
-      {
-        id: 2,
-        nombre: 'Escuela La Marina',
-        provincia: 'Málaga',
-        tipo: 'Concertado',
-        ciudad: 'Málaga',
-        telefono: '952 234 567',
-        logo: 'https://images.unsplash.com/photo-1588072432836-e10032774350?w=400&h=300&fit=crop',
-        resumen: 'Fuerte programa de idiomas y actividades náuticas.'
-      },
-      {
-        id: 3,
-        nombre: 'Colegio Las Acacias',
-        provincia: 'Cádiz',
-        tipo: 'Privado',
-        ciudad: 'Cádiz',
-        telefono: '956 345 678',
-        logo: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop',
-        resumen: 'Proyecto artístico y cultural consolidado.'
-      },
-      {
-        id: 4,
-        nombre: 'Centro Virgen del Alba',
-        provincia: 'Granada',
-        tipo: 'Concertado',
-        ciudad: 'Granada',
-        telefono: '958 456 789',
-        logo: 'https://images.unsplash.com/photo-1546410531-bb4caa6b424d?w=400&h=300&fit=crop',
-        resumen: 'Metodologías activas en primaria.'
-      },
-      {
-        id: 5,
-        nombre: 'Colegio Horizonte',
-        provincia: 'Córdoba',
-        tipo: 'Público',
-        ciudad: 'Córdoba',
-        telefono: '957 567 890',
-        logo: 'https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?w=400&h=300&fit=crop',
-        resumen: 'Enfoque en mejora continua y convivencia.'
-      },
-      {
-        id: 6,
-        nombre: 'Colegio Andalucía',
-        provincia: 'Jaén',
-        tipo: 'Concertado',
-        ciudad: 'Jaén',
-        telefono: '953 678 901',
-        logo: 'https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=400&h=300&fit=crop',
-        resumen: 'Programa de inclusión y proyectos rurales.'
-      },
-      {
-        id: 7,
-        nombre: 'Escuela Nueva Ola',
-        provincia: 'Huelva',
-        tipo: 'Privado',
-        ciudad: 'Huelva',
-        telefono: '959 789 012',
-        logo: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=400&h=300&fit=crop',
-        resumen: 'Talleres tecnológicos y deportivos.'
-      },
-      {
-        id: 8,
-        nombre: 'Colegio Alborán',
-        provincia: 'Almería',
-        tipo: 'Concertado',
-        ciudad: 'Almería',
-        telefono: '950 890 123',
-        logo: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=300&fit=crop',
-        resumen: 'Apuesta por la naturaleza y huertos escolares.'
-      },
-      {
-        id: 9,
-        nombre: 'Colegio Río Verde',
-        provincia: 'Sevilla',
-        tipo: 'Público',
-        ciudad: 'Dos Hermanas',
-        telefono: '955 901 234',
-        logo: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=400&h=300&fit=crop',
-        resumen: 'Proyectos STEAM desde infantil.'
-      },
-      {
-        id: 10,
-        nombre: 'Colegio Mediterráneo',
-        provincia: 'Málaga',
-        tipo: 'Concertado',
-        ciudad: 'Fuengirola',
-        telefono: '952 012 345',
-        logo: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop',
-        resumen: 'Programas bilingües y actividades marinas.'
-      }
-    ];
-
+    const colegios = window.colegios || []; // asume que ya tienes array de colegios
     const PER_PAGE = 15;
     let state = { q: '', provincia: '', tipo: '', page: 1 };
 
@@ -394,8 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextBtn = document.getElementById('nextPage');
     const pageInfo = document.getElementById('pageInfo');
 
-    // Modal elements
-    const modalOverlay = document.getElementById('modalOverlay');
+    const colegiosModalOverlay = document.getElementById('modalOverlay');
     const modalCloseBtn = document.getElementById('modalCloseBtn');
     const modalTitle = document.getElementById('modalTitle');
     const modalLogo = document.getElementById('modalLogo');
@@ -441,9 +245,9 @@ document.addEventListener("DOMContentLoaded", () => {
         </article>
       `).join('');
 
-      if (pageInfo) pageInfo.textContent = `${state.page} / ${totalPages}`;
-      if (prevBtn) prevBtn.disabled = state.page <= 1;
-      if (nextBtn) nextBtn.disabled = state.page >= totalPages;
+      pageInfo && (pageInfo.textContent = `${state.page} / ${totalPages}`);
+      prevBtn && (prevBtn.disabled = state.page <= 1);
+      nextBtn && (nextBtn.disabled = state.page >= totalPages);
       resultadosColegios.setAttribute('aria-busy', 'false');
     }
 
@@ -458,107 +262,39 @@ document.addEventListener("DOMContentLoaded", () => {
       modalCiudad.textContent = `Ciudad: ${c.ciudad}`;
       modalDescripcion.textContent = c.resumen;
       modalTelefono.textContent = `Teléfono: ${c.telefono}`;
-      if (modalGoPerfil) modalGoPerfil.href = `./detalle-colegio.html?id=${c.id}`;
+      modalGoPerfil && (modalGoPerfil.href = `./detalle-colegio.html?id=${c.id}`);
 
-      if (modalContactBtn) {
-        modalContactBtn.onclick = () => alert(`Solicitud de contacto enviada a ${c.nombre}. Tel: ${c.telefono}`);
-      }
+      modalContactBtn && (modalContactBtn.onclick = () => alert(`Solicitud de contacto enviada a ${c.nombre}. Tel: ${c.telefono}`));
 
-      if (modalOverlay) {
-        modalOverlay.classList.add('open');
-        modalOverlay.setAttribute('aria-hidden', 'false');
-      }
+      colegiosModalOverlay?.classList.add('open');
+      colegiosModalOverlay?.setAttribute('aria-hidden', 'false');
     }
 
     function closeModal() {
-      if (modalOverlay) {
-        modalOverlay.classList.remove('open');
-        modalOverlay.setAttribute('aria-hidden', 'true');
-      }
-
-      if (lastFocusedElement && typeof lastFocusedElement.focus === 'function') {
-        lastFocusedElement.focus();
-      }
+      colegiosModalOverlay?.classList.remove('open');
+      colegiosModalOverlay?.setAttribute('aria-hidden', 'true');
+      lastFocusedElement?.focus();
     }
 
-    // Event listeners para el modal
-    if (modalOverlay) {
-      modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
-      });
-    }
+    colegiosModalOverlay?.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+    modalCloseBtn?.addEventListener('click', closeModal);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
 
-    if (modalCloseBtn) {
-      modalCloseBtn.addEventListener('click', closeModal);
-    }
+    buscarEl?.addEventListener('input', e => { state.q = e.target.value; state.page = 1; render(); });
+    filtroProvincia?.addEventListener('change', e => { state.provincia = e.target.value; state.page = 1; render(); });
+    filtroTipo?.addEventListener('change', e => { state.tipo = e.target.value; state.page = 1; render(); });
+    btnLimpiar?.addEventListener('click', () => { buscarEl && (buscarEl.value = ''); filtroProvincia && (filtroProvincia.value = ''); filtroTipo && (filtroTipo.value = ''); state = { q: '', provincia: '', tipo: '', page: 1 }; render(); });
+    prevBtn?.addEventListener('click', () => { if (state.page > 1) { state.page--; render(); } });
+    nextBtn?.addEventListener('click', () => { state.page++; render(); });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('open')) {
-        closeModal();
-      }
-    });
-
-    // Event listeners principales
-    if (buscarEl) {
-      buscarEl.addEventListener('input', e => { state.q = e.target.value; state.page = 1; render(); });
-    }
-
-    if (filtroProvincia) {
-      filtroProvincia.addEventListener('change', e => { state.provincia = e.target.value; state.page = 1; render(); });
-    }
-
-    if (filtroTipo) {
-      filtroTipo.addEventListener('change', e => { state.tipo = e.target.value; state.page = 1; render(); });
-    }
-
-    if (btnLimpiar) {
-      btnLimpiar.addEventListener('click', () => {
-        if (buscarEl) buscarEl.value = '';
-        if (filtroProvincia) filtroProvincia.value = '';
-        if (filtroTipo) filtroTipo.value = '';
-        state.q = '';
-        state.provincia = '';
-        state.tipo = '';
-        state.page = 1;
-        render();
-      });
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        if (state.page > 1) { state.page--; render(); }
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        state.page++; render();
-      });
-    }
-
-    // Event delegation para botones
     resultadosColegios.addEventListener('click', e => {
-      // Botones "Ver ficha"
-      if (e.target.classList.contains('btn-view')) {
-        const id = Number(e.target.dataset.id);
-        openModalFor(id, e.target);
-      }
-
-      // Botones "Contactar centro" 
+      if (e.target.classList.contains('btn-view')) openModalFor(Number(e.target.dataset.id), e.target);
       const contactBtn = e.target.closest('[data-contact]');
-      if (contactBtn) {
-        const id = Number(contactBtn.dataset.contact);
-        const c = colegios.find(x => x.id === id);
-        if (c) {
-          alert(`Solicitud de contacto enviada a ${c.nombre}. Teléfono: ${c.telefono}`);
-        }
-      }
+      if (contactBtn) { const c = colegios.find(x => x.id == Number(contactBtn.dataset.contact)); if (c) alert(`Solicitud de contacto enviada a ${c.nombre}. Teléfono: ${c.telefono}`); }
     });
 
-    // Inicial render
     render();
   }
-
   /* ===========================
     LISTADO MAESTROS
   =========================== */
@@ -906,43 +642,159 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       maestrosResultadosEl.setAttribute('aria-busy', 'false');
     }
-
     // Inicializar
     setupEventListeners();
     renderMaestros();
   }
+// =============================================
+// MENSAJES
+// =============================================
 
-  //MODAL RESPUESTA MENSAJES
-  const replyModal = document.getElementById("reply-modal");
-  const closeReplyModalBtn = document.getElementById("close-reply-modal");
-  const replyToInput = document.getElementById("reply-to");
 
-  function openReplyModal(email) {
-    replyToInput.value = email;
-    replyModal.classList.add("active");
-    document.body.classList.add("modal-active");
+  // Función para expandir/contraer mensajes
+  window.toggleExpandMessage = function(button) {
+    const messageBox = button.closest('.message-box');
+    if (!messageBox) return;
+
+    // Buscar o crear el contenedor de contenido
+    let messageContent = messageBox.querySelector('.message-content');
+    
+    if (!messageContent) {
+      // Si no existe, crear la estructura
+      createMessageStructure(messageBox);
+      messageContent = messageBox.querySelector('.message-content');
+    }
+
+    if (messageContent) {
+      messageContent.classList.toggle('expanded');
+      button.textContent = messageContent.classList.contains('expanded') ? 'Leer menos' : 'Leer más';
+    }
+  };
+
+  function createMessageStructure(messageBox) {
+    // Guardar elementos existentes
+    const header = messageBox.querySelector('.message-header');
+    const meta = messageBox.querySelector('.message-meta');
+    const buttons = messageBox.querySelectorAll('button');
+    
+    // Encontrar el texto del mensaje (elementos de texto sueltos)
+    let messageText = '';
+    const nodes = messageBox.childNodes;
+    
+    nodes.forEach(node => {
+      if (node.nodeType === 3 && node.textContent.trim()) {
+        messageText += node.textContent;
+      }
+    });
+
+    // Reconstruir la estructura
+    messageBox.innerHTML = '';
+    
+    if (header) messageBox.appendChild(header);
+    if (meta) messageBox.appendChild(meta);
+    
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.textContent = messageText.trim();
+    messageBox.appendChild(contentDiv);
+    
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.className = 'message-buttons';
+    
+    // Recrear botones manteniendo sus funcionalidades
+    buttons.forEach(button => {
+      if (button.classList.contains('read-more-btn')) {
+        button.onclick = function() { window.toggleExpandMessage(this); };
+      }
+      buttonsContainer.appendChild(button.cloneNode(true));
+    });
+    
+    messageBox.appendChild(buttonsContainer);
   }
 
-  closeReplyModalBtn.addEventListener("click", () => {
-    replyModal.classList.remove("active");
-    document.body.classList.remove("modal-active");
-  });
+  // Función para abrir modal de respuesta
+  window.openReplyModal = function(email) {
+    const modal = document.getElementById('reply-modal');
+    const replyToInput = document.getElementById('reply-to');
+    
+    if (replyToInput && email) {
+      replyToInput.value = email;
+    }
+    
+    if (modal) {
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      
+      // Enfocar el campo de asunto
+      setTimeout(() => {
+        const subjectInput = document.getElementById('reply-subject');
+        if (subjectInput) subjectInput.focus();
+      }, 100);
+    }
+  };
 
-  // Cerrar modal al hacer clic fuera
-  replyModal.addEventListener("click", (e) => {
-    if (e.target === replyModal) {
-      replyModal.classList.remove("active");
-      document.body.classList.remove("modal-active");
+  // Función para cerrar modal de respuesta
+  window.closeReplyModal = function() {
+    const modal = document.getElementById('reply-modal');
+    if (modal) {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+  };
+
+  // Configurar el modal de mensajes
+  const closeReplyBtn = document.getElementById('close-reply-modal');
+  const replyModal = document.getElementById('reply-modal');
+  const replyForm = document.getElementById('reply-form');
+
+  // Cerrar modal con el botón X
+  if (closeReplyBtn) {
+    closeReplyBtn.addEventListener('click', window.closeReplyModal);
+  }
+
+  // Cerrar modal haciendo clic fuera
+  if (replyModal) {
+    replyModal.addEventListener('click', function(event) {
+      if (event.target === replyModal) {
+        window.closeReplyModal();
+      }
+    });
+  }
+
+  // Manejar envío del formulario de respuesta
+  if (replyForm) {
+    replyForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+      
+      const to = document.getElementById('reply-to').value;
+      const subject = document.getElementById('reply-subject').value;
+      const message = document.getElementById('reply-message').value;
+      
+      if (!to || !subject || !message) {
+        alert('Por favor, completa todos los campos');
+        return;
+      }
+      
+      // Simulación de envío exitoso
+      console.log('Enviando mensaje:', { to, subject, message });
+      alert(`Mensaje enviado correctamente a: ${to}`);
+      
+      // Limpiar y cerrar
+      replyForm.reset();
+      window.closeReplyModal();
+    });
+  }
+
+  // Cerrar modal con tecla Escape
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      window.closeReplyModal();
     }
   });
 
-  // Manejo del envío del formulario (simulado)
-  document.getElementById("reply-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    alert(`Correo enviado a: ${replyToInput.value}`);
-    replyModal.classList.remove("active");
-    document.body.classList.remove("modal-active");
-    e.target.reset();
+  // Normalizar botones existentes en mensajes
+  document.querySelectorAll('.read-more-butn').forEach(btn => {
+    btn.className = 'read-more-btn';
+    btn.setAttribute('onclick', 'toggleExpandMessage(this)');
   });
-
-});
+})
