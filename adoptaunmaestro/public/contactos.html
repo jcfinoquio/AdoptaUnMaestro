@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Contactos</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css" />
     <script src="js/js.js" defer></script>
 </head>
 
@@ -17,8 +17,9 @@
             </div>
             <nav class="menu" role="navigation" aria-label="Main navigation">
                 <a href="index.html">Inicio</a>
-                <a href="listado-colegios.html">Empleos</a>
-                <a href="listado-maestros.html">Centros/Maestros</a>
+                <a href="empleos.html">Empleos</a>
+                <a href="listado-colegios.html">Colegios</a>
+                <a href="listado-maestros.html">Maestros</a>
                 <a href="mensajes.html">Mensajes</a>
                 <a href="contactos.html">Contactos</a>
             </nav>
@@ -26,11 +27,15 @@
 
         <div class="layout">
             <aside class="sidebar-maestros" id="sidebar-maestros-izquierda">
-                <div class="perfil-avatar" aria-hidden="true"></div>
+                <div class="perfil-avatar" aria-hidden="true">
+                    <img src="img/perfil.jpeg" class="foto-perfil" alt="" />
+                </div>
                 <div class="perfil-meta">
                     <h4 title="María López">María López</h4>
                     <div class="meta-sub">Maestra de Primaria · 6 años</div>
-                    <div class="meta-visitas">Visitas al perfil: <strong id="visitas-perfil">0</strong></div>
+                    <div class="meta-visitas">
+                        Visitas al perfil: <strong id="visitas-perfil">0</strong>
+                    </div>
                     <div class="meta-actions">
                         <a class="btn btn-primary" href="perfil.html">Editar perfil</a>
                         <a class="btn btn-outline" href="listado-maestros.html">Ver mis anuncios</a>
@@ -40,50 +45,485 @@
 
             <div class="contacts-area">
                 <div class="contacts-grid">
-                    <!-- 10 contactos -->
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/11.jpg">
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/11.jpg" />
                         <div class="name">Carlos Ruiz</div>
-                    </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/14.jpg">
-                        <div class="name">Laura Pérez</div>
-                    </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/36.jpg">
-                        <div class="name">Miguel Santos</div>
-                    </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/28.jpg">
-                        <div class="name">Elena Gómez</div>
-                    </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/52.jpg">
-                        <div class="name">Javier Ortiz</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Matemáticas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Sierra Norte</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>8 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Sustituciones</td>
+                            </tr>
+                        </table>
                     </div>
 
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/33.jpg">
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/14.jpg" />
+                        <div class="name">Laura Pérez</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Lengua y Literatura</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP Valle Verde</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>5 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Jornada completa</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/36.jpg" />
+                        <div class="name">Miguel Santos</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Educación Física</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>Colegio San Marcos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>10 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Mañanas</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/28.jpg" />
+                        <div class="name">Elena Gómez</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Inglés</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Las Encinas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>7 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Bajas largas</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/52.jpg" />
+                        <div class="name">Javier Ortiz</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Tecnología</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Complutense</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>12 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>No disponible</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/33.jpg" />
                         <div class="name">Sara Molina</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Ciencias Naturales</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP Amanecer</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>4 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Inmediata</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/41.jpg">
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" />
                         <div class="name">David Lara</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Historia</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Cervantes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>9 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Tardes</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/47.jpg">
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/47.jpg" />
                         <div class="name">Nuria Vidal</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Educación Infantil</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP Los Olivos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>6 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Completa</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/men/77.jpg">
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/77.jpg" />
                         <div class="name">Rubén Torres</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Geografía</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Altamira</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>11 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Parcial</td>
+                            </tr>
+                        </table>
                     </div>
-                    <div class="contact-card"><img src="https://randomuser.me/api/portraits/women/5.jpg">
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/5.jpg" />
                         <div class="name">Patricia León</div>
+
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Música</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>Conservatorio Vega Real</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>3 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Fines de semana</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" />
+                        <div class="name">Antonio Delgado</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Física</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Monterrey</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>7 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Jornada completa</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/15.jpg" />
+                        <div class="name">Isabel Romero</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Química</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP La Paloma</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>6 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Inmediata</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/23.jpg" />
+                        <div class="name">Fernando Castillo</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Informática</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Victoria</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>9 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Sustituciones</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/20.jpg" />
+                        <div class="name">María Fuentes</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Biología</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP El Roble</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>5 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Mañanas</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/34.jpg" />
+                        <div class="name">Jorge Martínez</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Educación Física</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Los Pinos</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>8 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Tardes</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/22.jpg" />
+                        <div class="name">Ana Torres</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Matemáticas</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP San Juan</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>10 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Parcial</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" />
+                        <div class="name">Luis Navarro</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Geografía</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Alborán</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>12 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>No disponible</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/30.jpg" />
+                        <div class="name">Carmen Blanco</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Inglés</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP La Luz</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>7 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Fines de semana</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/men/56.jpg" />
+                        <div class="name">Pablo Rivas</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Tecnología</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>IES Castilla</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>6 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Inmediata</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="contact-card">
+                        <img src="https://randomuser.me/api/portraits/women/35.jpg" />
+                        <div class="name">Laura Méndez</div>
+                        <table class="contact-info">
+                            <tr>
+                                <td><strong>Especialidad</strong></td>
+                                <td>Ciencias Naturales</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Centro</strong></td>
+                                <td>CEIP Fuente Nueva</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Experiencia</strong></td>
+                                <td>8 años</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Disponibilidad</strong></td>
+                                <td>Sustituciones</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>
-
             <!-- SIDEBAR DERECHA -->
             <aside class="sidebar">
-                <a href="registro.html" class="btn-registrate">REGÍSTRATE AQUÍ</a>
+                <a href="registro.html" class="btn btn-registrate">REGÍSTRATE AQUÍ</a>
                 <nav class="side-links">
-                    <a href="#">EVENTOS Y TALLERES</a>
-                    <a href="#">RECURSOS EDUCATIVOS</a>
-                    <a href="#">FOROS</a>
-                    <a href="#">SOBRE NOSOTROS</a>
-                    <a href="#">AYUDA Y SOPORTE</a>
+                    <a href="#" class="btn btn-outline">EVENTOS Y TALLERES</a>
+                    <a href="#" class="btn btn-primary">RECURSOS EDUCATIVOS</a>
+                    <a href="#" class="btn btn-outline">FOROS</a>
+                    <a href="#" class="btn btn-primary">SOBRE NOSOTROS</a>
+                    <a href="#" class="btn btn-outline">AYUDA Y SOPORTE</a>
                 </nav>
             </aside>
         </div>
