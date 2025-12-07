@@ -1,202 +1,154 @@
-🍎 AdoptaUnMaestro
-<p align="center"> <img alt="Version" src="https://img.shields.io/badge/version-Final-blue.svg?cacheSeconds=2592000" /> <img alt="PHP" src="https://img.shields.io/badge/PHP-8.x-777BB4?logo=php" /> <img alt="MySQL" src="https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql" /> <img alt="License" src="https://img.shields.io/badge/license-MIT-green" /> </p>
-AdoptaUnMaestro es una plataforma web diseñada para conectar maestros y centros educativos, facilitando la gestión de publicaciones, ofertas y recursos educativos. Este proyecto fue desarrollado como Proyecto Final del ciclo formativo de DAW (Desarrollo de Aplicaciones Web).
+# 🍎 AdoptaUnMaestro
 
-✨ Características Principales
-🔐 Autenticación de usuarios - Sistema seguro de registro e inicio de sesión
+![Version](https://img.shields.io/badge/version-Final-blue.svg?cacheSeconds=2592000) 
+![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php) 
+![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql) 
+![License](https://img.shields.io/badge/license-MIT-green)
 
-📝 Gestión de publicaciones - Creación y administración de anuncios educativos
+> **AdoptaUnMaestro** es una plataforma web para conectar maestros y centros educativos, facilitando la gestión de publicaciones, ofertas y recursos educativos.  
+> Proyecto Final del ciclo formativo **DAW (Desarrollo de Aplicaciones Web)**.
 
-🤝 Sistema de ofertas - Interacción entre maestros e instituciones
+---
 
-📊 Panel de administración - Gestión completa de usuarios y contenido
+## ✨ Características Principales
 
-📱 Diseño responsivo - Compatible con dispositivos móviles y de escritorio
+| Icono | Funcionalidad | Descripción |
+|-------|---------------|-------------|
+| 🔐 | Autenticación de usuarios | Registro e inicio de sesión seguro |
+| 📝 | Gestión de publicaciones | Crear y administrar anuncios educativos |
+| 🤝 | Sistema de ofertas | Interacción entre maestros e instituciones |
+| 📊 | Panel de administración | Gestión completa de usuarios y contenido |
+| 📱 | Diseño responsivo | Compatible con móviles y escritorio |
+| 🧪 | Suite de pruebas | Tests para garantizar la calidad del código |
 
-🧪 Suite de pruebas - Tests para garantizar la calidad del código
+---
 
-📁 Estructura del Proyecto
-text
+## 📁 Estructura del Proyecto
+
 AdoptaUnMaestro/
 ├── public/                   # Frontend - Archivos públicos
-│   ├── css/                 # Hojas de estilo
-│   ├── js/                  # Scripts JavaScript
-│   ├── img/                 # Imágenes y recursos visuales
-│   ├── libs/                # Librerías externas (Bootstrap, jQuery, etc.)
-│   ├── fonts/               # Tipografías personalizadas
-│   └── index.html           # Página principal de la aplicación
-├── backend/                 # Lógica del servidor (PHP)
-│   ├── controllers/         # Controladores de la aplicación
-│   ├── models/              # Modelos de datos
-│   ├── routes/              # Definición de rutas API
-│   ├── services/            # Lógica de negocio y servicios
-│   ├── tests/               # Pruebas unitarias y de integración
-│   ├── auth.php             # Autenticación de usuarios
-│   ├── publicaciones.php    # Gestión de publicaciones
-│   ├── ofertas.php          # Gestión de ofertas
-│   └── conexion.php         # Conexión a base de datos
-├── db/                      # Base de datos
-│   ├── db_schema.sql        # Esquema inicial de la base de datos
-│   └── backups/             # Copias de seguridad de la base de datos
-├── disenio/                 # Diseño y experiencia de usuario
-│   ├── diagramas/           # Diagramas de flujo y arquitectura
-│   ├── mockups/             # Diseños visuales y prototipos
-│   ├── navegacion/          # Mapas de navegación
-│   └── usabilidad/          # Pruebas y análisis de usabilidad
-├── docs/                    # Documentación del proyecto
-│   ├── manuales/            # Manuales de usuario y técnico
-│   ├── tutoriales/          # Guías paso a paso
-│   └── reportes/            # Reportes de desarrollo y pruebas
+│   ├── css/
+│   ├── js/
+│   ├── img/
+│   ├── libs/
+│   ├── fonts/
+│   └── index.html
+├── backend/
+│   ├── controllers/
+│   ├── models/
+│   ├── routes/
+│   ├── services/
+│   ├── tests/
+│   ├── auth.php
+│   ├── publicaciones.php
+│   ├── ofertas.php
+│   └── conexion.php
+├── db/
+│   ├── db_schema.sql
+│   └── backups/
+├── disenio/
+│   ├── diagramas/
+│   ├── mockups/
+│   ├── navegacion/
+│   └── usabilidad/
+├── docs/
+│   ├── manuales/
+│   ├── tutoriales/
+│   └── reportes/
 └── archivos de configuración
-    ├── README.md            # Este archivo
-    ├── .gitignore           # Archivos ignorados por Git
-    ├── especificaciones.md  # Especificaciones técnicas
-    └── .env.example         # Plantilla de variables de entorno
-🚀 Instalación y Configuración
-Prerrequisitos
-Servidor web (Apache, Nginx o similar)
+├── README.md
+├── .gitignore
+├── especificaciones.md
+└── .env.example
 
-PHP 8.0 o superior
+---
 
-MySQL 8.0 o superior (o MariaDB equivalente)
+## 🚀 Instalación y Configuración
 
-Composer (para gestión de dependencias PHP, si las hay)
+### Prerrequisitos
 
-Git
+- Servidor web (Apache, Nginx o similar)
+- PHP 8.0 o superior
+- MySQL 8.0 o superior (o MariaDB equivalente)
+- Composer
+- Git
 
-Pasos de Instalación
-Clonar el repositorio
+### Pasos de Instalación
 
-bash
+# Clonar el repositorio
 git clone https://github.com/jcfinoquio/AdoptaUnMaestro.git
 cd AdoptaUnMaestro
-Configurar el entorno
 
-bash
+# Configurar el entorno
 cp .env.example .env
-Editar el archivo .env con tus credenciales de base de datos:
-
-env
+# Editar .env con tus credenciales
 DB_HOST=localhost
 DB_NAME=adoptaunmaestro
 DB_USER=tu_usuario
 DB_PASSWORD=tu_contraseña
-Configurar la base de datos
 
-bash
+# Configurar la base de datos
 mysql -u root -p
-sql
 CREATE DATABASE adoptaunmaestro;
 USE adoptaunmaestro;
 SOURCE db/db_schema.sql;
-Configurar el servidor web
 
-Apuntar el directorio raíz del servidor web a la carpeta public/
+# Configurar el servidor web apuntando a public/
+ 
 
-Asegurarse de que las carpetas public/ y backend/ tienen los permisos adecuados
+Abrir en navegador: [http://localhost/adoptaunmaestro/public/](http://localhost/adoptaunmaestro/public/)
 
-Acceder a la aplicación
+---
 
-Abrir el navegador y visitar http://localhost/adoptaunmaestro/public/
+## 🛠️ Tecnologías Utilizadas
 
-🛠️ Tecnologías Utilizadas
-Backend
-PHP 8+ - Lenguaje principal del servidor
+**Backend:** PHP 8+, MySQL 8+, Apache
+**Frontend:** HTML5, CSS3, JavaScript (ES6+), Bootstrap 5, jQuery (opcional)
+**Herramientas:** Git, PHPUnit, MySQL Workbench
 
-MySQL 8+ - Sistema de gestión de base de datos
+---
 
-Apache - Servidor web (configurable para otros)
+## 📖 Cómo Usar la Plataforma
 
-Frontend
-HTML5 - Estructura de páginas web
+### Para Maestros
 
-CSS3 - Estilos y diseño responsivo
+* Registrarse y completar perfil
+* Publicar necesidades o recursos
+* Explorar ofertas de centros educativos
+* Gestionar propuestas recibidas
 
-JavaScript (ES6+) - Interactividad del cliente
+### Para Centros Educativos
 
-Bootstrap 5 - Framework CSS (según contenido de public/libs/)
+* Crear cuenta institucional
+* Publicar necesidades específicas
+* Buscar maestros disponibles
+* Enviar ofertas de colaboración
+* Gestionar historial de conexiones
 
-jQuery - Biblioteca JavaScript (si se incluye)
+### Para Administradores
 
-Herramientas de Desarrollo
-Git - Control de versiones
+* Acceder al panel de administración
+* Gestionar usuarios y permisos
+* Modera publicaciones y ofertas
+* Generar reportes y estadísticas
+* Mantenimiento del sistema
 
-PHPUnit - Framework de pruebas (si está configurado)
+---
 
-MySQL Workbench - Diseño y gestión de base de datos
+## 🤝 Cómo Contribuir
 
-📖 Cómo Usar la Plataforma
-Para Maestros
-Registrarse en la plataforma
+1. Hacer fork del repositorio
+2. Crear rama: `git checkout -b feature/NuevaFuncionalidad`
+3. Realizar cambios y commit: `git commit -m 'Añadir alguna funcionalidad'`
+4. Subir cambios: `git push origin feature/NuevaFuncionalidad`
+5. Abrir Pull Request
 
-Completar el perfil profesional
+> Seguir estándares PSR, comentar código y mantener documentación actualizada.
 
-Publicar necesidades o recursos disponibles
+---
 
-Explorar ofertas de centros educativos
+## 📄 Licencia
 
-Gestionar propuestas recibidas
+Este proyecto está bajo la **Licencia MIT**. Consulta el archivo LICENSE para más detalles.
 
-Para Centros Educativos
-Crear una cuenta institucional
-
-Publicar necesidades específicas
-
-Buscar maestros disponibles
-
-Enviar ofertas de colaboración
-
-Gestionar el historial de conexiones
-
-Para Administradores
-Acceder al panel de administración
-
-Gestionar usuarios y permisos
-
-Moderar publicaciones y ofertas
-
-Generar reportes y estadísticas
-
-Realizar mantenimiento del sistema
-
-🧪 Ejecutar Pruebas
-bash
-# Navegar al directorio de pruebas
-cd backend/tests/
-
-# Ejecutar pruebas (si están configuradas con PHPUnit)
-phpunit
-🤝 Cómo Contribuir
-Las contribuciones son bienvenidas. Para contribuir al proyecto:
-
-Fork el repositorio
-
-Crear una rama para tu feature (git checkout -b feature/NuevaFuncionalidad)
-
-Realizar los cambios y hacer commit (git commit -m 'Añadir alguna funcionalidad')
-
-Subir los cambios (git push origin feature/NuevaFuncionalidad)
-
-Abrir un Pull Request
-
-Guías de Estilo
-Seguir los estándares PSR para código PHP
-
-Comentar el código adecuadamente
-
-Actualizar la documentación correspondiente
-
-📄 Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
-
-👥 Autores y Agradecimientos
-Juan Carlos Finoquio - @jcfinoquio - Desarrollo principal
-
-DAW - Proyecto Final del ciclo formativo de Desarrollo de Aplicaciones Web
-
-Agradecimientos Especiales
-Tutores y profesores del ciclo formativo
-
-Compañeros de clase por su feedback y apoyo
-
-Comunidades de desarrollo open source
+---
