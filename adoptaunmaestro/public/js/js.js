@@ -730,18 +730,454 @@ if (vp && !sessionStorage.getItem('visitas_perfil')) sessionStorage.setItem('vis
 if (vp) vp.textContent = sessionStorage.getItem('visitas_perfil') || '0';
 
 
+/* ===========================
+   CÓDIGO COMÚN PAGINAS ASIDE
+=========================== */
+(function () {
+  "use strict";
 
+  /* =============
+     Utilidades
+     ============= */
 
+  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
 
+  function safeText(node, fallback = "") {
+    return node ? node.textContent.trim() : fallback;
+  }
 
+  /* ============================
+     Inicialización principal
+     ============================ */
+  document.addEventListener("DOMContentLoaded", () => {
+    // Ejecutar las inicializaciones en orden lógico
+    initSidebarActiveLink();
+    initToggleExpandButtons();
+    initLikeCounters();
+    initFAQ();
+    initSupportForm();
+    initEventRegistration();
+    initRecursosActions();
+    initForoCreateIfPresent();
+    initAccessibilityHelpers();
 
+    // Segunda pasada de comprobaciones (revisión 2)
+    // - vuelvo a asegurar handlers ligados y estados iniciales
+    ensureReadMoreButtonsState();
+    // fin revisión 2
+  });
 
+  /* =====================================
+     1) Sidebar: marcar enlace activo según body class
+     ===================================== */
+  function initSidebarActiveLink() {
+    try {
+      const body = document.body;
+      const pageClass = Array.from(body.classList).find((c) =>
+        c.startsWith("page-")
+      ); // p.ej. page-eventos, page-recursos...
+      if (!pageClass) return;
 
+      const mapping = {
+        "page-eventos": "eventos-y-talleres.html",
+        "page-recursos": "recursos-educativos.html",
+        "page-foros": "foros.html",
+        "page-sobre": "sobre-nosotros.html",
+        "page-ayuda": "ayuda.html",
+        "page-empleos": "empleos.html",
+        "page-perfil": "perfil.html",
+      };
 
+      const targetHref = mapping[pageClass] || null;
+      if (!targetHref) return;
 
+      const links = $$("nav.menu a, .side-links a");
+      links.forEach((a) => {
+        try {
+          const href = a.getAttribute("href");
+          if (!href) return;
+          if (href.includes(targetHref) || href === targetHref) {
+            a.classList.add("active-link");
+            // estilo accesible: aria-current
+            a.setAttribute("aria-current", "page");
+          } else {
+            a.classList.remove("active-link");
+            a.removeAttribute("aria-current");
+          }
+        } catch (e) {
+          // ignore
+        }
+      });
+    } catch (e) {
+      // no crítico
+      console.warn("initSidebarActiveLink:", e);
+    }
+  }
 
+  /* =============================
+     2) Botones "Leer más" -> expandir tarjetas (empleos, ofertas...)
+     ============================= */
+  // Este nombre existe en algunos HTML como onclick="toggleExpand(this)"
+  window.toggleExpand = function (btn) {
+    // botón dentro de .job-offer
+    if (!btn) return;
+    const offer = btn.closest(".job-offer");
+    if (!offer) return;
+    const expanded = offer.classList.toggle("expanded");
+    btn.textContent = expanded ? "Leer menos" : "Leer más";
+    // A11y
+    btn.setAttribute("aria-expanded", String(expanded));
+  };
 
+  function initToggleExpandButtons() {
+    try {
+      const buttons = $$(
+        ".read-more-btn, .read-more-butn, .btn.read-more, button.read-more-btn"
+      );
+      buttons.forEach((btn) => {
+        // si ya se usa onclick inline, respetamos. Si no, añadimos listener.
+        if (!btn.getAttribute("data-listener")) {
+          btn.addEventListener("click", (e) => {
+            // si el HTML ya tiene onclick="toggleExpand(this)" entonces funcionará igual
+            window.toggleExpand(btn);
+          });
+          btn.setAttribute("data-listener", "1");
+        }
+      });
+    } catch (e) {
+      console.warn("initToggleExpandButtons:", e);
+    }
+  }
 
+  function ensureReadMoreButtonsState() {
+    // Segunda pasada: aseguramos que el texto coincide con el estado inicial
+    $$(".job-offer").forEach((offer) => {
+      const btn = $(".read-more-btn", offer);
+      if (btn) {
+        const expanded = offer.classList.contains("expanded");
+        btn.textContent = expanded ? "Leer menos" : "Leer más";
+        btn.setAttribute("aria-expanded", String(expanded));
+      }
+    });
+  }
 
+  /* =============================
+     3) Contadores de "likes" (perfil.html entradas)
+     ============================= */
+  function initLikeCounters() {
+    try {
+      const likeButtons = $$(".contador-likes");
+      likeButtons.forEach((btn) => {
+        if (btn._likesInit) return;
+        btn._likesInit = true;
 
+        btn.addEventListener("click", (e) => {
+          // toggle local pressed state
+          const pressed = btn.getAttribute("aria-pressed") === "true";
+          const newPressed = !pressed;
+          btn.setAttribute("aria-pressed", String(newPressed));
 
+          // buscar span interno y sumar o restar
+          const span = btn.querySelector("span");
+          if (!span) return;
+          let n = parseInt(span.textContent || "0", 10);
+          if (Number.isNaN(n)) n = 0;
+          n = newPressed ? n + 1 : Math.max(0, n - 1);
+          span.textContent = n;
+
+          // simple animación (clase temporal)
+          btn.classList.add("liked");
+          setTimeout(() => btn.classList.remove("liked"), 300);
+        });
+      });
+    } catch (e) {
+      console.warn("initLikeCounters:", e);
+    }
+  }
+
+  /* =============================
+     4) FAQ expand/collapse (ayuda.html)
+     ============================= */
+  function initFAQ() {
+    try {
+      const faqs = $$(".faq-item");
+      faqs.forEach((item, index) => {
+        const header =
+          item.querySelector("h3") ||
+          item.querySelector("summary") ||
+          item.firstElementChild;
+        if (!header) return;
+
+        // ensure aria attributes
+        item.setAttribute("role", "region");
+        const content = Array.from(item.children).filter(
+          (c) => c !== header && !(c.tagName === "HR")
+        );
+        // hide content except first paragraph by default
+        if (!item.classList.contains("expanded")) {
+          content.forEach((c) => (c.style.display = "none"));
+        } else {
+          content.forEach((c) => (c.style.display = ""));
+        }
+
+        header.setAttribute("tabindex", "0");
+        header.setAttribute("role", "button");
+        header.setAttribute("aria-expanded", item.classList.contains("expanded"));
+        header.addEventListener("click", () => toggleFAQ(item, header, content));
+        header.addEventListener("keydown", (ev) => {
+          if (ev.key === "Enter" || ev.key === " ") {
+            ev.preventDefault();
+            toggleFAQ(item, header, content);
+          }
+        });
+      });
+    } catch (e) {
+      console.warn("initFAQ:", e);
+    }
+  }
+
+  function toggleFAQ(item, header, contentNodes) {
+    const expanded = item.classList.toggle("expanded");
+    header.setAttribute("aria-expanded", String(expanded));
+    contentNodes.forEach((n) => {
+      n.style.display = expanded ? "" : "none";
+    });
+  }
+
+  /* =============================
+     5) Formulario de soporte (ayuda) — validación simple y feedback
+     ============================= */
+  function initSupportForm() {
+    try {
+      const form = $(".support-form");
+      if (!form) return;
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        // simple validación
+        const name = form.querySelector('input[type="text"]');
+        const email = form.querySelector('input[type="email"]');
+        const textarea = form.querySelector("textarea");
+        const errors = [];
+
+        if (!name || name.value.trim().length < 2) {
+          errors.push("Nombre (mínimo 2 caracteres)");
+        }
+        if (!email || !/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+          errors.push("Email válido");
+        }
+        if (!textarea || textarea.value.trim().length < 10) {
+          errors.push("Mensaje (mínimo 10 caracteres)");
+        }
+
+        // limpiar mensajes anteriores
+        const old = form.querySelector(".form-feedback");
+        if (old) old.remove();
+
+        const feedback = document.createElement("div");
+        feedback.className = "form-feedback";
+        feedback.style.marginTop = "12px";
+
+        if (errors.length) {
+          feedback.innerHTML =
+            "<strong>Por favor corrige los siguientes errores:</strong><ul>" +
+            errors.map((e) => `<li>${e}</li>`).join("") +
+            "</ul>";
+          feedback.style.color = "#b00020";
+          form.appendChild(feedback);
+          // focus en primer campo con error
+          if (errors[0].includes("Nombre")) name.focus();
+          else if (errors[0].includes("Email")) email.focus();
+          else textarea.focus();
+          return;
+        }
+
+        // Simular envío (sin backend): mostrar mensaje de éxito y limpiar campos
+        feedback.innerHTML =
+          "<strong>Mensaje enviado correctamente.</strong> Nuestro equipo te responderá en breve.";
+        feedback.style.color = "#094032";
+        form.appendChild(feedback);
+
+        // opcional: limpiar
+        name.value = "";
+        email.value = "";
+        textarea.value = "";
+      });
+    } catch (e) {
+      console.warn("initSupportForm:", e);
+    }
+  }
+
+  /* =============================
+     6) Eventos: "Inscribirme" simulación
+     ============================= */
+  function initEventRegistration() {
+    try {
+      // delegado: escucha clicks en botones dentro de .evento-card
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".evento-card .btn, .evento-card .btn-primary, .evento-card .btn-outline");
+        if (!btn) return;
+        const card = btn.closest(".evento-card");
+        if (!card) return;
+
+        // si el botón tiene data-action="register" o es btn-primary dentro de evento-card -> inscribir
+        const isRegister = btn.classList.contains("btn-primary") && !btn.classList.contains("btn-outline");
+        if (isRegister) {
+          // toggle inscrito
+          const registered = card.classList.toggle("registered");
+          btn.textContent = registered ? "Inscrito" : "Inscribirme";
+          btn.disabled = registered;
+          // accesibilidad
+          btn.setAttribute("aria-pressed", String(!!registered));
+          // animación breve
+          card.classList.add("flash");
+          setTimeout(() => card.classList.remove("flash"), 500);
+        }
+      });
+    } catch (e) {
+      console.warn("initEventRegistration:", e);
+    }
+  }
+
+  /* =============================
+     7) Recursos: descargar / abrir (simulación)
+     ============================= */
+  function initRecursosActions() {
+    try {
+      document.addEventListener("click", (e) => {
+        const btn = e.target.closest(".recurso-card .btn, .recurso-card .btn-primary, .recurso-card .btn-outline");
+        if (!btn) return;
+        const card = btn.closest(".recurso-card");
+        if (!card) return;
+        const title = safeText(card.querySelector("h3"), "recurso");
+
+        // Simular descarga / apertura
+        if (btn.classList.contains("btn-primary") && !btn.classList.contains("btn-outline")) {
+          // "Descargar" o "Acceder"
+          // Crear blob temporal con contenido de muestra (no persistente)
+          try {
+            const sample = `Recurso: ${title}\nGenerado por Adopta un Maestro - simulación de descarga.`;
+            const blob = new Blob([sample], { type: "text/plain;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = (title.replace(/\s+/g, "_").toLowerCase() || "recurso") + ".txt";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(url), 2000);
+          } catch (err) {
+            console.warn("download simulation failed", err);
+          }
+        } else {
+          // Ver plantillas / Abrir (btn-outline)
+          // Mostrar feedback ligero
+          const msg = document.createElement("div");
+          msg.className = "recurso-feedback";
+          msg.textContent = `Abriendo "${title}"... (simulación)`;
+          msg.style.marginTop = "8px";
+          card.appendChild(msg);
+          setTimeout(() => msg.remove(), 2200);
+        }
+      });
+    } catch (e) {
+      console.warn("initRecursosActions:", e);
+    }
+  }
+
+  /* =============================
+     8) Foros: creación simple de hilos si existe formulario
+     ============================= */
+  function initForoCreateIfPresent() {
+    try {
+      const form = $("#foro-create-form");
+      const list = $("#foro-list");
+      if (!form || !list) return;
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const title = safeText(form.querySelector('input[name="title"]')) || form.querySelector('input[name="title"]').value;
+        const body = form.querySelector('textarea[name="body"]').value || "";
+
+        if (!title || title.trim().length < 3) {
+          showTemporaryMessage(form, "El título debe tener al menos 3 caracteres.", true);
+          return;
+        }
+        if (!body || body.trim().length < 5) {
+          showTemporaryMessage(form, "El mensaje debe tener al menos 5 caracteres.", true);
+          return;
+        }
+
+        // construir hilo minimalista
+        const item = document.createElement("article");
+        item.className = "foro-card";
+        item.innerHTML = `
+          <h3>${escapeHtml(title)}</h3>
+          <p class="foro-meta">0 respuestas · nuevo</p>
+          <p>${escapeHtml(body)}</p>
+          <div class="foro-actions">
+            <button class="btn btn-outline btn-reply">Responder</button>
+            <button class="btn btn-primary btn-open">Abrir</button>
+          </div>
+        `;
+        list.prepend(item);
+        form.reset();
+        showTemporaryMessage(form, "Hilo creado correctamente.", false);
+
+        // opcional: scroll al hilo
+        item.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    } catch (e) {
+      console.warn("initForoCreateIfPresent:", e);
+    }
+  }
+
+  // helper mensajes temporales
+  function showTemporaryMessage(container, text, isError = false) {
+    const msg = document.createElement("div");
+    msg.className = "temp-msg";
+    msg.textContent = text;
+    msg.style.padding = "10px";
+    msg.style.marginTop = "8px";
+    msg.style.borderRadius = "8px";
+    msg.style.color = isError ? "#7a0b15" : "#063";
+    msg.style.background = isError ? "rgba(186, 84, 84, 0.08)" : "rgba(9, 64, 50, 0.06)";
+    container.appendChild(msg);
+    setTimeout(() => msg.remove(), 2800);
+  }
+
+  // escape básico para html
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  /* =============================
+     9) Pequeños helpers de accesibilidad y comportamiento
+     ============================= */
+  function initAccessibilityHelpers() {
+    try {
+      // añadir focus visible class para teclado
+      document.body.addEventListener("keydown", (e) => {
+        if (e.key === "Tab") document.body.classList.add("show-focus");
+      });
+      document.body.addEventListener("mousedown", () => {
+        document.body.classList.remove("show-focus");
+      });
+
+      // aria labels para botones de sidebar si no los tienen
+      $$(".side-links a").forEach((a) => {
+        if (!a.hasAttribute("aria-label")) {
+          a.setAttribute("aria-label", a.textContent.trim());
+        }
+      });
+    } catch (e) {
+      console.warn("initAccessibilityHelpers:", e);
+    }
+  }
+
+})();
