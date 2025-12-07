@@ -1,111 +1,13 @@
-\# Adopta un Maestro
+<h1 align="center">Welcome to AdoptaUnMaestro 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-Final version-blue.svg?cacheSeconds=2592000" />
+</p>
 
+> Proyecto Final - DAW
 
+## Show your support
 
-Proyecto web para conectar maestros y centros educativos.
+Give a ⭐️ if this project helped you!
 
-
-
-\## 📂 Estructura del proyecto
-
-
-
-\- \*\*public/\*\*: Archivos públicos (frontend)
-
-&nbsp; - `index.html`: Página principal
-
-&nbsp; - `css/`: Estilos
-
-&nbsp; - `js/`: Scripts
-
-&nbsp; - `img/`: Imágenes
-
-&nbsp; - `libs/`: Librerías externas
-
-&nbsp; - `fonts/`: Tipografías
-
-
-
-\- \*\*backend/\*\*: Lógica del servidor
-
-&nbsp; - Archivos PHP: `auth.php`, `publicaciones.php`, `ofertas.php`, `conexion.php`
-
-&nbsp; - Subcarpetas:
-
-&nbsp;   - `controllers/`
-
-&nbsp;   - `models/`
-
-&nbsp;   - `routes/`
-
-&nbsp;   - `services/`
-
-&nbsp;   - `tests/`
-
-
-
-\- \*\*db/\*\*: Base de datos
-
-&nbsp; - `db\_schema.sql`: Esquema inicial
-
-&nbsp; - `backups/`: Copias de seguridad
-
-
-
-\- \*\*disenio/\*\*: Diseño y UX/UI
-
-&nbsp; - `diagramas/`
-
-&nbsp; - `mockups/`
-
-&nbsp; - `navegacion/`
-
-&nbsp; - `usabilidad/`
-
-
-
-\- \*\*docs/\*\*: Documentación
-
-&nbsp; - `manuales/`
-
-&nbsp; - `tutoriales/`
-
-&nbsp; - `reportes/`
-
-
-
-\- Archivos raíz:
-
-&nbsp; - `README.md`
-
-&nbsp; - `.gitignore.txt`
-
-&nbsp; - `especificaciones.md`
-
-&nbsp; - `.env.example`
-
-
-
-\## ⚙️ Instalación
-
-
-
-1\. Clonar el repositorio:
-
-```bash
-
-git clone <URL\_DEL\_REPOSITORIO>
-
-
-
-2\. Configurar las variables de entorno
-```bash
-cp .env.example .env
-3. Importar la base de datos
-```bash
-mysql -u usuario -p adoptaunmaestro < db/db\_schema.sql
-
-
-
-
-
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
