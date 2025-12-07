@@ -73,30 +73,9 @@ AdoptaUnMaestro/
 - Composer
 - Git
 
-### Pasos de Instalación
+## PARA ACCEDER
 
-# Clonar el repositorio
-git clone https://github.com/jcfinoquio/AdoptaUnMaestro.git
-cd AdoptaUnMaestro
-
-# Configurar el entorno
-cp .env.example .env
-# Editar .env con tus credenciales
-DB_HOST=localhost
-DB_NAME=adoptaunmaestro
-DB_USER=tu_usuario
-DB_PASSWORD=tu_contraseña
-
-# Configurar la base de datos
-mysql -u root -p
-CREATE DATABASE adoptaunmaestro;
-USE adoptaunmaestro;
-SOURCE db/db_schema.sql;
-
-# Configurar el servidor web apuntando a public/
- 
-
-Abrir en navegador: [http://localhost/adoptaunmaestro/public/](http://localhost/adoptaunmaestro/public/)
+Abrir en navegador: https://adoptaunmaestro.onrender.com/
 
 ---
 
