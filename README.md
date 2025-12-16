@@ -25,42 +25,20 @@
 
 ## 📁 Estructura del Proyecto
 
-AdoptaUnMaestro/
-├── public/                   # Frontend - Archivos públicos
-│   ├── css/
-│   ├── js/
-│   ├── img/
-│   ├── libs/
-│   ├── fonts/
-│   └── index.html
-├── backend/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   ├── services/
-│   ├── tests/
-│   ├── auth.php
-│   ├── publicaciones.php
-│   ├── ofertas.php
-│   └── conexion.php
-├── db/
-│   ├── db_schema.sql
-│   └── backups/
-├── disenio/
-│   ├── diagramas/
-│   ├── mockups/
-│   ├── navegacion/
-│   └── usabilidad/
-├── docs/
-│   ├── manuales/
-│   ├── tutoriales/
-│   └── reportes/
-└── archivos de configuración
-├── README.md
-├── .gitignore
-├── especificaciones.md
-└── .env.example
-
+AdoptaUnMaestro/ 
+├── public/
+│ ├── css/ 
+│ ├── js/ 
+│ ├── img/ 
+│ ├── libs/ 
+│ ├── fonts/ 
+│ ├──  index.html 
+│ └── …html
+├── backend/ 
+├── controllers/ 
+├── README.md 
+├── .gitignore 
+└── especificaciones.md
 ---
 
 ## 🚀 Instalación y Configuración
