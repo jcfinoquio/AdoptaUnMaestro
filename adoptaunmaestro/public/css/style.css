@@ -628,18 +628,20 @@ hr {
   background-color: #eaf5ee;
 }
 
-.coles-container.list-main {
+.coles-container {
   width: 100%;
   margin: auto;
   padding: 1vh;
   display: flex;
   gap: var(--gap);
   align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .list-content {
   flex: 1;
   max-width: 2000px;
+  min-width: 500px;
 }
 
 .card-shell {
