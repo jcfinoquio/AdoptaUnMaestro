@@ -652,28 +652,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
   }
 })
-
 // Abrir modal y cargar email
 function openReplyModal(email) {
   const modal = document.getElementById("reply-modal");
   const inputTo = document.getElementById("reply-to");
-
-  inputTo.value = email;      // Rellena el campo "Para:"
-  modal.classList.add("active"); // Muestra el modal
+  
+  if (!modal || !inputTo) return; // Verifica que existan
+  
+  inputTo.value = email;
+  modal.classList.add("active");
 }
 
-// Cerrar modal
-document.getElementById("close-reply-modal").addEventListener("click", () => {
-  document.getElementById("reply-modal").classList.remove("active");
-});
+// Cerrar modal - SÓLO si existe el botón
+const closeReplyBtn = document.getElementById("close-reply-modal");
+if (closeReplyBtn) {
+  closeReplyBtn.addEventListener("click", () => {
+    const modal = document.getElementById("reply-modal");
+    if (modal) modal.classList.remove("active");
+  });
+}
 
-// También cerrar si se hace clic fuera de la ventana
-document.getElementById("reply-modal").addEventListener("click", (e) => {
-  if (e.target.id === "reply-modal") {
-    e.target.classList.remove("active");
-  }
-});
-
+// Cerrar al hacer clic fuera - SÓLO si existe el modal
+const replyModal = document.getElementById("reply-modal");
+if (replyModal) {
+  replyModal.addEventListener("click", (e) => {
+    if (e.target.id === "reply-modal") {
+      e.target.classList.remove("active");
+    }
+  });
+}
 
 
 function toggleExpandM(button) {
