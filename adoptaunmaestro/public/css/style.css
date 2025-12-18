@@ -635,7 +635,6 @@ hr {
   display: flex;
   gap: var(--gap);
   align-items: flex-start;
-  flex-wrap: wrap;
 }
 
 .list-content {
