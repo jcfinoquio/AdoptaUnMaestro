@@ -187,7 +187,12 @@ document.addEventListener("DOMContentLoaded", () => {
   =========================== */
   const resultadosColegios = document.getElementById('resultados');
   if (resultadosColegios) {
-    const colegios = window.colegios || []; // asume que ya tienes array de colegios
+    window.colegios =[{ id: 1, nombre: "Colegio San José", ciudad: "Sevilla", provincia: "Sevilla", tipo: "Concertado", resumen: "Centro con amplia trayectoria en educación primaria y secundaria.", telefono: "954 123 456", logo: "https://images.unsplash.com/photo-1562774053-701939374585?w=400&h=300&fit=crop" },
+    { id: 2, nombre: "Instituto La Salle", ciudad: "Málaga", provincia: "Málaga", tipo: "Privado", resumen: "Enseñanza personalizada y proyectos tecnológicos.", telefono: "952 987 654", logo: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop" },
+    { id: 3, nombre: "CEIP Marismas del Tinto", ciudad: "Huelva", provincia: "Huelva", tipo: "Público", resumen: "Comprometido con la educación pública y la integración.", telefono: "959 456 789", logo: "https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b?w=400&h=300&fit=crop" },
+    { id: 4, nombre: "Colegio Ave María", ciudad: "Granada", provincia: "Granada", tipo: "Concertado", resumen: "Tradición educativa con valores cristianos.", telefono: "958 234 567", logo: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&h=300&fit=crop" },
+    { id: 5, nombre: "Academia Santa Teresa", ciudad: "Cádiz", provincia: "Cádiz", tipo: "Privado", resumen: "Especializado en idiomas y bachillerato internacional.", telefono: "956 345 678", logo: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=300&fit=crop" }];
+    const colegios = window.colegios; // asume que ya tienes array de colegios
     const PER_PAGE = 15;
     let state = { q: '', provincia: '', tipo: '', page: 1 };
 
